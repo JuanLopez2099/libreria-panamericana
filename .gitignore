@@ -23,8 +23,10 @@
 hs_err_pid*
 replay_pid*
 
+
 # Eclipse
 .classpath
 .project
 .settings/
 bin/
+/bin/
