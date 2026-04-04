@@ -1,6 +1,6 @@
 package mundo;
 
-public class LibroFisico extends Producto
+public class LibroFisico 
 {
 	
 }
