@@ -4,8 +4,8 @@ package mundo;
  * Representa un ítem dentro del carrito de compras.
  * Asocia un producto con la cantidad seleccionada por el usuario.
  * 
- * @author TuNombre
- * @version 1.0
+ * 
+ * 
  */
 public class ItemCarrito
 {
