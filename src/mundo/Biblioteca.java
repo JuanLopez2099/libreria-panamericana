@@ -272,11 +272,26 @@ public class Biblioteca
         return resultado;
     }
 
+    
+    /**
+     * Retorna la lista de productos almacenados en la biblioteca.
+     * 
+     * @return Lista de productos de la biblioteca
+     * 
+     * @pre productos != null
+     * @post Se retorna la referencia a la lista interna de productos
+     */
+    public ArrayList<Producto> getProductos() {
+		return productos;
+	}
+
+
     // -------------------------------------------------------------------------
     // INVARIANTES
     // -------------------------------------------------------------------------
 
-    /**
+   
+	/**
      * Verifica que la lista de productos no sea null.
      */
     private boolean productosValidos() 
