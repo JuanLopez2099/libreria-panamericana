@@ -24,6 +24,7 @@ public class ItemCarrito
     {
         this.producto = producto;
         this.cantidad = cantidad;
+        validarInvariantes();
     }
 
     /**
@@ -51,6 +52,7 @@ public class ItemCarrito
     public void setCantidad(int cantidad)
     {
         this.cantidad = cantidad;
+        validarInvariantes();
     }
 
     /**
@@ -60,6 +62,7 @@ public class ItemCarrito
     public void setProducto(Producto producto)
     {
         this.producto = producto;
+        validarInvariantes();
     }
 
     /**
@@ -68,6 +71,7 @@ public class ItemCarrito
     public void incrementarCantidad()
     {
         this.cantidad++;
+        validarInvariantes();
     }
 
     /**
@@ -80,6 +84,8 @@ public class ItemCarrito
         {
             this.cantidad--;
         }
+        
+        validarInvariantes();
     }
 
     /**
@@ -90,5 +96,31 @@ public class ItemCarrito
     public double getSubtotal()
     {
         return producto.getPrecioFinal() * cantidad;
+    }
+    
+    
+    /**
+     * Verifica que el producto sea válido.
+     */
+    private boolean productoValido() 
+    {
+        return producto != null;
+    }
+
+    /**
+     * Verifica que la cantidad sea válida.
+     */
+    private boolean cantidadValida() 
+    {
+        return cantidad >= 1;
+    }
+
+    /**
+     * Verifica las invariantes de la clase.
+     */
+    private void validarInvariantes() 
+    {
+        assert productoValido() : "El producto no puede ser null";
+        assert cantidadValida() : "La cantidad debe ser mayor o igual a 1";
     }
 }
