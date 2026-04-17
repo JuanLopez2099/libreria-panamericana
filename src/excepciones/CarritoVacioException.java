@@ -2,14 +2,21 @@ package excepciones;
 
 /**
  * Excepción que se lanza cuando se intenta realizar una compra
- * con el carrito vacío.
+ * con el carrito de compras vacío.
+ * <p>
+ * Esta excepción indica que no es posible completar la operación
+ * debido a la ausencia de productos en el carrito.
+ * </p>
  */
 public class CarritoVacioException extends Exception 
 {
     /**
-     * Construye la excepción con un mensaje descriptivo.
+     * Construye una excepción con un mensaje descriptivo.
      * 
-     * @param mensaje Descripción del error.
+     * @param mensaje Mensaje que describe la causa de la excepción
+     * 
+     * @pre mensaje != null
+     * @post Se crea una excepción con el mensaje especificado
      */
     public CarritoVacioException(String mensaje) 
     {
@@ -17,10 +24,13 @@ public class CarritoVacioException extends Exception
     }
 
     /**
-     * Construye la excepción con mensaje y causa.
+     * Construye una excepción con un mensaje descriptivo y una causa.
      * 
-     * @param mensaje Descripción del error.
-     * @param causa Causa original de la excepción.
+     * @param mensaje Mensaje que describe la causa de la excepción
+     * @param causa Causa original de la excepción
+     * 
+     * @pre mensaje != null
+     * @post Se crea una excepción con el mensaje y la causa especificados
      */
     public CarritoVacioException(String mensaje, Throwable causa) 
     {

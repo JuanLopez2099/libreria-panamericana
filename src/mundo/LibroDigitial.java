@@ -1,12 +1,11 @@
 package mundo;
 
-
 /**
  * Representa un libro digital dentro del sistema.
  * <p>
  * Los libros digitales tienen disponibilidad ilimitada y no manejan stock.
  * Además, incluyen información adicional como el formato del archivo
- * y su tamaño en MB.
+ * y su tamaño en megabytes.
  * </p>
  */
 public class LibroDigitial extends Producto 
@@ -24,26 +23,30 @@ public class LibroDigitial extends Producto
     /**
      * Construye un nuevo libro digital.
      *
-     * @param codigo Código único del producto.
-     * @param titulo Título del libro.
-     * @param nombreAutor Nombre del autor.
-     * @param precio Precio base del libro.
-     * @param categoria Categoría del libro.
-     * @param rutaPortada Ruta de la portada.
-     * @param sinopsis Sinopsis del libro.
-     * @param editorial Editorial del libro.
-     * @param numeroPaginas Número de páginas.
-     * @param idioma Idioma del libro.
-     * @param fechaPublicacion Fecha de publicación.
-     * @param tieneDescuento Indica si tiene descuento.
-     * @param porcentajeDescuento Porcentaje de descuento.
-     * @param numeroVentas Número de veces vendido.
-     * @param formatoArchivo Formato del archivo digital.
-     * @param tamanoMB Tamaño del archivo en MB.
+     * @param codigo Código único del producto
+     * @param titulo Título del libro
+     * @param nombreAutor Nombre del autor
+     * @param precio Precio base del libro
+     * @param categoria Categoría del libro
+     * @param rutaPortada Ruta de la portada
+     * @param sinopsis Sinopsis del libro
+     * @param editorial Editorial del libro
+     * @param numeroPaginas Número de páginas
+     * @param idioma Idioma del libro
+     * @param fechaPublicacion Fecha de publicación
+     * @param tieneDescuento Indica si tiene descuento
+     * @param porcentajeDescuento Porcentaje de descuento
+     * @param numeroVentas Número de veces vendido
+     * @param formatoArchivo Formato del archivo digital
+     * @param tamanoMB Tamaño del archivo en MB
+     * 
+     * @pre codigo != null && titulo != null && precio > 0 &&
+     *      formatoArchivo != null && tamanoMB > 0
+     * @post Se crea un libro digital con los atributos especificados
      */
     public LibroDigitial(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento, int numeroVentas, String formatoArchivo, double tamanoMB)                    
     {
-    	super(codigo, titulo, nombreAutor, precio, categoria, rutaPortada, sinopsis, editorial, numeroPaginas, idioma, fechaPublicacion, tieneDescuento, porcentajeDescuento, numeroVentas);
+        super(codigo, titulo, nombreAutor, precio, categoria, rutaPortada, sinopsis, editorial, numeroPaginas, idioma, fechaPublicacion, tieneDescuento, porcentajeDescuento, numeroVentas);
 
         this.formatoArchivo = formatoArchivo;
         this.tamanoMB = tamanoMB;
@@ -57,7 +60,11 @@ public class LibroDigitial extends Producto
 
     /**
      * Retorna el formato del archivo digital.
-     * @return Formato del archivo.
+     * 
+     * @return Formato del archivo
+     * 
+     * @pre true
+     * @post Se retorna el formato del archivo
      */
     public String getFormatoArchivo() 
     {
@@ -66,7 +73,11 @@ public class LibroDigitial extends Producto
 
     /**
      * Retorna el tamaño del archivo en MB.
-     * @return Tamaño en megabytes.
+     * 
+     * @return Tamaño en megabytes
+     * 
+     * @pre true
+     * @post Se retorna el tamaño del archivo
      */
     public double getTamanoMB() 
     {
@@ -79,7 +90,11 @@ public class LibroDigitial extends Producto
 
     /**
      * Establece el formato del archivo.
-     * @param formatoArchivo Nuevo formato.
+     * 
+     * @param formatoArchivo Nuevo formato
+     * 
+     * @pre formatoArchivo != null && !formatoArchivo.equals("")
+     * @post El formato del archivo se actualiza
      */
     public void setFormatoArchivo(String formatoArchivo) 
     {
@@ -89,7 +104,11 @@ public class LibroDigitial extends Producto
 
     /**
      * Establece el tamaño del archivo en MB.
-     * @param tamanoMB Nuevo tamaño en MB.
+     * 
+     * @param tamanoMB Nuevo tamaño
+     * 
+     * @pre tamanoMB > 0
+     * @post El tamaño del archivo se actualiza
      */
     public void setTamanoMB(double tamanoMB) 
     {
@@ -103,7 +122,11 @@ public class LibroDigitial extends Producto
 
     /**
      * Retorna el tipo de producto.
+     * 
      * @return "Digital"
+     * 
+     * @pre true
+     * @post Se retorna el tipo de producto como "Digital"
      */
     @Override
     public String getTipo() 
@@ -112,8 +135,15 @@ public class LibroDigitial extends Producto
     }
 
     /**
+     * Indica si el producto está disponible.
+     * <p>
      * Los libros digitales siempre están disponibles.
-     * @return true siempre.
+     * </p>
+     * 
+     * @return true siempre
+     * 
+     * @pre true
+     * @post Se retorna true
      */
     @Override
     public boolean estaDisponible() 
@@ -127,6 +157,8 @@ public class LibroDigitial extends Producto
 
     /**
      * Verifica que el formato del archivo sea válido.
+     * 
+     * @return true si el formato no es null ni vacío
      */
     private boolean formatoValido()
     {
@@ -135,6 +167,8 @@ public class LibroDigitial extends Producto
 
     /**
      * Verifica que el tamaño del archivo sea válido.
+     * 
+     * @return true si el tamaño es mayor que 0 y válido
      */
     private boolean tamanoValido()
     {
@@ -143,6 +177,9 @@ public class LibroDigitial extends Producto
 
     /**
      * Verifica las invariantes de la clase.
+     * 
+     * @pre true
+     * @post Se garantiza que el formato y el tamaño sean válidos
      */
     private void validarInvariantes()
     {
@@ -154,6 +191,14 @@ public class LibroDigitial extends Producto
     // toString
     // -------------------------------------------------------------------------
 
+    /**
+     * Retorna una representación en texto del libro digital.
+     * 
+     * @return Cadena con la información del libro digital
+     * 
+     * @pre true
+     * @post Se retorna una cadena con los datos del objeto
+     */
     @Override
     public String toString() 
     {
