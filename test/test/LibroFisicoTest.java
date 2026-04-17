@@ -128,9 +128,7 @@ public class LibroFisicoTest
     @Test
     public void testReducirStockInsuficiente()
     {
-        assertThrows(StockInsuficienteException.class, () -> 
-        {
-            libro.reducirStock(20);
-        });
+        assertThrows(StockInsuficienteException.class, () -> {libro.reducirStock(20);});
+ 
     }
 }
