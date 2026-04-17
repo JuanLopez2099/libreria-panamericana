@@ -41,16 +41,9 @@ public class LibroDigitial extends Producto
      * @param formatoArchivo Formato del archivo digital.
      * @param tamanoMB Tamaño del archivo en MB.
      */
-    public LibroDigitial(String codigo, String titulo, String nombreAutor, double precio, String categoria,
-                        String rutaPortada, String sinopsis, String editorial, String numeroPaginas,
-                        String idioma, String fechaPublicacion, boolean tieneDescuento,
-                        double porcentajeDescuento, int numeroVentas,
-                        String formatoArchivo, double tamanoMB) 
+    public LibroDigitial(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento, int numeroVentas, String formatoArchivo, double tamanoMB)                    
     {
-        super(codigo, titulo, nombreAutor, precio, categoria,
-              rutaPortada, sinopsis, editorial, numeroPaginas,
-              idioma, fechaPublicacion, tieneDescuento,
-              porcentajeDescuento, numeroVentas);
+    	super(codigo, titulo, nombreAutor, precio, categoria, rutaPortada, sinopsis, editorial, numeroPaginas, idioma, fechaPublicacion, tieneDescuento, porcentajeDescuento, numeroVentas);
 
         this.formatoArchivo = formatoArchivo;
         this.tamanoMB = tamanoMB;
