@@ -82,9 +82,7 @@ public abstract class Producto
 	 * @param porcentajeDescuento Porcentaje de descuento (0-100).
 	 * @param numeroVentas        Número de veces vendido.
 	 */
-	public Producto(String codigo, String titulo, String nombreAutor, double precio, String categoria,
-			String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma,
-			String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento, int numeroVentas) 
+	public Producto(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento, int numeroVentas) 
 	{
 		this.codigo = codigo;
 		this.titulo = titulo;
