@@ -64,7 +64,7 @@ public class Biblioteca
     {
         for (Producto p : productos) 
         {
-            if (p.getCodigo().equals(codigo)) 
+            if (p.getCodigo().equalsIgnoreCase(codigo)) 
             {
                 return p;
             }
@@ -93,8 +93,8 @@ public class Biblioteca
 
             for (int j = i + 1; j < n; j++) 
             {
-                if (productos.get(j).getTitulo()
-                        .compareTo(productos.get(min).getTitulo()) < 0) 
+                if (productos.get(j).getTitulo().compareTo(productos.get(min).getTitulo()) < 0)
+                         
                 {
                     min = j;
                 }
@@ -150,27 +150,24 @@ public class Biblioteca
      */
     public Producto busquedaBinariaPorTitulo(String titulo) throws LibroNoEncontradoException 
     {
-        int izquierda = 0;
-        int derecha = productos.size() - 1;
+        int inicio = 0;
+        int fin = productos.size() - 1;
 
-        while (izquierda <= derecha) 
+        while (inicio <= fin) 
         {
-            int medio = (izquierda + derecha) / 2;
+            int medio = inicio + (fin - inicio) /2;
 
-            Producto p = productos.get(medio);
-            int comparacion = p.getTitulo().compareTo(titulo);
-
-            if (comparacion == 0) 
+            if(productos.get(medio).getTitulo().equalsIgnoreCase(titulo)) 
             {
-                return p;
+                return productos.get(medio);
             } 
-            else if (comparacion < 0) 
+            else if(productos.get(medio).getTitulo().compareToIgnoreCase(titulo) > 0) 
             {
-                izquierda = medio + 1;
+                fin = medio - 1;
             } 
             else 
             {
-                derecha = medio - 1;
+                inicio = medio + 1;
             }
         }
 
@@ -196,7 +193,7 @@ public class Biblioteca
 
         for (Producto p : productos) 
         {
-            if (p.getCategoria().equalsIgnoreCase(categoria)) 
+            if(p.getCategoria().equalsIgnoreCase(categoria)) 
             {
                 resultado.add(p);
             }
@@ -220,7 +217,7 @@ public class Biblioteca
 
         for (Producto p : productos) 
         {
-            if (p.getNombreAutor().equalsIgnoreCase(autor)) 
+            if(p.getNombreAutor().equalsIgnoreCase(autor)) 
             {
                 resultado.add(p);
             }
@@ -241,7 +238,7 @@ public class Biblioteca
     {
         ArrayList<Producto> resultado = new ArrayList<>();
 
-        for (Producto p : productos) 
+        for(Producto p : productos) 
         {
             if (p.estaDisponible()) 
             {
@@ -264,7 +261,7 @@ public class Biblioteca
     {
         ArrayList<Producto> resultado = new ArrayList<>();
 
-        for (Producto p : productos) 
+        for(Producto p : productos) 
         {
             if (p.isTieneDescuento()) 
             {
@@ -292,7 +289,7 @@ public class Biblioteca
      */
     private boolean sinProductosNull() 
     {
-        for (Producto p : productos) 
+        for(Producto p : productos) 
         {
             if (p == null) 
             {
