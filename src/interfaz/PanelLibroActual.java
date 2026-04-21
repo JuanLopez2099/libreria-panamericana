@@ -52,10 +52,20 @@ public class PanelLibroActual extends JPanel
 		lblstock = new JLabel("Stock:");
 		txtstock = new JTextField("");
 		
+		txtcodigo.setEditable(false);
+		txttitulo.setEditable(false);
+		txtautor.setEditable(false);
+		txtprecio.setEditable(false);
+		txtstock.setEditable(false);
+		
+		
+		
 		btncomprar = new JButton("Comprar ✅");
 		btneliminar = new JButton("Eliminar ❌");
 		btninfo = new JButton("Info 🔎");
 		btncarrito = new JButton("🛒");
+		
+		
 		
 		gbc.gridx = 0; 
 		gbc.gridy = 0; 
