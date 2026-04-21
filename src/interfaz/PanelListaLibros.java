@@ -32,7 +32,7 @@ public class PanelListaLibros extends JPanel
 		scroll.setBorder(borde);
 		
 		libroActual = new PanelLibroActual();
-		
+		listaLibros.setEditable(false);
 		
         gbc.gridy = 0;
         gbc.gridheight = 6;
