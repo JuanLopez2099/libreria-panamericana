@@ -11,12 +11,15 @@ public class InterfazBiblioteca extends JFrame
 	
 	public InterfazBiblioteca()
 	{
-		setTitle("Bibliteca Panamericana");
+		setTitle("Biblioteca Panamericana");
 		setSize(950, 600);
 		setLayout(new BorderLayout());
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		
+		panelListaLibros = new PanelListaLibros();
+		add(panelListaLibros, BorderLayout.CENTER);
 		
 		
 	}
