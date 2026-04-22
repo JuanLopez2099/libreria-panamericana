@@ -21,6 +21,9 @@ public class InterfazBiblioteca extends JFrame
 		panelListaLibros = new PanelListaLibros();
 		add(panelListaLibros, BorderLayout.CENTER);
 		
+		panelConsultas = new PanelConsultas();
+		add(panelConsultas, BorderLayout.SOUTH);
+		
 		
 	}
 	
