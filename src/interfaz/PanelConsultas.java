@@ -21,7 +21,7 @@ public class PanelConsultas extends JPanel
 	private JButton filtrarDescuento;
 	private JButton ordenarPrecio;
 	private JButton ordenarTitulo;
-	
+	private PanelFormulario panelFormulario;
 	
 	
 	public PanelConsultas()
@@ -43,6 +43,7 @@ public class PanelConsultas extends JPanel
 		ordenarPrecio = new JButton("Ordenar por Precio");
 		ordenarTitulo = new JButton("Ordenar por Título");
 		
+		panelFormulario = new PanelFormulario();
 		
 		
 		 gbc.gridx = 0;
@@ -73,7 +74,13 @@ public class PanelConsultas extends JPanel
 	     gbc.gridy = 7;
 	     add(ordenarTitulo, gbc);
 	     
-	     
+	     gbc.gridx = 1;
+	     gbc.gridy = 0;
+	     gbc.gridheight = 8; 
+	     gbc.weightx = 0.7;
+	     gbc.weighty = 1.0;
+	     gbc.fill = GridBagConstraints.BOTH;
+	     add(panelFormulario, gbc);
 		
 		
 		
