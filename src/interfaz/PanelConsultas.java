@@ -21,10 +21,7 @@ public class PanelConsultas extends JPanel
 	private JButton filtrarDescuento;
 	private JButton ordenarPrecio;
 	private JButton ordenarTitulo;
-	private JLabel lblcodigo;
-	private JTextField txtcodigo;
-	private JLabel lbltitulo;
-	private JTextField txttitulo;
+	
 	
 	
 	public PanelConsultas()
@@ -46,10 +43,7 @@ public class PanelConsultas extends JPanel
 		ordenarPrecio = new JButton("Ordenar por Precio");
 		ordenarTitulo = new JButton("Ordenar por Título");
 		
-		lblcodigo = new JLabel("Codigo:");
-		txtcodigo = new JTextField("");
-		lbltitulo = new JLabel("Titulo:");
-		txttitulo = new JTextField("");
+		
 		
 		 gbc.gridx = 0;
 	     gbc.weightx = 1.0;
