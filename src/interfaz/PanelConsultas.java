@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -33,15 +34,14 @@ public class PanelConsultas extends JPanel
 		borde.setTitleColor(Color.BLACK);
 		setBorder(borde);
 		
-		buscarCodigo = new JButton("Buscar Por Codigo");
-		buscarCodigo = new JButton("Buscar Por Código");
-		buscarTitulo = new JButton("Buscar Por Título");
-		filtrarCategoria = new JButton("Filtrar por Categoría");
-		filtrarAutor = new JButton("Filtrar por Autor");
-		filtrarDisponibles = new JButton("Mostrar Disponibles");
-		filtrarDescuento = new JButton("Mostrar con Descuento");
-		ordenarPrecio = new JButton("Ordenar por Precio");
-		ordenarTitulo = new JButton("Ordenar por Título");
+		buscarCodigo = new JButton("Buscar Por Codigo 🔎");
+		buscarTitulo = new JButton("Buscar Por Título 🔍");
+		filtrarCategoria = new JButton("Filtrar por Categoría 🗂️");
+		filtrarAutor = new JButton("Filtrar por Autor ✍️");
+		filtrarDisponibles = new JButton("Mostrar Disponibles 📦");
+		filtrarDescuento = new JButton("Mostrar con Descuento 💸");
+		ordenarPrecio = new JButton("Ordenar por Precio 💲");
+		ordenarTitulo = new JButton("Ordenar por Título 🔤");
 		
 		panelFormulario = new PanelFormulario();
 		
@@ -63,7 +63,7 @@ public class PanelConsultas extends JPanel
 	     add(filtrarAutor, gbc);
 
 	     gbc.gridy = 4;
-	     add(filtrarDisponibles, gbc);
+	     add(filtrarDisponibles, gbc);  	
 
 	     gbc.gridy = 5;
 	     add(filtrarDescuento, gbc);
@@ -80,7 +80,9 @@ public class PanelConsultas extends JPanel
 	     gbc.weightx = 0.7;
 	     gbc.weighty = 1.0;
 	     gbc.fill = GridBagConstraints.BOTH;
+	     gbc.insets = new Insets(5, 20, 5, 5);
 	     add(panelFormulario, gbc);
+	     
 		
 		
 		
