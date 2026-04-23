@@ -74,6 +74,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		btninfo.addActionListener(this);
 		
 		btncarrito = new JButton("🛒");
+		btncarrito.addActionListener(this);
 		
 		
 		
@@ -149,6 +150,14 @@ public class PanelLibroActual extends JPanel implements ActionListener
 			InterfazInfo interfazInfo = new InterfazInfo(padre);
 			
 			interfazInfo.setVisible(true);
+		}
+		else if(e.getSource() == btncarrito)
+		{
+			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
+			
+			InterfazCarrito interfazCarrito = new InterfazCarrito(padre);
+			
+			interfazCarrito.setVisible(true);
 		}
 		
 	}
