@@ -15,7 +15,7 @@ public class InterfazInfo extends JDialog
 	public InterfazInfo(JFrame padre)
 	{
 		super(padre, "Informacion del Libro", true);
-		setSize(700, 500);
+		setSize(1050, 600);
 		setLayout(new BorderLayout());
 		setResizable(false);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
