@@ -2,12 +2,16 @@ package interfaz;
 
 import java.awt.BorderLayout;
 
+
+
 import javax.swing.JFrame;
+
 
 public class InterfazBiblioteca extends JFrame
 {
 	private PanelListaLibros panelListaLibros;
 	private PanelConsultas panelConsultas;
+	
 	
 	public InterfazBiblioteca()
 	{
@@ -24,7 +28,7 @@ public class InterfazBiblioteca extends JFrame
 		panelConsultas = new PanelConsultas();
 		add(panelConsultas, BorderLayout.SOUTH);
 		
-		
+
 	}
 	
 	public static void main(String[] args) 
