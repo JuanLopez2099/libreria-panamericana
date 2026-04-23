@@ -285,7 +285,12 @@ public class Biblioteca
 		return productos;
 	}
     
-    
+    /**
+     * Carga los libros iniciales en la biblioteca.
+     * 
+     * @pre La lista de productos debe existir
+     * @post Libros agregados
+     */
     public void cargarLibros()
     {
     	LibroFisico libro1 = new LibroFisico("LF005", "Cien Años de Soledad", "Gabriel García Márquez", 45000, "Novela", "", "Un realismo mágico...", "Sudamericana", "432", "Español", "1967-05-30", false, 0.0, 120, 10);
