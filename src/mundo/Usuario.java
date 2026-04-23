@@ -7,6 +7,10 @@ package mundo;
  * el nombre sea válido (no nulo y no vacío) y el saldo sea no negativo mediante
  * la validación de invariantes.
  * </p>
+ * 
+ * @author [Tu Nombre]
+ * @version 1.1
+ * @since 1.0
  */
 public class Usuario 
 {
@@ -14,7 +18,7 @@ public class Usuario
 	private String nombre;
 	
 	/** Saldo actual del usuario. Debe ser mayor o igual a cero. */
-	private double Saldo;
+	private double saldo;
 	
 	/**
 	 * Constructor de la clase Usuario.
@@ -26,13 +30,13 @@ public class Usuario
 	 * PRE: nombre != null && !nombre.equals("")
 	 *      saldo >= 0
 	 * POST: this.nombre == nombre
-	 *       this.Saldo == saldo
+	 *       this.saldo == saldo
 	 * </pre>
 	 */
 	public Usuario(String nombre, double saldo) 
 	{
 		this.nombre = nombre;
-		Saldo = saldo;
+		this.saldo = saldo;
 		
 		validarInvariantes();
 	}
@@ -71,11 +75,11 @@ public class Usuario
 	 * @return El saldo del usuario
 	 * 
 	 * <pre>
-	 * POST: resultado == this.Saldo
+	 * POST: resultado == this.saldo
 	 * </pre>
 	 */
 	public double getSaldo() {
-		return Saldo;
+		return saldo;
 	}
 
 	/**
@@ -85,27 +89,43 @@ public class Usuario
 	 * 
 	 * <pre>
 	 * PRE: saldo >= 0
-	 * POST: this.Saldo == saldo
+	 * POST: this.saldo == saldo
 	 * </pre>
 	 */
 	public void setSaldo(double saldo) {
-		Saldo = saldo;
+		this.saldo = saldo;
+		validarInvariantes();
+	}
+
+	/**
+	 * Descuenta un monto del saldo del usuario.
+	 * 
+	 * @param monto Monto a descontar del saldo
+	 * 
+	 * <pre>
+	 * PRE: monto >= 0 && monto <= this.saldo
+	 * POST: this.saldo == saldo_anterior - monto
+	 * </pre>
+	 */
+	public void descontarSaldo(double monto)
+	{
+		this.saldo -= monto;
 		validarInvariantes();
 	}
 
 	/**
 	 * Retorna una representación en cadena del usuario.
 	 * 
-	 * @return Cadena con formato "Usuario [nombre=nombre, Saldo=saldo]"
+	 * @return Cadena con formato "Usuario [nombre=nombre, saldo=saldo]"
 	 * 
 	 * <pre>
-	 * POST: resultado.equals("Usuario [nombre=" + this.nombre + ", Saldo=" + this.Saldo + "]")
+	 * POST: resultado.equals("Usuario [nombre=" + this.nombre + ", saldo=" + this.saldo + "]")
 	 * </pre>
 	 */
 	@Override
 	public String toString() 
 	{
-		return "Usuario [nombre=" + nombre + ", Saldo=" + Saldo + "]";
+		return "Usuario [nombre=" + nombre + ", saldo=" + saldo + "]";
 	}
 	
 	/**
@@ -128,12 +148,12 @@ public class Usuario
 	 * @return true si el saldo es mayor o igual a cero, false en caso contrario
 	 * 
 	 * <pre>
-	 * POST: resultado == (Saldo >= 0)
+	 * POST: resultado == (saldo >= 0)
 	 * </pre>
 	 */
 	private boolean validarSaldo()
 	{
-		return Saldo >= 0;
+		return saldo >= 0;
 	}
 	
 	/**
