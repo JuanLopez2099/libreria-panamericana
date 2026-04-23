@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -45,7 +46,8 @@ public class PanelInfoLibro extends JPanel
 		setBorder(borde);
 		
 		imagen = new JLabel();
-
+		imagen.setPreferredSize(new Dimension(150, 200));
+		
 		lblcodigo = new JLabel("Código:");
 		txtcodigo = new JTextField();
 
@@ -94,7 +96,7 @@ public class PanelInfoLibro extends JPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridheight = 6;
-		gbc.weightx = 0.1;
+		gbc.weightx = 0.2;
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.BOTH;
 		add(imagen, gbc);
