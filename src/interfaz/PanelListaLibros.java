@@ -4,7 +4,9 @@ package interfaz;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -54,6 +56,28 @@ public class PanelListaLibros extends JPanel
         gbc.weightx = 0.6;
         add(libroActual, gbc);
         mostrarLibros();
+        
+        listaLibros.addMouseListener(new MouseAdapter() 
+        {
+        	@Override
+        	public void mouseClicked(MouseEvent e)
+        	{
+        		try
+            	{
+            		int linea = listaLibros.getLineOfOffset(listaLibros.viewToModel2D(e.getPoint()));
+            		ArrayList<Producto> productos = biblioteca.getProductos();
+            		if(linea >= 0 && linea < productos.size())
+            		{
+            			libroActual.mostrarInformacio(productos.get(linea));
+            		}
+            		
+            	}
+            	catch(Exception ex)
+            	{
+            		
+            	}
+        	}
+		});
       
 	}
 	
