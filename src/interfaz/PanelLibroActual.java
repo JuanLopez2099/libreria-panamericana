@@ -3,15 +3,19 @@ package interfaz;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.SwingUtilities;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class PanelLibroActual extends JPanel
+public class PanelLibroActual extends JPanel implements ActionListener
 {
 	private JLabel lblcodigo;
 	private JTextField txtcodigo;
@@ -27,6 +31,8 @@ public class PanelLibroActual extends JPanel
 	private JButton btncarrito;
 	private JButton btninfo;
 	private JButton btneliminar;
+	
+	
 	
 	public PanelLibroActual()
 	{
@@ -61,8 +67,12 @@ public class PanelLibroActual extends JPanel
 		
 		
 		btncomprar = new JButton("Agregar Carrito ✅");
+		
 		btneliminar = new JButton("Eliminar ❌");
+		
 		btninfo = new JButton("Info 🔎");
+		btninfo.addActionListener(this);
+		
 		btncarrito = new JButton("🛒");
 		
 		
@@ -127,5 +137,19 @@ public class PanelLibroActual extends JPanel
 
 		gbc.gridy = 8;
 		add(btncarrito, gbc);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource() == btninfo)
+		{
+			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
+			
+			InterfazInfo interfazInfo = new InterfazInfo(padre);
+			
+			interfazInfo.setVisible(true);
+		}
+		
 	}
 }
