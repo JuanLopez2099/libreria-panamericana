@@ -284,6 +284,33 @@ public class Biblioteca
     public ArrayList<Producto> getProductos() {
 		return productos;
 	}
+    
+    /**
+     * Carga los libros iniciales en la biblioteca.
+     * 
+     * @pre La lista de productos debe existir
+     * @post Libros agregados
+     */
+    public void cargarLibros()
+    {
+    	LibroFisico libro1 = new LibroFisico("LF005", "Cien Años de Soledad", "Gabriel García Márquez", 45000, "Novela", "", "Un realismo mágico...", "Sudamericana", "432", "Español", "1967-05-30", false, 0.0, 120, 10);
+    	agregarProducto(libro1);
+
+    	LibroFisico libro2 = new LibroFisico("LF006", "El Principito", "Antoine de Saint-Exupéry", 28000, "Fábula", "", "Un piloto conoce a un niño...", "Reynal & Hitchcock", "96", "Español", "1943-04-06", true, 15.0, 200, 5);
+    	agregarProducto(libro2);
+
+    	LibroFisico libro3 = new LibroFisico("LF004", "Don Quijote de la Mancha", "Miguel de Cervantes", 60000, "Clásico", "", "Las aventuras del ingenioso hidalgo...", "Francisco de Robles", "863", "Español", "1605-01-16", false, 0.0, 80, 3);
+    	agregarProducto(libro3);
+
+    	LibroDigitial libro4 = new LibroDigitial("LD002", "Clean Code", "Robert C. Martin", 35000, "Tecnología", "", "Principios de código limpio...", "Prentice Hall", "431", "Inglés", "2008-08-01", true, 20.0, 300, "PDF", 4.2);
+    	agregarProducto(libro4);
+
+    	LibroDigitial libro5 = new LibroDigitial("LD003", "El Alquimista", "Paulo Coelho", 22000, "Novela", "", "La historia de Santiago...", "HarperCollins", "208", "Español", "1988-01-01", false, 0.0, 500, "EPUB", 1.8);
+    	agregarProducto(libro5);
+
+    	LibroDigitial libro6 = new LibroDigitial("LD001", "Sapiens", "Yuval Noah Harari", 40000, "Historia", "", "Breve historia de la humanidad...", "Harper", "443", "Español", "2011-01-01", true, 10.0, 250, "PDF", 5.1);
+    	agregarProducto(libro6);
+    }
 
 
     // -------------------------------------------------------------------------
