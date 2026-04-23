@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -12,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class PanelConsultas extends JPanel
+public class PanelConsultas extends JPanel implements ActionListener
 {
 	private JButton buscarCodigo;
 	private JButton buscarTitulo;
@@ -23,10 +25,14 @@ public class PanelConsultas extends JPanel
 	private JButton ordenarPrecio;
 	private JButton ordenarTitulo;
 	private PanelFormulario panelFormulario;
+	private PanelListaLibros panelListaLibros;
 	
 	
-	public PanelConsultas()
+	
+	public PanelConsultas(PanelListaLibros panelListaLibros)
 	{
+		this.panelListaLibros = panelListaLibros;
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -40,9 +46,11 @@ public class PanelConsultas extends JPanel
 		filtrarAutor = new JButton("Filtrar por Autor ✍️");
 		filtrarDisponibles = new JButton("Mostrar Disponibles 📦");
 		filtrarDescuento = new JButton("Mostrar con Descuento 💸");
-		ordenarPrecio = new JButton("Ordenar por Precio 💲");
-		ordenarTitulo = new JButton("Ordenar por Título 🔤");
 		
+		ordenarPrecio = new JButton("Ordenar por Precio 💲");
+		ordenarPrecio.addActionListener(this);
+		
+		ordenarTitulo = new JButton("Ordenar por Título 🔤");
 		panelFormulario = new PanelFormulario();
 		
 		
@@ -86,6 +94,17 @@ public class PanelConsultas extends JPanel
 		
 		
 		
+		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource() == ordenarPrecio)
+		{
+			panelListaLibros.ordenarPorPrecio();
+		}
 		
 	}
 	
