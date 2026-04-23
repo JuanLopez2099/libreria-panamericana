@@ -5,7 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingUtilities;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,7 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
+
+import mundo.Biblioteca;
+import mundo.LibroFisico;
+import mundo.Producto;
 
 public class PanelLibroActual extends JPanel implements ActionListener
 {
@@ -31,6 +35,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	private JButton btncarrito;
 	private JButton btninfo;
 	private JButton btneliminar;
+	private Biblioteca biblioteca;
 	
 	
 	
@@ -159,6 +164,25 @@ public class PanelLibroActual extends JPanel implements ActionListener
 			
 			interfazCarrito.setVisible(true);
 		}
+		
+	}
+	
+	public void mostrarInformacio(Producto p)
+	{
+		txtcodigo.setText(p.getCodigo());
+		txttitulo.setText(p.getTitulo());
+		txtautor.setText(p.getNombreAutor());
+		txtprecio.setText("$" + p.getPrecio());
+		
+		if(p instanceof LibroFisico)
+		{
+			txtstock.setText(String.valueOf(((LibroFisico) p).getStock()));
+		}
+		else
+		{
+			txtstock.setText("Digital");
+		}
+		
 		
 	}
 }
