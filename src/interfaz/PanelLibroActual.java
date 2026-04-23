@@ -60,7 +60,7 @@ public class PanelLibroActual extends JPanel
 		
 		
 		
-		btncomprar = new JButton("Comprar ✅");
+		btncomprar = new JButton("Agregar Carrito ✅");
 		btneliminar = new JButton("Eliminar ❌");
 		btninfo = new JButton("Info 🔎");
 		btncarrito = new JButton("🛒");
