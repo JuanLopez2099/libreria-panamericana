@@ -46,7 +46,9 @@ public class PanelInfoLibro extends JPanel
 		setBorder(borde);
 		
 		imagen = new JLabel();
-		imagen.setPreferredSize(new Dimension(150, 200));
+		imagen.setPreferredSize(new Dimension(10, 200));
+		imagen.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		imagen.setHorizontalAlignment(JLabel.CENTER);
 		
 		lblcodigo = new JLabel("Código:");
 		txtcodigo = new JTextField();
