@@ -12,15 +12,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
+import mundo.Biblioteca;
+import mundo.Producto;
+
 
 public class PanelListaLibros extends JPanel
 {	
 	private JTextArea listaLibros;
 	private PanelLibroActual libroActual;
+	private Biblioteca biblioteca;
 	
 	
 	public PanelListaLibros()
 	{
+		biblioteca = new Biblioteca();
+		biblioteca.cargarLibros();
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -46,8 +53,18 @@ public class PanelListaLibros extends JPanel
         gbc.gridx = 1;
         gbc.weightx = 0.6;
         add(libroActual, gbc);
-       
+        mostrarLibros();
+      
+	}
+	
+	public void mostrarLibros()
+	{
+		listaLibros.setText("");
 		
+		for(Producto p : biblioteca.getProductos())
+		{
+			listaLibros.append(p.getTitulo() + "\n");
+		}
 	}
 	
 	
