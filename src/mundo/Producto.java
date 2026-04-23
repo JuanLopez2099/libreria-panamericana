@@ -8,7 +8,7 @@ package mundo;
  * sino a través de sus subclases.
  * </p>
  *
- * @author Tu nombre aquí
+ * @author Juan Camilo Lopez, Estefania Rodriguez Gutierrez
  * @version 1.0
  */
 public abstract class Producto 
@@ -81,6 +81,21 @@ public abstract class Producto
 	 * @param tieneDescuento      Indica si tiene descuento activo.
 	 * @param porcentajeDescuento Porcentaje de descuento (0-100).
 	 * @param numeroVentas        Número de veces vendido.
+	 *
+	 * @pre codigo != null &amp;&amp; !codigo.isEmpty()
+	 * @pre titulo != null &amp;&amp; !titulo.isEmpty()
+	 * @pre precio > 0 &amp;&amp; !Double.isNaN(precio) &amp;&amp; !Double.isInfinite(precio)
+	 * @pre categoria != null &amp;&amp; !categoria.isEmpty()
+	 * @pre rutaPortada != null &amp;&amp; !rutaPortada.isEmpty()
+	 * @pre idioma != null &amp;&amp; !idioma.isEmpty()
+	 * @pre porcentajeDescuento >= 0 &amp;&amp; porcentajeDescuento &lt;= 100
+	 * @pre numeroVentas >= 0
+	 *
+	 * @post getCodigo().equals(codigo)
+	 * @post getTitulo().equals(titulo)
+	 * @post getPrecio() == precio
+	 * @post getNumeroVentas() == numeroVentas
+	 * @post getPorcentajeDescuento() == porcentajeDescuento
 	 */
 	public Producto(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento, int numeroVentas) 
 	{
@@ -110,6 +125,9 @@ public abstract class Producto
 	 * Retorna el código único del producto.
 	 *
 	 * @return El código del producto.
+	 *
+	 * @pre true
+	 * @post El valor retornado no es nulo ni vacío.
 	 */
 	public String getCodigo() 
 	{
@@ -120,6 +138,9 @@ public abstract class Producto
 	 * Retorna el título del producto.
 	 *
 	 * @return El título del producto.
+	 *
+	 * @pre true
+	 * @post El valor retornado no es nulo ni vacío.
 	 */
 	public String getTitulo() 
 	{
@@ -130,6 +151,9 @@ public abstract class Producto
 	 * Retorna el nombre del autor del producto.
 	 *
 	 * @return El nombre del autor.
+	 *
+	 * @pre true
+	 * @post El valor retornado puede ser nulo si no fue especificado.
 	 */
 	public String getNombreAutor() 
 	{
@@ -140,6 +164,9 @@ public abstract class Producto
 	 * Retorna el precio base del producto.
 	 *
 	 * @return El precio base.
+	 *
+	 * @pre true
+	 * @post El valor retornado es mayor que 0.
 	 */
 	public double getPrecio() 
 	{
@@ -154,6 +181,11 @@ public abstract class Producto
 	 * </p>
 	 *
 	 * @return El precio final con o sin descuento aplicado.
+	 *
+	 * @pre true
+	 * @post isTieneDescuento() ==> result == getPrecio() * (1 - getPorcentajeDescuento() / 100)
+	 * @post !isTieneDescuento() ==> result == getPrecio()
+	 * @post result > 0
 	 */
 	public double getPrecioFinal()
 	{
@@ -169,6 +201,9 @@ public abstract class Producto
 	 * Retorna la categoría del producto.
 	 *
 	 * @return La categoría del producto.
+	 *
+	 * @pre true
+	 * @post El valor retornado no es nulo ni vacío.
 	 */
 	public String getCategoria() 
 	{
@@ -179,6 +214,9 @@ public abstract class Producto
 	 * Retorna la ruta de la imagen de portada del producto.
 	 *
 	 * @return La ruta de la portada.
+	 *
+	 * @pre true
+	 * @post El valor retornado no es nulo ni vacío.
 	 */
 	public String getRutaPortada() 
 	{
@@ -189,6 +227,9 @@ public abstract class Producto
 	 * Retorna la sinopsis del producto.
 	 *
 	 * @return La sinopsis del producto.
+	 *
+	 * @pre true
+	 * @post El valor retornado puede ser nulo si no fue especificado.
 	 */
 	public String getSinopsis() 
 	{
@@ -199,6 +240,9 @@ public abstract class Producto
 	 * Retorna la editorial del producto.
 	 *
 	 * @return La editorial del producto.
+	 *
+	 * @pre true
+	 * @post El valor retornado puede ser nulo si no fue especificado.
 	 */
 	public String getEditorial() 
 	{
@@ -209,6 +253,9 @@ public abstract class Producto
 	 * Retorna el número de páginas del producto.
 	 *
 	 * @return El número de páginas.
+	 *
+	 * @pre true
+	 * @post El valor retornado puede ser nulo si no fue especificado.
 	 */
 	public String getNumeroPaginas() 
 	{
@@ -219,6 +266,9 @@ public abstract class Producto
 	 * Retorna el idioma del producto.
 	 *
 	 * @return El idioma del producto.
+	 *
+	 * @pre true
+	 * @post El valor retornado no es nulo ni vacío.
 	 */
 	public String getIdioma() 
 	{
@@ -229,6 +279,9 @@ public abstract class Producto
 	 * Retorna la fecha de publicación del producto.
 	 *
 	 * @return La fecha de publicación.
+	 *
+	 * @pre true
+	 * @post El valor retornado puede ser nulo si no fue especificado.
 	 */
 	public String getFechaPublicacion() 
 	{
@@ -239,6 +292,9 @@ public abstract class Producto
 	 * Indica si el producto tiene descuento activo.
 	 *
 	 * @return {@code true} si tiene descuento, {@code false} en caso contrario.
+	 *
+	 * @pre true
+	 * @post true
 	 */
 	public boolean isTieneDescuento() 
 	{
@@ -249,6 +305,9 @@ public abstract class Producto
 	 * Retorna el porcentaje de descuento del producto.
 	 *
 	 * @return El porcentaje de descuento (entre 0 y 100).
+	 *
+	 * @pre true
+	 * @post result >= 0 &amp;&amp; result &lt;= 100
 	 */
 	public double getPorcentajeDescuento() 
 	{
@@ -259,6 +318,9 @@ public abstract class Producto
 	 * Retorna el número de veces que el producto ha sido vendido.
 	 *
 	 * @return El número de ventas.
+	 *
+	 * @pre true
+	 * @post result >= 0
 	 */
 	public int getNumeroVentas() 
 	{
@@ -273,6 +335,11 @@ public abstract class Producto
 	 * Establece el código del producto.
 	 *
 	 * @param codigo El nuevo código del producto.
+	 *
+	 * @pre codigo != null &amp;&amp; !codigo.isEmpty()
+	 * @post getCodigo().equals(codigo)
+	 *
+	 * @throws AssertionError Si las precondiciones no se cumplen y las aserciones están habilitadas.
 	 */
 	public void setCodigo(String codigo)
 	{
@@ -284,6 +351,11 @@ public abstract class Producto
 	 * Establece el título del producto.
 	 *
 	 * @param titulo El nuevo título del producto.
+	 *
+	 * @pre titulo != null &amp;&amp; !titulo.isEmpty()
+	 * @post getTitulo().equals(titulo)
+	 *
+	 * @throws AssertionError Si las precondiciones no se cumplen y las aserciones están habilitadas.
 	 */
 	public void setTitulo(String titulo)
 	{
@@ -295,6 +367,9 @@ public abstract class Producto
 	 * Establece el nombre del autor del producto.
 	 *
 	 * @param nombreAutor El nuevo nombre del autor.
+	 *
+	 * @pre true
+	 * @post getNombreAutor().equals(nombreAutor)
 	 */
 	public void setNombreAutor(String nombreAutor)
 	{
@@ -306,6 +381,11 @@ public abstract class Producto
 	 * Establece el precio base del producto.
 	 *
 	 * @param precio El nuevo precio base. Debe ser mayor que 0.
+	 *
+	 * @pre precio > 0 &amp;&amp; !Double.isNaN(precio) &amp;&amp; !Double.isInfinite(precio)
+	 * @post getPrecio() == precio
+	 *
+	 * @throws AssertionError Si el precio no es un número finito positivo y las aserciones están habilitadas.
 	 */
 	public void setPrecio(double precio)
 	{
@@ -317,6 +397,11 @@ public abstract class Producto
 	 * Establece la categoría del producto.
 	 *
 	 * @param categoria La nueva categoría del producto.
+	 *
+	 * @pre categoria != null &amp;&amp; !categoria.isEmpty()
+	 * @post getCategoria().equals(categoria)
+	 *
+	 * @throws AssertionError Si las precondiciones no se cumplen y las aserciones están habilitadas.
 	 */
 	public void setCategoria(String categoria)
 	{
@@ -328,6 +413,11 @@ public abstract class Producto
 	 * Establece la ruta de la imagen de portada del producto.
 	 *
 	 * @param rutaPortada La nueva ruta de la portada.
+	 *
+	 * @pre rutaPortada != null &amp;&amp; !rutaPortada.isEmpty()
+	 * @post getRutaPortada().equals(rutaPortada)
+	 *
+	 * @throws AssertionError Si las precondiciones no se cumplen y las aserciones están habilitadas.
 	 */
 	public void setRutaPortada(String rutaPortada)
 	{
@@ -339,6 +429,9 @@ public abstract class Producto
 	 * Establece la sinopsis del producto.
 	 *
 	 * @param sinopsis La nueva sinopsis del producto.
+	 *
+	 * @pre true
+	 * @post getSinopsis().equals(sinopsis)
 	 */
 	public void setSinopsis(String sinopsis)
 	{
@@ -350,6 +443,9 @@ public abstract class Producto
 	 * Establece la editorial del producto.
 	 *
 	 * @param editorial La nueva editorial del producto.
+	 *
+	 * @pre true
+	 * @post getEditorial().equals(editorial)
 	 */
 	public void setEditorial(String editorial)
 	{
@@ -361,6 +457,9 @@ public abstract class Producto
 	 * Establece el número de páginas del producto.
 	 *
 	 * @param numeroPaginas El nuevo número de páginas.
+	 *
+	 * @pre true
+	 * @post getNumeroPaginas().equals(numeroPaginas)
 	 */
 	public void setNumeroPaginas(String numeroPaginas)
 	{
@@ -372,6 +471,11 @@ public abstract class Producto
 	 * Establece el idioma del producto.
 	 *
 	 * @param idioma El nuevo idioma del producto.
+	 *
+	 * @pre idioma != null &amp;&amp; !idioma.isEmpty()
+	 * @post getIdioma().equals(idioma)
+	 *
+	 * @throws AssertionError Si las precondiciones no se cumplen y las aserciones están habilitadas.
 	 */
 	public void setIdioma(String idioma)
 	{
@@ -383,6 +487,9 @@ public abstract class Producto
 	 * Establece la fecha de publicación del producto.
 	 *
 	 * @param fechaPublicacion La nueva fecha de publicación.
+	 *
+	 * @pre true
+	 * @post getFechaPublicacion().equals(fechaPublicacion)
 	 */
 	public void setFechaPublicacion(String fechaPublicacion)
 	{
@@ -394,6 +501,11 @@ public abstract class Producto
 	 * Establece el porcentaje de descuento del producto.
 	 *
 	 * @param porcentajeDescuento El nuevo porcentaje de descuento (entre 0 y 100).
+	 *
+	 * @pre porcentajeDescuento >= 0 &amp;&amp; porcentajeDescuento &lt;= 100
+	 * @post getPorcentajeDescuento() == porcentajeDescuento
+	 *
+	 * @throws AssertionError Si el porcentaje está fuera del rango [0, 100] y las aserciones están habilitadas.
 	 */
 	public void setPorcentajeDescuento(double porcentajeDescuento)
 	{
@@ -405,6 +517,11 @@ public abstract class Producto
 	 * Establece el número de ventas del producto.
 	 *
 	 * @param numeroVentas El nuevo número de ventas. Debe ser mayor o igual a 0.
+	 *
+	 * @pre numeroVentas >= 0
+	 * @post getNumeroVentas() == numeroVentas
+	 *
+	 * @throws AssertionError Si el número de ventas es negativo y las aserciones están habilitadas.
 	 */
 	public void setNumeroVentas(int numeroVentas)
 	{
@@ -420,6 +537,9 @@ public abstract class Producto
 	 * Incrementa el número de ventas del producto en la cantidad indicada.
 	 *
 	 * @param veces Cantidad de ventas a agregar. Se espera que sea un valor positivo.
+	 *
+	 * @pre veces > 0
+	 * @post getNumeroVentas() == old(getNumeroVentas()) + veces
 	 */
 	public void incrementarVecesVendido(int veces)
 	{
@@ -434,6 +554,9 @@ public abstract class Producto
 	 * </p>
 	 *
 	 * @return Una cadena con el tipo de producto.
+	 *
+	 * @pre true
+	 * @post result != null &amp;&amp; !result.isEmpty()
 	 */
 	public abstract String getTipo();
 
@@ -444,6 +567,9 @@ public abstract class Producto
 	 * </p>
 	 *
 	 * @return {@code true} si el producto está disponible, {@code false} en caso contrario.
+	 *
+	 * @pre true
+	 * @post true
 	 */
 	public abstract boolean estaDisponible();
 
@@ -451,6 +577,9 @@ public abstract class Producto
 	 * Retorna una representación en texto del producto con todos sus atributos.
 	 *
 	 * @return Una cadena con la información completa del producto.
+	 *
+	 * @pre true
+	 * @post result != null &amp;&amp; !result.isEmpty()
 	 */
 	@Override
 	public String toString() 
