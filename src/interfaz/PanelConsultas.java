@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import excepciones.DatoInvalidoException;
 import excepciones.LibroNoEncontradoException;
 import mundo.Biblioteca;
 import mundo.Producto;
@@ -117,10 +118,19 @@ public class PanelConsultas extends JPanel implements ActionListener
 	{
 		try
 		{
-			Producto p = biblioteca.buscarPorCodigo(panelFormulario.getCodigo());
-			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-	        InterfazInfo interfazInfo = new InterfazInfo(padre, p);
-	        interfazInfo.setVisible(true);
+			try
+			{
+				String codigo = panelFormulario.getCodigo();
+				Producto p = biblioteca.buscarPorCodigo(codigo);
+				JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
+		        InterfazInfo interfazInfo = new InterfazInfo(padre, p);
+		        interfazInfo.setVisible(true);
+			}
+			catch(DatoInvalidoException e)
+			{
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+			}
+			
 		}
 		catch(LibroNoEncontradoException e)
 		{
@@ -135,10 +145,20 @@ public class PanelConsultas extends JPanel implements ActionListener
 		
 		try
 		{
-			Producto p = biblioteca.busquedaBinariaPorTitulo(panelFormulario.getTitulo());
-			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-	        InterfazInfo interfazInfo = new InterfazInfo(padre, p);
-	        interfazInfo.setVisible(true);
+			try
+			{
+				String titulo = panelFormulario.getTitulo();
+				Producto p = biblioteca.busquedaBinariaPorTitulo(titulo);
+				JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
+		        InterfazInfo interfazInfo = new InterfazInfo(padre, p);
+		        interfazInfo.setVisible(true);
+			}
+			catch(DatoInvalidoException e)
+			{
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			
 		}
 		catch(LibroNoEncontradoException e)
 		{
