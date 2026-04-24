@@ -10,13 +10,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
+import mundo.Biblioteca;
+import mundo.Producto;
+
 public class PanelSinopsis extends JPanel
 {
 	private JTextArea txtsinopsis;
+	private Biblioteca biblioteca;
 	
 	
 	public PanelSinopsis()
 	{
+		biblioteca = new Biblioteca();
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -39,6 +45,11 @@ public class PanelSinopsis extends JPanel
 		add(scroll, gbc);
 		
 		
+	}
+	
+	public void mostrarSinopsis(Producto p)
+	{
+		txtsinopsis.setText(p.getSinopsis());
 	}
 
 }
