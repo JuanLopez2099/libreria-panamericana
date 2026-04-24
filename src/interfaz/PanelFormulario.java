@@ -94,7 +94,10 @@ public class PanelFormulario extends JPanel
 	
 	public String getCategoria() throws DatoInvalidoException
 	{
-		
+		if(txtcategoria.getText().isEmpty())
+		{
+			throw new DatoInvalidoException("El campo no puede estar vacio");
+		}
 		return txtcategoria.getText();
 	}
 }
