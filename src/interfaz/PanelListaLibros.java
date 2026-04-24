@@ -102,6 +102,17 @@ public class PanelListaLibros extends JPanel
 		}
 	}
 	
+	public void ordenarPorTitulo()
+	{
+		listaLibros.setText("");
+		biblioteca.ordenarPorTitulo();
+		
+		for(Producto p : biblioteca.getProductos())
+		{
+			listaLibros.append(p.getTitulo() + "\n");
+		}
+	}
+	
 	
 	
 

@@ -51,6 +51,8 @@ public class PanelConsultas extends JPanel implements ActionListener
 		ordenarPrecio.addActionListener(this);
 		
 		ordenarTitulo = new JButton("Ordenar por Título 🔤");
+		ordenarTitulo.addActionListener(this);
+		
 		panelFormulario = new PanelFormulario();
 		
 		
@@ -104,6 +106,10 @@ public class PanelConsultas extends JPanel implements ActionListener
 		if(e.getSource() == ordenarPrecio)
 		{
 			panelListaLibros.ordenarPorPrecio();
+		}
+		else if(e.getSource() == ordenarTitulo)
+		{
+			panelListaLibros.ordenarPorTitulo();
 		}
 		
 	}
