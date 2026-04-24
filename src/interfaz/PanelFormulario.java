@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import excepciones.DatoInvalidoException;
+
 public class PanelFormulario extends JPanel
 {
 	private JLabel lblcodigo;
@@ -72,18 +74,27 @@ public class PanelFormulario extends JPanel
 	}
 	
 	
-	public String getCodigo()
+	public String getCodigo() throws DatoInvalidoException
 	{
+		if(txtcodigo.getText().isEmpty())
+		{
+			throw new DatoInvalidoException("El campo no puede estar vacio");
+		}
 		return txtcodigo.getText();
 	}
 	
-	public String getTitulo()
+	public String getTitulo() throws DatoInvalidoException
 	{
+		if(txttitulo.getText().isEmpty())
+		{
+			throw new DatoInvalidoException("El campo no puede estar vacio");
+		}
 		return txttitulo.getText();
 	}
 	
-	public String getCategoria()
+	public String getCategoria() throws DatoInvalidoException
 	{
+		
 		return txtcategoria.getText();
 	}
 }
