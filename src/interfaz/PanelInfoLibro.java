@@ -45,6 +45,8 @@ public class PanelInfoLibro extends JPanel
 	private JTextField txtformato;
 	private JLabel lbltamaño;
 	private JTextField txttamaño;
+	private JLabel lblidioma;
+	private JTextField txtidioma;
 	
 	public PanelInfoLibro()
 	{
@@ -95,6 +97,9 @@ public class PanelInfoLibro extends JPanel
 		lbltamaño = new JLabel("Tamaño MB:");
 		txttamaño = new JTextField("");
 		
+		lblidioma = new JLabel("Idioma:");
+		txtidioma = new JTextField("");
+		
 		txtcodigo.setEditable(false);
 		txttitulo.setEditable(false);
 		txtautor.setEditable(false);
@@ -107,6 +112,7 @@ public class PanelInfoLibro extends JPanel
 		txtstock.setEditable(false);
 		txtformato.setEditable(false);
 		txttamaño.setEditable(false);
+		txtidioma.setEditable(false);
 		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(3, 5, 3, 5);
@@ -219,6 +225,14 @@ public class PanelInfoLibro extends JPanel
 		gbc.weightx = 0.2;
 		add(txttamaño, gbc);
 		
+		gbc.gridx = 1; 
+		gbc.gridy = 6; 
+		gbc.weightx = 0.1;
+		add(lblidioma, gbc);
+		gbc.gridx = 2; 
+		gbc.weightx = 0.2;
+		add(txtidioma, gbc);
+		
 	}
 	
 	public void mostrarInformacio(Producto p)
@@ -236,6 +250,7 @@ public class PanelInfoLibro extends JPanel
 		txtpaginas.setText(p.getNumeroPaginas());
 		txtfechapublicacion.setText(p.getFechaPublicacion());
 		txtdescuento.setText("%" + p.getPorcentajeDescuento());
+		txtidioma.setText(p.getIdioma());
 		
 		
 		if(p instanceof LibroFisico)
