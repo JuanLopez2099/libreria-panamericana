@@ -9,10 +9,17 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
+
+import excepciones.LibroNoEncontradoException;
+import mundo.Biblioteca;
+import mundo.Producto;
 
 public class PanelConsultas extends JPanel implements ActionListener
 {
@@ -24,14 +31,17 @@ public class PanelConsultas extends JPanel implements ActionListener
 	private JButton filtrarDescuento;
 	private JButton ordenarPrecio;
 	private JButton ordenarTitulo;
+	private Biblioteca biblioteca;
 	private PanelFormulario panelFormulario;
 	private PanelListaLibros panelListaLibros;
 	
 	
 	
-	public PanelConsultas(PanelListaLibros panelListaLibros)
+	public PanelConsultas(PanelListaLibros panelListaLibros, PanelFormulario panelFormulario, Biblioteca biblioteca)
 	{
 		this.panelListaLibros = panelListaLibros;
+		this.panelFormulario = panelFormulario;
+		this.biblioteca = biblioteca;
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -41,6 +51,8 @@ public class PanelConsultas extends JPanel implements ActionListener
 		setBorder(borde);
 		
 		buscarCodigo = new JButton("Buscar Por Codigo 🔎");
+		buscarCodigo.addActionListener(this);
+		
 		buscarTitulo = new JButton("Buscar Por Título 🔍");
 		filtrarCategoria = new JButton("Filtrar por Categoría 🗂️");
 		filtrarAutor = new JButton("Filtrar por Autor ✍️");
@@ -53,7 +65,7 @@ public class PanelConsultas extends JPanel implements ActionListener
 		ordenarTitulo = new JButton("Ordenar por Título 🔤");
 		ordenarTitulo.addActionListener(this);
 		
-		panelFormulario = new PanelFormulario();
+		
 		
 		
 		 gbc.gridx = 0;
@@ -99,7 +111,22 @@ public class PanelConsultas extends JPanel implements ActionListener
 		
 	}
 
-
+	public void buscarPorCodigo()
+	{
+		try
+		{
+			Producto p = biblioteca.buscarPorCodigo(panelFormulario.getCodigo());
+			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
+	        InterfazInfo interfazInfo = new InterfazInfo(padre, p);
+	        interfazInfo.setVisible(true);
+		}
+		catch(LibroNoEncontradoException e)
+		{
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Libro No Encontrado", JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -110,6 +137,10 @@ public class PanelConsultas extends JPanel implements ActionListener
 		else if(e.getSource() == ordenarTitulo)
 		{
 			panelListaLibros.ordenarPorTitulo();
+		}
+		else if(e.getSource() == buscarCodigo)
+		{
+			buscarPorCodigo();
 		}
 		
 	}
