@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import mundo.LibroDigitial;
 import mundo.LibroFisico;
 import mundo.Producto;
 
@@ -40,6 +41,10 @@ public class PanelInfoLibro extends JPanel
 	private JTextField txtdescuento;
 	private JLabel lblstock;
 	private JTextField txtstock;
+	private JLabel lblformato;
+	private JTextField txtformato;
+	private JLabel lbltamaño;
+	private JTextField txttamaño;
 	
 	public PanelInfoLibro()
 	{
@@ -84,6 +89,12 @@ public class PanelInfoLibro extends JPanel
 		lblstock = new JLabel("Stock:");
 		txtstock = new JTextField();
 		
+		lblformato = new JLabel("Formato:");
+		txtformato = new JTextField("");
+		
+		lbltamaño = new JLabel("Tamaño MB:");
+		txttamaño = new JTextField("");
+		
 		txtcodigo.setEditable(false);
 		txttitulo.setEditable(false);
 		txtautor.setEditable(false);
@@ -94,6 +105,8 @@ public class PanelInfoLibro extends JPanel
 		txtfechapublicacion.setEditable(false);
 		txtdescuento.setEditable(false);
 		txtstock.setEditable(false);
+		txtformato.setEditable(false);
+		txttamaño.setEditable(false);
 		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(3, 5, 3, 5);
@@ -190,6 +203,22 @@ public class PanelInfoLibro extends JPanel
 		gbc.weightx = 0.2;
 		add(txteditorial, gbc);
 		
+		gbc.gridx = 3; 
+		gbc.gridy = 4; 
+		gbc.weightx = 0.1;
+		add(lblformato, gbc);
+		gbc.gridx = 4; 
+		gbc.weightx = 0.2;
+		add(txtformato, gbc);
+
+		gbc.gridx = 3; 
+		gbc.gridy = 5; 
+		gbc.weightx = 0.1;
+		add(lbltamaño, gbc);
+		gbc.gridx = 4; 
+		gbc.weightx = 0.2;
+		add(txttamaño, gbc);
+		
 	}
 	
 	public void mostrarInformacio(Producto p)
@@ -216,6 +245,17 @@ public class PanelInfoLibro extends JPanel
 		else
 		{
 			txtstock.setText("Digital");
+		}
+		
+		if(p instanceof LibroDigitial)
+		{
+			txtformato.setText(String.valueOf(((LibroDigitial) p).getFormatoArchivo()));
+			txttamaño.setText(String.valueOf(((LibroDigitial) p).getTamanoMB()));
+		}
+		else
+		{
+			txtformato.setText("Libro fisico");
+			txttamaño.setText("Libro fisico");
 		}
 		
 		
