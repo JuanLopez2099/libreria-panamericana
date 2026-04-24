@@ -4,13 +4,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import mundo.LibroFisico;
+import mundo.Producto;
 
 public class PanelInfoLibro extends JPanel
 {
@@ -46,8 +51,7 @@ public class PanelInfoLibro extends JPanel
 		setBorder(borde);
 		
 		imagen = new JLabel();
-		imagen.setPreferredSize(new Dimension(10, 200));
-		imagen.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		imagen.setPreferredSize(new Dimension(150, 200));
 		imagen.setHorizontalAlignment(JLabel.CENTER);
 		
 		lblcodigo = new JLabel("Código:");
@@ -188,6 +192,34 @@ public class PanelInfoLibro extends JPanel
 		
 	}
 	
+	public void mostrarInformacio(Producto p)
+	{
+		ImageIcon portada = new ImageIcon(p.getRutaPortada());
+		Image imagenEscalada = portada.getImage().getScaledInstance(imagen.getPreferredSize().width, 200, Image.SCALE_SMOOTH);
+		imagen.setIcon(new ImageIcon(imagenEscalada));
+		
+		txtcodigo.setText(p.getCodigo());
+		txttitulo.setText(p.getTitulo());
+		txtautor.setText(p.getNombreAutor());
+		txtprecio.setText("$" + p.getPrecio());
+		txtcategoria.setText(p.getCategoria());
+		txteditorial.setText(p.getEditorial());
+		txtpaginas.setText(p.getNumeroPaginas());
+		txtfechapublicacion.setText(p.getFechaPublicacion());
+		txtdescuento.setText("%" + p.getPorcentajeDescuento());
+		
+		
+		if(p instanceof LibroFisico)
+		{
+			txtstock.setText(String.valueOf(((LibroFisico) p).getStock()));
+		}
+		else
+		{
+			txtstock.setText("Digital");
+		}
+		
+		
+	}
 	
 	
 	
