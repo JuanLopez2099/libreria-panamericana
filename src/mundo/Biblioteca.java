@@ -293,23 +293,25 @@ public class Biblioteca
      */
     public void cargarLibros()
     {
-    	LibroFisico libro1 = new LibroFisico("LF005", "Cien Años de Soledad", "Gabriel García Márquez", 45000, "Novela", "", "Un realismo mágico...", "Sudamericana", "432", "Español", "1967-05-30", false, 0.0, 120, 10);
+    	LibroFisico libro1 = new LibroFisico("LF005", "Cien Años de Soledad", "Gabriel García Márquez", 45000, "Novela", "img/cien_anos_de_soledad.jpg", "Esta obra maestra narra la historia de la familia Buendía a lo largo de siete generaciones en el pueblo ficticio de Macondo. Desde la fundación del pueblo por José Arcadio Buendía hasta su inevitable y profético final, la trama entrelaza lo fantástico con lo cotidiano. A través de guerras civiles, amores imposibles, soledad y eventos sobrenaturales como lluvias de flores y ascensos al cielo, la novela se convierte en una metáfora épica de la historia de América Latina y la condición humana misma.", "Sudamericana", "432", "Español", "1967-05-30", false, 0.0, 120, 10);
     	agregarProducto(libro1);
 
-    	LibroFisico libro2 = new LibroFisico("LF006", "El Principito", "Antoine de Saint-Exupéry", 28000, "Fábula", "", "Un piloto conoce a un niño...", "Reynal & Hitchcock", "96", "Español", "1943-04-06", true, 15.0, 200, 5);
+    	LibroFisico libro2 = new LibroFisico("LF006", "El Principito", "Antoine de Saint-Exupéry", 28000, "Fábula", "img/principito.png", "Tras sufrir un accidente en el desierto del Sahara, un aviador se encuentra con un pequeño príncipe que viene del asteroide B-612. El niño le relata sus viajes por otros planetas, donde ha conocido a personajes extraños que representan las obsesiones y debilidades de los adultos. A través de sus conversaciones y su relación con una rosa y un zorro, el principito enseña lecciones profundas sobre la importancia de la amistad, el amor y la capacidad de ver más allá de las apariencias, recordándonos que lo esencial es invisible a los ojos.", "Reynal & Hitchcock", "96", "Español", "1943-04-06", true, 15.0, 200, 5);
     	agregarProducto(libro2);
 
-    	LibroFisico libro3 = new LibroFisico("LF004", "Don Quijote de la Mancha", "Miguel de Cervantes", 60000, "Clásico", "", "Las aventuras del ingenioso hidalgo...", "Francisco de Robles", "863", "Español", "1605-01-16", false, 0.0, 80, 3);
+    	LibroFisico libro3 = new LibroFisico("LF004", "Don Quijote de la Mancha", "Miguel de Cervantes", 60000, "Clásico", "img/quijote.jpg", "Alonso Quijano es un hidalgo que, tras perder el juicio por leer demasiados libros de caballería, decide convertirse en caballero andante bajo el nombre de Don Quijote. Junto a su fiel escudero Sancho Panza, recorre España buscando aventuras, deshaciendo entuertos y protegiendo a los desvalidos en honor a su amada Dulcinea del Toboso. La novela explora el conflicto entre el idealismo y el realismo, utilizando el humor y la tragedia para cuestionar la naturaleza de la cordura y la identidad en un mundo que ya no tiene espacio para héroes antiguos.", "Francisco de Robles", "863", "Español", "1605-01-16", false, 0.0, 80, 3);
     	agregarProducto(libro3);
 
-    	LibroDigitial libro4 = new LibroDigitial("LD002", "Clean Code", "Robert C. Martin", 35000, "Tecnología", "", "Principios de código limpio...", "Prentice Hall", "431", "Inglés", "2008-08-01", true, 20.0, 300, "PDF", 4.2);
+    	LibroDigitial libro4 = new LibroDigitial("LD002", "Clean Code", "Robert C. Martin", 35000, "Tecnología", "img/clean_code.png", "Este libro es una guía fundamental para desarrolladores que buscan elevar la calidad de su trabajo. Robert C. Martin presenta una filosofía sobre la importancia de escribir código legible y mantenible, argumentando que incluso el código que funciona puede ser un desastre si no es limpio. A través de ejemplos prácticos y principios como SOLID y la regla del Boy Scout, el autor detalla cómo nombrar variables, estructurar funciones y manejar errores, transformando el desarrollo de software en una artesanía donde la elegancia y la eficiencia van de la mano.", "Prentice Hall", "431", "Inglés", "2008-08-01", true, 20.0, 300, "PDF", 4.2);
     	agregarProducto(libro4);
 
-    	LibroDigitial libro5 = new LibroDigitial("LD003", "El Alquimista", "Paulo Coelho", 22000, "Novela", "", "La historia de Santiago...", "HarperCollins", "208", "Español", "1988-01-01", false, 0.0, 500, "EPUB", 1.8);
+    	LibroDigitial libro5 = new LibroDigitial("LD003", "El Alquimista", "Paulo Coelho", 22000, "Novela", "img/alquimista.jpg", "Santiago es un joven pastor andaluz que sueña con encontrar un tesoro escondido en las pirámides de Egipto. Motivado por este sueño, decide abandonar su vida tranquila y emprender un viaje que lo llevará a cruzar el desierto. En su camino, descubre que el verdadero tesoro no son las riquezas materiales, sino el aprendizaje de escuchar a su corazón y la capacidad de descifrar el lenguaje del universo. Es un relato inspirador sobre la perseverancia y la búsqueda de la Leyenda Personal que cada individuo debe cumplir.", "HarperCollins", "208", "Español", "1988-01-01", false, 0.0, 500, "EPUB", 1.8);
     	agregarProducto(libro5);
 
-    	LibroDigitial libro6 = new LibroDigitial("LD001", "Sapiens", "Yuval Noah Harari", 40000, "Historia", "", "Breve historia de la humanidad...", "Harper", "443", "Español", "2011-01-01", true, 10.0, 250, "PDF", 5.1);
+    	LibroDigitial libro6 = new LibroDigitial("LD001", "Sapiens", "Yuval Noah Harari", 40000, "Historia", "img/sapiens.jpg", "En este ambicioso recorrido histórico, el autor explora cómo una especie animal insignificante se convirtió en la dueña del planeta. El libro analiza tres grandes revoluciones: la cognitiva, la agrícola y la científica. Harari cuestiona nuestras creencias más arraigadas sobre el dinero, la religión y el poder, explicando cómo los mitos compartidos y las ficciones colectivas permitieron a los humanos colaborar a gran escala. Es una provocativa reflexión sobre nuestro pasado, nuestro presente y hacia dónde nos dirigimos como sociedad global.", "Harper", "443", "Español", "2011-01-01", true, 10.0, 250, "PDF", 5.1);
     	agregarProducto(libro6);
+    	
+    	
     }
 
 
