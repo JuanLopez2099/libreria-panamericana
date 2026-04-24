@@ -58,6 +58,8 @@ public class PanelConsultas extends JPanel implements ActionListener
 		buscarTitulo.addActionListener(this);
 		
 		filtrarCategoria = new JButton("Filtrar por Categoría 🗂️");
+		filtrarCategoria.addActionListener(this);
+		
 		filtrarAutor = new JButton("Filtrar por Autor ✍️");
 		filtrarDisponibles = new JButton("Mostrar Disponibles 📦");
 		filtrarDescuento = new JButton("Mostrar con Descuento 💸");
@@ -169,6 +171,8 @@ public class PanelConsultas extends JPanel implements ActionListener
 		
 	}
 	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -187,6 +191,18 @@ public class PanelConsultas extends JPanel implements ActionListener
 		else if(e.getSource() == buscarTitulo)
 		{
 			buscarPorTitulo();
+		}
+		else if(e.getSource() == filtrarCategoria)
+		{
+			try
+			{
+				panelListaLibros.filtrarPorCategoria(panelFormulario.getCategoria());
+			}
+			catch(DatoInvalidoException ex)
+			{
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+			}
+			
 		}
 		
 		
