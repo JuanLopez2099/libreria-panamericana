@@ -81,4 +81,9 @@ public class PanelFormulario extends JPanel
 	{
 		return txttitulo.getText();
 	}
+	
+	public String getCategoria()
+	{
+		return txtcategoria.getText();
+	}
 }
