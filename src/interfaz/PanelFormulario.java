@@ -68,10 +68,12 @@ public class PanelFormulario extends JPanel
         gbc.gridx = 1;
         gbc.weightx = 0.7;
         add(txtautor, gbc);
-        
-        
-        
-        
-		
+
+	}
+	
+	
+	public String getCodigo()
+	{
+		return txtcodigo.getText();
 	}
 }
