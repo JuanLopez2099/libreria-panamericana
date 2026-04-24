@@ -54,6 +54,8 @@ public class PanelConsultas extends JPanel implements ActionListener
 		buscarCodigo.addActionListener(this);
 		
 		buscarTitulo = new JButton("Buscar Por Título 🔍");
+		buscarTitulo.addActionListener(this);
+		
 		filtrarCategoria = new JButton("Filtrar por Categoría 🗂️");
 		filtrarAutor = new JButton("Filtrar por Autor ✍️");
 		filtrarDisponibles = new JButton("Mostrar Disponibles 📦");
@@ -127,6 +129,26 @@ public class PanelConsultas extends JPanel implements ActionListener
 		
 	}
 	
+	public void buscarPorTitulo()
+	{
+		biblioteca.ordenarPorTitulo();
+		
+		try
+		{
+			Producto p = biblioteca.busquedaBinariaPorTitulo(panelFormulario.getTitulo());
+			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
+	        InterfazInfo interfazInfo = new InterfazInfo(padre, p);
+	        interfazInfo.setVisible(true);
+		}
+		catch(LibroNoEncontradoException e)
+		{
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Libro No Encontrado", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -142,6 +164,11 @@ public class PanelConsultas extends JPanel implements ActionListener
 		{
 			buscarPorCodigo();
 		}
+		else if(e.getSource() == buscarTitulo)
+		{
+			buscarPorTitulo();
+		}
+		
 		
 	}
 	
