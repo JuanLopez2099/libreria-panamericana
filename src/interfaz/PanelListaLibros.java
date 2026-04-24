@@ -9,11 +9,13 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
+import excepciones.DatoInvalidoException;
 import mundo.Biblioteca;
 import mundo.Producto;
 
@@ -22,11 +24,15 @@ public class PanelListaLibros extends JPanel
 {	
 	private JTextArea listaLibros;
 	private PanelLibroActual libroActual;
+	private PanelFormulario formulario;
 	private Biblioteca biblioteca;
+	private ArrayList<Producto> productosListados;
 	
 	
 	public PanelListaLibros()
 	{
+		formulario = new PanelFormulario();
+			
 		biblioteca = new Biblioteca();
 		biblioteca.cargarLibros();
 		
@@ -65,7 +71,7 @@ public class PanelListaLibros extends JPanel
         		try
             	{
             		int linea = listaLibros.getLineOfOffset(listaLibros.viewToModel2D(e.getPoint()));
-            		ArrayList<Producto> productos = biblioteca.getProductos();
+            		ArrayList<Producto> productos = productosListados;
             		if(linea >= 0 && linea < productos.size())
             		{
             			libroActual.mostrarInformacio(productos.get(linea));
@@ -83,9 +89,10 @@ public class PanelListaLibros extends JPanel
 	
 	public void mostrarLibros()
 	{
+		productosListados = biblioteca.getProductos();
 		listaLibros.setText("");
 		
-		for(Producto p : biblioteca.getProductos())
+		for(Producto p : productosListados)
 		{
 			listaLibros.append(p.getTitulo() + "\n");
 		}
@@ -95,8 +102,10 @@ public class PanelListaLibros extends JPanel
 	{
 		listaLibros.setText("");
 		biblioteca.ordenarPorPrecio();
+		productosListados = biblioteca.getProductos();
 		
-		for(Producto p : biblioteca.getProductos())
+		
+		for(Producto p : productosListados)
 		{
 			listaLibros.append(p.getTitulo() + "\n");
 		}
@@ -106,11 +115,35 @@ public class PanelListaLibros extends JPanel
 	{
 		listaLibros.setText("");
 		biblioteca.ordenarPorTitulo();
+		productosListados = biblioteca.getProductos();
 		
-		for(Producto p : biblioteca.getProductos())
+		for(Producto p : productosListados)
 		{
 			listaLibros.append(p.getTitulo() + "\n");
 		}
+	}
+	
+	public void filtrarPorCategoria(String categoria)
+	{
+		
+		ArrayList<Producto> lista  = biblioteca.filtrarPorCategoria(categoria);
+
+		if(lista.isEmpty())
+		{
+			JOptionPane.showMessageDialog(this, "Sin resultados", "Categoria no encontrada", JOptionPane.ERROR_MESSAGE);
+			mostrarLibros();
+		}
+		else
+		{	
+			listaLibros.setText("");
+			productosListados = lista;
+			for(Producto p: lista)
+			{
+				listaLibros.append(p.getTitulo() + "\n");
+			}
+		}
+			
+		
 	}
 	
 	
