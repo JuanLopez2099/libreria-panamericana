@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
-import mundo.Biblioteca;
+
 import mundo.LibroFisico;
 import mundo.Producto;
 
@@ -35,7 +35,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	private JButton btncarrito;
 	private JButton btninfo;
 	private JButton btneliminar;
-	private Biblioteca biblioteca;
+	private Producto productoActual;
 	
 	
 	
@@ -152,7 +152,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		{
 			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
 			
-			InterfazInfo interfazInfo = new InterfazInfo(padre);
+			InterfazInfo interfazInfo = new InterfazInfo(padre, productoActual);
 			
 			interfazInfo.setVisible(true);
 		}
@@ -169,6 +169,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	
 	public void mostrarInformacio(Producto p)
 	{
+		this.productoActual = p;
 		txtcodigo.setText(p.getCodigo());
 		txttitulo.setText(p.getTitulo());
 		txtautor.setText(p.getNombreAutor());
