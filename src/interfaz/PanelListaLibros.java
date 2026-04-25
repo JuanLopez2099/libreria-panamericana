@@ -167,6 +167,35 @@ public class PanelListaLibros extends JPanel
 		
 	}
 	
+	public void filtrarDisponibles()
+	{
+		ArrayList<Producto> lista  = biblioteca.filtrarDisponibles();
+		
+		listaLibros.setText("");
+		productosListados = lista;
+		for(Producto p: lista)
+		{
+			listaLibros.append(p.getTitulo() + "\n");
+		}
+	}
+	
+	public void filtrarPorDescuento()
+	{
+		
+		ArrayList<Producto> lista  = biblioteca.filtrarConDescuento();
+		
+			
+		listaLibros.setText("");
+		productosListados = lista;
+		for(Producto p: lista)
+		{
+			listaLibros.append(p.getTitulo() + "\n");
+		}
+		
+			
+		
+	}
+	
 	
 	
 
