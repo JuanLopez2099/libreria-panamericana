@@ -34,7 +34,6 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	private JButton btncomprar;
 	private JButton btncarrito;
 	private JButton btninfo;
-	private JButton btneliminar;
 	private Producto productoActual;
 	
 	
@@ -73,7 +72,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		
 		btncomprar = new JButton("Agregar Carrito ✅");
 		
-		btneliminar = new JButton("Eliminar ❌");
+		
 		
 		btninfo = new JButton("Info 🔎");
 		btninfo.addActionListener(this);
@@ -135,8 +134,6 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		gbc.weightx = 1.0;
 		add(btncomprar, gbc);
 
-		gbc.gridy = 6;
-		add(btneliminar, gbc);
 
 		gbc.gridy = 7;
 		add(btninfo, gbc);
