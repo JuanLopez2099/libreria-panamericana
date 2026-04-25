@@ -61,6 +61,8 @@ public class PanelConsultas extends JPanel implements ActionListener
 		filtrarCategoria.addActionListener(this);
 		
 		filtrarAutor = new JButton("Filtrar por Autor ✍️");
+		filtrarAutor.addActionListener(this);
+		
 		filtrarDisponibles = new JButton("Mostrar Disponibles 📦");
 		filtrarDescuento = new JButton("Mostrar con Descuento 💸");
 		
@@ -203,6 +205,17 @@ public class PanelConsultas extends JPanel implements ActionListener
 				JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
 			}
 			
+		}
+		else if(e.getSource() == filtrarAutor)
+		{
+			try
+			{
+				panelListaLibros.filtrarPorAutor(panelFormulario.getAutor());
+			}
+			catch(DatoInvalidoException ex)
+			{
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		
 		
