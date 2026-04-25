@@ -65,6 +65,7 @@ public class PanelConsultas extends JPanel implements ActionListener
 		
 		filtrarDisponibles = new JButton("Mostrar Disponibles 📦");
 		filtrarDescuento = new JButton("Mostrar con Descuento 💸");
+		filtrarDescuento.addActionListener(this);
 		
 		ordenarPrecio = new JButton("Ordenar por Precio 💲");
 		ordenarPrecio.addActionListener(this);
@@ -216,6 +217,10 @@ public class PanelConsultas extends JPanel implements ActionListener
 			{
 				JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
 			}
+		}
+		else if(e.getSource() == filtrarDescuento)
+		{
+			panelListaLibros.filtrarPorDescuento();
 		}
 		
 		
