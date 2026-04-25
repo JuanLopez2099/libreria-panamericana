@@ -15,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-import excepciones.DatoInvalidoException;
 import mundo.Biblioteca;
 import mundo.Producto;
 
@@ -24,14 +23,13 @@ public class PanelListaLibros extends JPanel
 {	
 	private JTextArea listaLibros;
 	private PanelLibroActual libroActual;
-	private PanelFormulario formulario;
 	private Biblioteca biblioteca;
 	private ArrayList<Producto> productosListados;
 	
 	
 	public PanelListaLibros()
 	{
-		formulario = new PanelFormulario();
+		
 			
 		biblioteca = new Biblioteca();
 		biblioteca.cargarLibros();
@@ -131,6 +129,29 @@ public class PanelListaLibros extends JPanel
 		if(lista.isEmpty())
 		{
 			JOptionPane.showMessageDialog(this, "Sin resultados", "Categoria no encontrada", JOptionPane.ERROR_MESSAGE);
+			mostrarLibros();
+		}
+		else
+		{	
+			listaLibros.setText("");
+			productosListados = lista;
+			for(Producto p: lista)
+			{
+				listaLibros.append(p.getTitulo() + "\n");
+			}
+		}
+			
+		
+	}
+	
+	public void filtrarPorAutor(String autor)
+	{
+		
+		ArrayList<Producto> lista  = biblioteca.filtrarPorAutor(autor);
+
+		if(lista.isEmpty())
+		{
+			JOptionPane.showMessageDialog(this, "Sin resultados", "Autor no encontrado", JOptionPane.ERROR_MESSAGE);
 			mostrarLibros();
 		}
 		else
