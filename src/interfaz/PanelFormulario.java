@@ -100,4 +100,13 @@ public class PanelFormulario extends JPanel
 		}
 		return txtcategoria.getText();
 	}
+	
+	public String getAutor() throws DatoInvalidoException
+	{
+		if(txtautor.getText().isEmpty())
+		{
+			throw new DatoInvalidoException("El campo no puede estar vacio");
+		}
+		return txtautor.getText();
+	}
 }
