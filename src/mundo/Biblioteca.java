@@ -311,6 +311,18 @@ public class Biblioteca
     	LibroDigitial libro6 = new LibroDigitial("LD001", "Sapiens", "Yuval Noah Harari", 40000, "Historia", "img/sapiens.jpg", "En este ambicioso recorrido histórico, el autor explora cómo una especie animal insignificante se convirtió en la dueña del planeta. El libro analiza tres grandes revoluciones: la cognitiva, la agrícola y la científica. Harari cuestiona nuestras creencias más arraigadas sobre el dinero, la religión y el poder, explicando cómo los mitos compartidos y las ficciones colectivas permitieron a los humanos colaborar a gran escala. Es una provocativa reflexión sobre nuestro pasado, nuestro presente y hacia dónde nos dirigimos como sociedad global.", "Harper", "443", "Español", "2011-01-01", true, 10.0, 250, "PDF", 5.1);
     	agregarProducto(libro6);
     	
+    	LibroFisico libro7 = new LibroFisico("LF008", "Satanás", "Mario Mendoza", 38000, "Novela", "img/satanas.png", "Galardonada con el Premio Biblioteca Breve, esta impactante novela teje las vidas de tres personajes en la caótica y oscura Bogotá: una mujer hermosa que seduce a ejecutivos para robarles, un sacerdote atormentado por sus demonios y por el peso de los secretos de confesión, y un profesor de arte veterano de guerra que se siente cada vez más alienado de la sociedad. Sus caminos se cruzan fatalmente con la historia real de Campo Elías Delgado, un asesino que protagonizó la masacre del restaurante Pozzetto. Es un viaje psicológico profundo y perturbador a los abismos de la mente humana y la violencia urbana.", "Seix Barral", "288", "Español", "2002-02-01", false, 0.0, 45, 5);
+    	agregarProducto(libro7);
+
+    	LibroDigitial libro8 = new LibroDigitial("LD009", "Vírgenes y toxicómanos", "Mario Mendoza", 25000, "Cuento", "img/virgenes.jpg", "Sumergiéndose de nuevo en las entrañas de la ciudad, esta obra relata la crudeza de la vida en los márgenes urbanos. Con su característico estilo directo y descarnado, Mendoza explora la dualidad de la inocencia perdida y la adicción en un entorno que devora a los más vulnerables. A través de personajes marginados, desde jóvenes soñadoras que enfrentan una realidad implacable hasta individuos atrapados en la espiral de los narcóticos, el autor pinta un fresco desgarrador y a la vez profundamente humano sobre la marginalidad, la redención y las sombras que habitan las calles de la capital.", "Planeta", "198", "Español", "2010-05-15", true, 15.0, 150, "EPUB", 2.5);
+    	agregarProducto(libro8);
+
+    	LibroFisico libro9 = new LibroFisico("LF007", "Leer es resistir", "Mario Mendoza", 42000, "Ensayo", "img/leer_resistir.jpg", "En esta obra íntima y reveladora, Mario Mendoza se aleja de la ficción pura para ofrecernos un manifiesto sobre el poder salvador de la literatura. A través de memorias personales, anécdotas de su formación como lector y escritor, y reflexiones sobre el acto de leer en un mundo consumido por la inmediatez y la superficialidad, el autor nos invita a ver los libros como refugios. La lectura se presenta no solo como un acto de rebeldía contra un sistema que busca estandarizarnos, sino como una herramienta vital para la resistencia intelectual, la empatía y la supervivencia del espíritu libre.", "Planeta", "224", "Español", "2022-10-01", false, 0.0, 60, 4);
+    	agregarProducto(libro9);
+    	
+    	
+    	
+    	
     	
     }
 
