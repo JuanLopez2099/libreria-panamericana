@@ -64,6 +64,8 @@ public class PanelConsultas extends JPanel implements ActionListener
 		filtrarAutor.addActionListener(this);
 		
 		filtrarDisponibles = new JButton("Mostrar Disponibles 📦");
+		filtrarDisponibles.addActionListener(this);
+		
 		filtrarDescuento = new JButton("Mostrar con Descuento 💸");
 		filtrarDescuento.addActionListener(this);
 		
@@ -221,6 +223,10 @@ public class PanelConsultas extends JPanel implements ActionListener
 		else if(e.getSource() == filtrarDescuento)
 		{
 			panelListaLibros.filtrarPorDescuento();
+		}
+		else if(e.getSource() == filtrarDisponibles)
+		{
+			panelListaLibros.filtrarDisponibles();
 		}
 		
 		
