@@ -161,7 +161,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		{
 			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
 			
-			InterfazCarrito interfazCarrito = new InterfazCarrito(padre);
+			InterfazCarrito interfazCarrito = new InterfazCarrito(padre, carrito);
 			
 			interfazCarrito.setVisible(true);
 		}
