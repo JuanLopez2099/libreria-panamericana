@@ -18,6 +18,7 @@ import javax.swing.border.TitledBorder;
 import mundo.Biblioteca;
 import mundo.CarritoCompra;
 import mundo.Producto;
+import mundo.Usuario;
 
 
 public class PanelListaLibros extends JPanel
@@ -28,7 +29,7 @@ public class PanelListaLibros extends JPanel
 	private ArrayList<Producto> productosListados;
 	
 	
-	public PanelListaLibros(Biblioteca biblioteca, CarritoCompra carrito)
+	public PanelListaLibros(Biblioteca biblioteca, CarritoCompra carrito, Usuario usuario, PanelUsuario panelUsuario)
 	{
 		this.biblioteca = biblioteca;
 		
@@ -43,7 +44,7 @@ public class PanelListaLibros extends JPanel
 		borde.setTitleColor(Color.BLACK);
 		scroll.setBorder(borde);
 		
-		libroActual = new PanelLibroActual(carrito);
+		libroActual = new PanelLibroActual(carrito, usuario, panelUsuario);
 		listaLibros.setEditable(false);
 		
         gbc.gridy = 0;
