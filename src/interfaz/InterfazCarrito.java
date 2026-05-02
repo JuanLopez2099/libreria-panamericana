@@ -14,8 +14,8 @@ public class InterfazCarrito extends JDialog
     private PanelListaCarrito panelListaCarrito;
     private JLabel lbltotal;
     private JTextField txttotal;
-    private JLabel lblcodigo;
-    private JTextField txtcodigo;
+    private JLabel lbltitulo;
+    private JTextField txttitulo;
     private JButton btncomprar;
     private JButton btnañadir;
     private JButton btnquitar;
@@ -36,9 +36,9 @@ public class InterfazCarrito extends JDialog
         txttotal = new JTextField(10);
         txttotal.setEditable(false);
 
-        lblcodigo = new JLabel("Codigo");
-        txtcodigo = new JTextField("");
-        txtcodigo.setEditable(false);
+        lbltitulo = new JLabel("Titulo");
+        txttitulo = new JTextField("");
+        txttitulo.setEditable(false);
 
         btncomprar = new JButton("Comprar 🛍️");
         btnañadir = new JButton("➕");
@@ -59,12 +59,12 @@ public class InterfazCarrito extends JDialog
         gbc.gridwidth = 1;
         gbc.weightx = 0;
         gbc.gridx = 0;
-        add(lblcodigo, gbc);
+        add(lbltitulo, gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.5;
-        add(txtcodigo, gbc);
+        add(txttitulo, gbc);
 
         gbc.gridx = 2;
         gbc.fill = GridBagConstraints.NONE;
