@@ -108,6 +108,11 @@ public class Usuario
 		this.saldo -= monto;
 		validarInvariantes();
 	}
+	
+	public boolean tieneSaldoSuficiente(double monto)
+	{
+	    return saldo >= monto;
+	}
 
 	/**
 	 * Retorna una representación en cadena del usuario.
