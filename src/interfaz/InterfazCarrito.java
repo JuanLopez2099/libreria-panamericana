@@ -3,6 +3,9 @@ package interfaz;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -13,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import mundo.CarritoCompra;
 import mundo.ItemCarrito;
 
-public class InterfazCarrito extends JDialog
+public class InterfazCarrito extends JDialog implements ActionListener
 {
     private PanelListaCarrito panelListaCarrito;
     private JLabel lbltotal;
@@ -24,8 +27,9 @@ public class InterfazCarrito extends JDialog
     private JButton btnañadir;
     private JButton btnquitar;
     private CarritoCompra carrito;
+    private ItemCarrito itemSeleccionado;
 
-    public InterfazCarrito(JFrame padre, CarritoCompra carrito)
+    public InterfazCarrito(JFrame padre, CarritoCompra carrito) 
     {
     	super(padre, "Carrito de Compra", true);
     	
@@ -49,8 +53,13 @@ public class InterfazCarrito extends JDialog
         txttitulo.setEditable(false);
 
         btncomprar = new JButton("Comprar 🛍️");
+        
+        
         btnañadir = new JButton("➕");
+        btnañadir.addActionListener(this);
+        
         btnquitar = new JButton("➖");
+        btnquitar.addActionListener(this);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -97,9 +106,50 @@ public class InterfazCarrito extends JDialog
         gbc.weightx = 1.0;
         add(btncomprar, gbc);
         
+        panelListaCarrito.getTabla().getSelectionModel().addListSelectionListener(e ->
+        {
+            int fila = panelListaCarrito.getTabla().getSelectedRow();
+            if(fila >= 0 && fila < carrito.getItems().size())
+            {
+                itemSeleccionado = carrito.getItems().get(fila);
+                txttitulo.setText(itemSeleccionado.getProducto().getTitulo());
+            }
+        });
+        
+
         mostrarCarrito();
     }
     
+    @Override
+	public void actionPerformed(ActionEvent e) 
+	{
+    	if(e.getSource() == btnañadir)
+    	{
+    		if(itemSeleccionado != null)
+    	    {
+    	        itemSeleccionado.incrementarCantidad();
+    	        mostrarCarrito();
+    	    }
+    	}
+    	else if(e.getSource() == btnquitar)
+    	{
+    		if(itemSeleccionado != null)
+    	    {
+    	        if(itemSeleccionado.getCantidad() == 1)
+    	        {
+    	            carrito.eliminarProducto(itemSeleccionado.getProducto());
+    	            itemSeleccionado = null;
+    	            txttitulo.setText("");
+    	        }
+    	        else
+    	        {
+    	            itemSeleccionado.decrementarCantidad();
+    	        }
+    	        mostrarCarrito();
+    	    }
+    	}
+		
+	}
     private void mostrarCarrito()
     {
         DefaultTableModel modelo = (DefaultTableModel) panelListaCarrito.getModelo();
@@ -117,4 +167,6 @@ public class InterfazCarrito extends JDialog
         
         txttotal.setText("$" + carrito.calcularTotal());
     }
+
+	
 }
