@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class PanelListaCarrito extends JPanel
 {
     private JTable listaProductos;
+    private DefaultTableModel modeloTabla;
 
     public PanelListaCarrito()
     {
@@ -22,10 +23,15 @@ public class PanelListaCarrito extends JPanel
         setBorder(borde);
 
         String[] columnas = {"Título", "Precio", "Cantidad", "Subtotal"};
-        DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0);
+        modeloTabla = new DefaultTableModel(columnas, 0);
         listaProductos = new JTable(modeloTabla);
         JScrollPane scroll = new JScrollPane(listaProductos);
 
         add(scroll, BorderLayout.CENTER);
+    }
+    
+    public DefaultTableModel getModelo()
+    {
+        return modeloTabla;
     }
 }

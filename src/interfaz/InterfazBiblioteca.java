@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import mundo.Biblioteca;
+import mundo.CarritoCompra;
 import mundo.Usuario;
 
 
@@ -18,6 +19,7 @@ public class InterfazBiblioteca extends JFrame
 	private PanelUsuario panelUsuario;
 	private PanelFormulario panelFormulario;
 	private Biblioteca biblioteca;
+	private CarritoCompra carrito;
 	
 	
 	
@@ -25,6 +27,8 @@ public class InterfazBiblioteca extends JFrame
 	{
 		biblioteca = new Biblioteca();
 		biblioteca.cargarLibros();
+		
+		carrito = new CarritoCompra();
 		
 		setTitle("Biblioteca Panamericana");
 		ImageIcon icono = new ImageIcon("img/icono.png");
@@ -39,7 +43,7 @@ public class InterfazBiblioteca extends JFrame
 		panelUsuario = new PanelUsuario();
 		add(panelUsuario, BorderLayout.NORTH);
 		
-		panelListaLibros = new PanelListaLibros();
+		panelListaLibros = new PanelListaLibros(biblioteca, carrito);
 		add(panelListaLibros, BorderLayout.CENTER);
 		
 		panelFormulario = new PanelFormulario();

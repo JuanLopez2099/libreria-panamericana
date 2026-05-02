@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 import mundo.Biblioteca;
+import mundo.CarritoCompra;
 import mundo.Producto;
 
 
@@ -27,12 +28,10 @@ public class PanelListaLibros extends JPanel
 	private ArrayList<Producto> productosListados;
 	
 	
-	public PanelListaLibros()
+	public PanelListaLibros(Biblioteca biblioteca, CarritoCompra carrito)
 	{
+		this.biblioteca = biblioteca;
 		
-			
-		biblioteca = new Biblioteca();
-		biblioteca.cargarLibros();
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -44,7 +43,7 @@ public class PanelListaLibros extends JPanel
 		borde.setTitleColor(Color.BLACK);
 		scroll.setBorder(borde);
 		
-		libroActual = new PanelLibroActual();
+		libroActual = new PanelLibroActual(carrito);
 		listaLibros.setEditable(false);
 		
         gbc.gridy = 0;

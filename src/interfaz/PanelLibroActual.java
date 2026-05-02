@@ -10,12 +10,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
-
+import mundo.CarritoCompra;
 import mundo.LibroFisico;
 import mundo.Producto;
 
@@ -35,11 +36,14 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	private JButton btncarrito;
 	private JButton btninfo;
 	private Producto productoActual;
+	private CarritoCompra carrito;
 	
 	
 	
-	public PanelLibroActual()
+	public PanelLibroActual(CarritoCompra carrito)
 	{
+		this.carrito = carrito;
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -71,7 +75,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		
 		
 		btncomprar = new JButton("Agregar Carrito ✅");
-		
+		btncomprar.addActionListener(this);
 		
 		
 		btninfo = new JButton("Info 🔎");
@@ -157,9 +161,14 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		{
 			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
 			
-			InterfazCarrito interfazCarrito = new InterfazCarrito(padre);
+			InterfazCarrito interfazCarrito = new InterfazCarrito(padre, carrito);
 			
 			interfazCarrito.setVisible(true);
+		}
+		else if(e.getSource() == btncomprar)
+		{
+			carrito.agregarProducto(productoActual);
+			JOptionPane.showMessageDialog(this, productoActual.getTitulo() + " agregado al carrito", "Carrito", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}

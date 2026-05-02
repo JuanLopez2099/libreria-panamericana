@@ -8,21 +8,29 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import mundo.CarritoCompra;
+import mundo.ItemCarrito;
 
 public class InterfazCarrito extends JDialog
 {
     private PanelListaCarrito panelListaCarrito;
     private JLabel lbltotal;
     private JTextField txttotal;
-    private JLabel lblcodigo;
-    private JTextField txtcodigo;
+    private JLabel lbltitulo;
+    private JTextField txttitulo;
     private JButton btncomprar;
     private JButton btnañadir;
     private JButton btnquitar;
+    private CarritoCompra carrito;
 
-    public InterfazCarrito(JFrame padre)
+    public InterfazCarrito(JFrame padre, CarritoCompra carrito)
     {
-        super(padre, "Carrito de Compra", true);
+    	super(padre, "Carrito de Compra", true);
+    	
+    	this.carrito = carrito;
+        
         setSize(700, 450);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -36,9 +44,9 @@ public class InterfazCarrito extends JDialog
         txttotal = new JTextField(10);
         txttotal.setEditable(false);
 
-        lblcodigo = new JLabel("Codigo");
-        txtcodigo = new JTextField("");
-        txtcodigo.setEditable(false);
+        lbltitulo = new JLabel("Titulo");
+        txttitulo = new JTextField("");
+        txttitulo.setEditable(false);
 
         btncomprar = new JButton("Comprar 🛍️");
         btnañadir = new JButton("➕");
@@ -59,12 +67,12 @@ public class InterfazCarrito extends JDialog
         gbc.gridwidth = 1;
         gbc.weightx = 0;
         gbc.gridx = 0;
-        add(lblcodigo, gbc);
+        add(lbltitulo, gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.5;
-        add(txtcodigo, gbc);
+        add(txttitulo, gbc);
 
         gbc.gridx = 2;
         gbc.fill = GridBagConstraints.NONE;
@@ -88,5 +96,25 @@ public class InterfazCarrito extends JDialog
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
         add(btncomprar, gbc);
+        
+        mostrarCarrito();
+    }
+    
+    private void mostrarCarrito()
+    {
+        DefaultTableModel modelo = (DefaultTableModel) panelListaCarrito.getModelo();
+        modelo.setRowCount(0); 
+        
+        for(ItemCarrito item : carrito.getItems())
+        {
+            modelo.addRow(new Object[]{
+                item.getProducto().getTitulo(),
+                "$" + item.getProducto().getPrecio(),
+                item.getCantidad(),
+                "$" + item.getSubtotal()
+            });
+        }
+        
+        txttotal.setText("$" + carrito.calcularTotal());
     }
 }
