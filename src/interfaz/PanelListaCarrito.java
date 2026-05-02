@@ -34,4 +34,9 @@ public class PanelListaCarrito extends JPanel
     {
         return modeloTabla;
     }
+    
+    public JTable getTabla()
+    {
+        return listaProductos;
+    }
 }
