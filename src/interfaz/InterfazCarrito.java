@@ -8,6 +8,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import mundo.CarritoCompra;
+import mundo.ItemCarrito;
 
 public class InterfazCarrito extends JDialog
 {
@@ -19,10 +23,14 @@ public class InterfazCarrito extends JDialog
     private JButton btncomprar;
     private JButton btnañadir;
     private JButton btnquitar;
+    private CarritoCompra carrito;
 
-    public InterfazCarrito(JFrame padre)
+    public InterfazCarrito(JFrame padre, CarritoCompra carrito)
     {
-        super(padre, "Carrito de Compra", true);
+    	super(padre, "Carrito de Compra", true);
+    	
+    	this.carrito = carrito;
+        
         setSize(700, 450);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -88,5 +96,25 @@ public class InterfazCarrito extends JDialog
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
         add(btncomprar, gbc);
+        
+        mostrarCarrito();
+    }
+    
+    private void mostrarCarrito()
+    {
+        DefaultTableModel modelo = (DefaultTableModel) panelListaCarrito.getModelo();
+        modelo.setRowCount(0); 
+        
+        for(ItemCarrito item : carrito.getItems())
+        {
+            modelo.addRow(new Object[]{
+                item.getProducto().getTitulo(),
+                "$" + item.getProducto().getPrecio(),
+                item.getCantidad(),
+                "$" + item.getSubtotal()
+            });
+        }
+        
+        txttotal.setText("$" + carrito.calcularTotal());
     }
 }
