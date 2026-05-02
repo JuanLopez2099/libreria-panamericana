@@ -20,6 +20,7 @@ import excepciones.StockInsuficienteException;
 import mundo.CarritoCompra;
 import mundo.LibroFisico;
 import mundo.Producto;
+import mundo.Usuario;
 
 public class PanelLibroActual extends JPanel implements ActionListener
 {
@@ -38,12 +39,16 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	private JButton btninfo;
 	private Producto productoActual;
 	private CarritoCompra carrito;
+	private Usuario usuario;
+	private PanelUsuario panelUsuario;
 	
 	
 	
-	public PanelLibroActual(CarritoCompra carrito)
+	public PanelLibroActual(CarritoCompra carrito, Usuario usuario, PanelUsuario panelUsuario)
 	{
 		this.carrito = carrito;
+		this.usuario = usuario;
+		this.panelUsuario = panelUsuario;
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -162,7 +167,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		{
 			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
 			
-			InterfazCarrito interfazCarrito = new InterfazCarrito(padre, carrito);
+			InterfazCarrito interfazCarrito = new InterfazCarrito(padre, carrito, usuario, panelUsuario);
 			
 			interfazCarrito.setVisible(true);
 		}
