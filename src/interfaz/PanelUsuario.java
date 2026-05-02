@@ -1,7 +1,8 @@
 package interfaz;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,14 +16,19 @@ public class PanelUsuario extends JPanel
 	
 	public PanelUsuario()
 	{
-		setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
-		
-		usuario = new Usuario("Juan Camilo", 500000);
-		
-		nombre = new JLabel("Usuario: " + usuario.getNombre());
-		saldo = new JLabel("Saldo: " + String.format("$%,.2f", usuario.getSaldo()));
-		
-		add(nombre);
-		add(saldo);
+		setLayout(new BorderLayout());
+	    
+	    usuario = new Usuario("Juan Camilo", 500000);
+	    
+	    JLabel banner = new JLabel(new ImageIcon("img/banner.png"));
+	    add(banner, BorderLayout.NORTH);
+	    
+	    
+	    JPanel panelInfo = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
+	    nombre = new JLabel("Usuario: " + usuario.getNombre());
+	    saldo = new JLabel("Saldo: " + String.format("$%,.2f", usuario.getSaldo()));
+	    panelInfo.add(nombre);
+	    panelInfo.add(saldo);
+	    add(panelInfo, BorderLayout.CENTER);
 	}
 }

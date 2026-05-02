@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.BorderLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -26,6 +27,8 @@ public class InterfazBiblioteca extends JFrame
 		biblioteca.cargarLibros();
 		
 		setTitle("Biblioteca Panamericana");
+		ImageIcon icono = new ImageIcon("img/icono.png");
+		setIconImage(icono.getImage());
 		setSize(950, 600);
 		setLayout(new BorderLayout());
 		setResizable(false);
