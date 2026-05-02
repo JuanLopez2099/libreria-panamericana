@@ -193,6 +193,11 @@ public class CarritoCompra
         validarInvariantes();
     }
 
+    public ArrayList<ItemCarrito> getItems()
+    {
+        return items;
+    }
+    
     /**
      * Indica si el carrito está vacío.
      * 
