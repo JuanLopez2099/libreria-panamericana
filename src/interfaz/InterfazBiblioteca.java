@@ -20,6 +20,7 @@ public class InterfazBiblioteca extends JFrame
 	private PanelFormulario panelFormulario;
 	private Biblioteca biblioteca;
 	private CarritoCompra carrito;
+	private Usuario usuario;
 	
 	
 	
@@ -29,6 +30,7 @@ public class InterfazBiblioteca extends JFrame
 		biblioteca.cargarLibros();
 		
 		carrito = new CarritoCompra();
+		usuario = new Usuario("Estefania Rodriguez", 500000);
 		
 		setTitle("Biblioteca Panamericana");
 		ImageIcon icono = new ImageIcon("img/icono.png");
@@ -40,10 +42,10 @@ public class InterfazBiblioteca extends JFrame
 		setLocationRelativeTo(null);
 		
 		
-		panelUsuario = new PanelUsuario();
+		panelUsuario = new PanelUsuario(usuario);
 		add(panelUsuario, BorderLayout.NORTH);
 		
-		panelListaLibros = new PanelListaLibros(biblioteca, carrito);
+		panelListaLibros = new PanelListaLibros(biblioteca, carrito, usuario, panelUsuario);
 		add(panelListaLibros, BorderLayout.CENTER);
 		
 		panelFormulario = new PanelFormulario();
