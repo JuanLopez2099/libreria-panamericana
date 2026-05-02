@@ -72,7 +72,15 @@ public class CarritoCompraTest
     @Test
     public void testAgregarProducto()
     {
-        carrito.agregarProducto(libro1);
+    	try
+    	{
+    		carrito.agregarProducto(libro1);
+    	}
+    	catch(StockInsuficienteException e)
+    	{
+    		e.getMessage();
+    	}
+        
         assertFalse(carrito.estaVacio());
     }
 
@@ -100,7 +108,15 @@ public class CarritoCompraTest
     @Test
     public void testEliminarProducto()
     {
-        carrito.agregarProducto(libro1);
+    	try
+    	{
+    		carrito.agregarProducto(libro1);
+    	}
+    	catch(StockInsuficienteException e)
+    	{
+    		e.getMessage();
+    	}
+        
         carrito.eliminarProducto(libro1);
 
         assertTrue(carrito.estaVacio());
