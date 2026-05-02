@@ -14,11 +14,11 @@ public class PanelUsuario extends JPanel
 	private JLabel nombre;
 	private JLabel saldo;
 	
-	public PanelUsuario()
+	public PanelUsuario(Usuario usuario)
 	{
 		setLayout(new BorderLayout());
 	    
-	    usuario = new Usuario("Juan Camilo", 500000);
+	    this.usuario = usuario;
 	    
 	    JLabel banner = new JLabel(new ImageIcon("img/banner.png"));
 	    add(banner, BorderLayout.NORTH);
@@ -30,5 +30,10 @@ public class PanelUsuario extends JPanel
 	    panelInfo.add(nombre);
 	    panelInfo.add(saldo);
 	    add(panelInfo, BorderLayout.CENTER);
+	}
+	
+	public void actualizarSaldo()
+	{
+	    saldo.setText("Saldo: " + String.format("$%,.2f", usuario.getSaldo()));
 	}
 }
