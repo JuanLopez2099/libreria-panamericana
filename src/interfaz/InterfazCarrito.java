@@ -10,9 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import excepciones.CarritoVacioException;
+import excepciones.StockInsuficienteException;
 import mundo.CarritoCompra;
 import mundo.ItemCarrito;
 
@@ -53,7 +56,7 @@ public class InterfazCarrito extends JDialog implements ActionListener
         txttitulo.setEditable(false);
 
         btncomprar = new JButton("Comprar 🛍️");
-        
+        btncomprar.addActionListener(this);
         
         btnañadir = new JButton("➕");
         btnañadir.addActionListener(this);
@@ -147,6 +150,26 @@ public class InterfazCarrito extends JDialog implements ActionListener
     	        }
     	        mostrarCarrito();
     	    }
+    	}
+    	else if(e.getSource() == btncomprar)
+    	{
+    		try
+    		{
+    			carrito.comprar();
+    			mostrarCarrito();
+    			txttitulo.setText("");
+    	        itemSeleccionado = null;
+    	        JOptionPane.showMessageDialog(this, "¡Compra realizada con éxito!", "Compra", JOptionPane.INFORMATION_MESSAGE);
+    	        dispose();
+    		}
+    		catch(CarritoVacioException ex)
+    		{
+    			JOptionPane.showMessageDialog(this, ex.getMessage(), "Carrito Vacío", JOptionPane.ERROR_MESSAGE);
+    		}
+    		catch(StockInsuficienteException ex)
+    		{
+    			 JOptionPane.showMessageDialog(this, ex.getMessage(), "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
+    		}
     	}
 		
 	}
