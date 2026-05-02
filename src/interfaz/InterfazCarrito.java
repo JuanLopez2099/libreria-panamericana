@@ -18,6 +18,7 @@ import excepciones.CarritoVacioException;
 import excepciones.StockInsuficienteException;
 import mundo.CarritoCompra;
 import mundo.ItemCarrito;
+import mundo.Usuario;
 
 public class InterfazCarrito extends JDialog implements ActionListener
 {
@@ -31,12 +32,16 @@ public class InterfazCarrito extends JDialog implements ActionListener
     private JButton btnquitar;
     private CarritoCompra carrito;
     private ItemCarrito itemSeleccionado;
+    private Usuario usuario;
+    private PanelUsuario panelUsuario;
 
-    public InterfazCarrito(JFrame padre, CarritoCompra carrito) 
+    public InterfazCarrito(JFrame padre, CarritoCompra carrito, Usuario usuario, PanelUsuario panelUsuario) 
     {
     	super(padre, "Carrito de Compra", true);
     	
+    	this.usuario = usuario;
     	this.carrito = carrito;
+    	this.panelUsuario = panelUsuario;
         
         setSize(700, 450);
         setLayout(new GridBagLayout());
@@ -155,10 +160,21 @@ public class InterfazCarrito extends JDialog implements ActionListener
     	{
     		try
     		{
+    			double total = carrito.calcularTotal();
+    			
+    			if(!usuario.tieneSaldoSuficiente(total))
+    			{
+    				JOptionPane.showMessageDialog(this, "Saldo insuficiente", "Sin Saldo", JOptionPane.ERROR_MESSAGE);
+    				return;
+    			}
+    			
     			carrito.comprar();
+    			usuario.descontarSaldo(total);
+    			panelUsuario.actualizarSaldo();
     			mostrarCarrito();
     			txttitulo.setText("");
     	        itemSeleccionado = null;
+    	        
     	        JOptionPane.showMessageDialog(this, "¡Compra realizada con éxito!", "Compra", JOptionPane.INFORMATION_MESSAGE);
     	        dispose();
     		}
