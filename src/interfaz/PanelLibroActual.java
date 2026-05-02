@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import excepciones.StockInsuficienteException;
 import mundo.CarritoCompra;
 import mundo.LibroFisico;
 import mundo.Producto;
@@ -167,8 +168,17 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		}
 		else if(e.getSource() == btncomprar)
 		{
-			carrito.agregarProducto(productoActual);
-			JOptionPane.showMessageDialog(this, productoActual.getTitulo() + " agregado al carrito", "Carrito", JOptionPane.INFORMATION_MESSAGE);
+			try
+			{
+				carrito.agregarProducto(productoActual);
+				JOptionPane.showMessageDialog(this, productoActual.getTitulo() + " agregado al carrito", "Carrito", JOptionPane.INFORMATION_MESSAGE);
+			}
+			catch(StockInsuficienteException ex)
+			{
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			
 		}
 		
 	}
