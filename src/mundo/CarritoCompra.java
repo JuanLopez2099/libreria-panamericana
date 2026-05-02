@@ -67,8 +67,25 @@ public class CarritoCompra
      * @pre producto != null
      * @post El producto queda agregado al carrito con cantidad 1
      */
-    public void agregarProducto(Producto producto) 
+    public void agregarProducto(Producto producto)throws StockInsuficienteException
     {
+    	if(producto instanceof LibroFisico)
+        {
+            LibroFisico libroFisico = (LibroFisico) producto;
+            ItemCarrito itemExistente = buscarItem(producto);
+            int cantidadActual = 0;
+ 
+            if(itemExistente != null)
+            {
+                cantidadActual = itemExistente.getCantidad();
+            }
+
+            if(cantidadActual + 1 > libroFisico.getStock())
+            {
+                throw new StockInsuficienteException("Stock insuficiente para: " + producto.getTitulo());
+            }
+        }
+
         agregarProducto(producto, 1);
     }
 
@@ -157,25 +174,7 @@ public class CarritoCompra
             throw new CarritoVacioException("El carrito está vacío");
         }
 
-        // Validación de stock
-        for (ItemCarrito item : items) 
-        {
-            Producto p = item.getProducto();
 
-            if (p instanceof LibroFisico) 
-            {
-                LibroFisico libroFisico = (LibroFisico) p;
-
-                if (item.getCantidad() > libroFisico.getStock()) 
-                {
-                    throw new StockInsuficienteException(
-                        "Stock insuficiente para: " + p.getTitulo()
-                    );
-                }
-            }
-        }
-
-        // Aplicar compra
         for (ItemCarrito item : items) 
         {
             Producto p = item.getProducto();
