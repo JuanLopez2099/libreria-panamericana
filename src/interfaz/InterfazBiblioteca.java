@@ -49,8 +49,7 @@ public class InterfazBiblioteca extends JFrame
 		usuario = new Usuario("Estefania Rodriguez", 500000);
 		
 		setTitle("Biblioteca Panamericana");
-		ImageIcon icono = new ImageIcon("img/icono.png");
-		setIconImage(icono.getImage());
+		setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
 		setSize(950, 600);
 		setLayout(new BorderLayout());
 		setResizable(false);

@@ -38,7 +38,7 @@ public class PanelUsuario extends JPanel
 	    
 	    this.usuario = usuario;
 	    
-	    JLabel banner = new JLabel(new ImageIcon("img/banner.png"));
+	    JLabel banner = new JLabel(new ImageIcon(getClass().getResource("/banner.png")));
 	    add(banner, BorderLayout.NORTH);
 	    
 	    JPanel panelInfo = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
