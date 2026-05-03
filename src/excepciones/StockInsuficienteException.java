@@ -3,11 +3,14 @@ package excepciones;
 /**
  * Excepción que se lanza cuando no hay suficiente stock
  * de un libro físico para realizar una operación.
- * <p>
+ *
  * Esta excepción indica que no es posible completar una acción,
  * como una compra, debido a que la cantidad solicitada excede
  * el stock disponible del producto.
- * </p>
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
  */
 public class StockInsuficienteException extends Exception 
 {

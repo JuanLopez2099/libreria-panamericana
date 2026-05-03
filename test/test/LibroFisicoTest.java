@@ -10,14 +10,18 @@ import mundo.LibroFisico;
 
 /**
  * Clase de pruebas para la clase LibroFisico.
- * <p>
- * Se verifican los comportamientos principales del libro físico,
- * incluyendo manejo de stock, disponibilidad y tipo de producto.
- * </p>
+ *
+ * Permite verificar el correcto funcionamiento de los métodos
+ * relacionados con el manejo de stock, disponibilidad y cálculo
+ * del precio final.
+ *
+ * @author Juan Camilo Lopez
+ * @author Estefania Rodriguez
+ * @version 1.0
  */
-public class LibroFisicoTest 
+public class LibroFisicoTest
 {
-    /** Instancia de prueba de LibroFisico */
+    /** Libro físico de prueba */
     private LibroFisico libro;
 
     // -------------------------------------------------------------------------
@@ -26,16 +30,14 @@ public class LibroFisicoTest
 
     /**
      * Configura un escenario base antes de cada prueba.
-     * <p>
-     * Crea un libro físico con valores válidos y un stock inicial.
-     * </p>
-     * 
-     * post: Se crea una instancia válida de LibroFisico con stock = 10
+     *
+     * @pre true
+     * @post Se crea un libro físico con stock inicial válido
      */
     @BeforeEach
     public void setUp()
     {
-    	libro = new LibroFisico("001", "El Quijote", "Cervantes", 50.0, "Novela", "ruta.jpg", "Una historia clásica", "Editorial X", "500", "Español", "1605", false, 0, 0, 10);
+        libro = new LibroFisico("001", "Java Básico", "Autor1", 50.0, "Programación", "ruta.jpg", "desc", "ed", "100", "ES", "2020", false, 0, 10);
     }
 
     // -------------------------------------------------------------------------
@@ -43,22 +45,22 @@ public class LibroFisicoTest
     // -------------------------------------------------------------------------
 
     /**
-     * Verifica que el tipo de producto sea "Físico".
-     * 
-     * pre: El libro está correctamente inicializado
-     * post: El tipo retornado es "Físico"
+     * Verifica que el método getStock retorne el valor correcto.
+     *
+     * @pre El libro ha sido creado con stock inicial
+     * @post Se retorna el stock actual del libro
      */
     @Test
-    public void testGetTipo()
+    public void testGetStock()
     {
-        assertEquals("Físico", libro.getTipo());
+        assertEquals(10, libro.getStock());
     }
 
     /**
-     * Verifica que el libro esté disponible cuando el stock es mayor a 0.
-     * 
-     * pre: stock > 0
-     * post: estaDisponible() retorna true
+     * Verifica que el libro esté disponible cuando tiene stock.
+     *
+     * @pre stock > 0
+     * @post estaDisponible() retorna true
      */
     @Test
     public void testEstaDisponibleConStock()
@@ -67,10 +69,10 @@ public class LibroFisicoTest
     }
 
     /**
-     * Verifica que el libro no esté disponible cuando el stock es 0.
-     * 
-     * pre: stock = 0
-     * post: estaDisponible() retorna false
+     * Verifica que el libro no esté disponible cuando no tiene stock.
+     *
+     * @pre stock == 0
+     * @post estaDisponible() retorna false
      */
     @Test
     public void testEstaDisponibleSinStock()
@@ -80,55 +82,54 @@ public class LibroFisicoTest
     }
 
     /**
-     * Verifica que el getter de stock retorne el valor correcto.
-     * 
-     * pre: El libro fue creado con stock inicial
-     * post: getStock() retorna el valor esperado
+     * Verifica que el stock se reduzca correctamente.
+     *
+     * @pre cantidad <= stock
+     * @post El stock disminuye en la cantidad indicada
      */
     @Test
-    public void testGetStock()
-    {
-        assertEquals(10, libro.getStock());
-    }
-
-    /**
-     * Verifica que el setter de stock funcione correctamente.
-     * 
-     * pre: Nuevo stock válido
-     * post: El stock se actualiza correctamente
-     */
-    @Test
-    public void testSetStock()
-    {
-        libro.setStock(5);
-        assertEquals(5, libro.getStock());
-    }
-
-    /**
-     * Verifica que el método reducirStock disminuya correctamente el stock.
-     * 
-     * pre: cantidad <= stock
-     * post: El stock se reduce correctamente
-     * 
-     * @throws StockInsuficienteException no debería lanzarse
-     */
-    @Test
-    public void testReducirStockCorrectamente() throws StockInsuficienteException
+    public void testReducirStock() throws StockInsuficienteException
     {
         libro.reducirStock(3);
         assertEquals(7, libro.getStock());
     }
 
     /**
-     * Verifica que se lance una excepción cuando no hay suficiente stock.
-     * 
-     * pre: cantidad > stock
-     * post: Se lanza StockInsuficienteException
+     * Verifica que se lance excepción cuando no hay suficiente stock.
+     *
+     * @pre cantidad > stock
+     * @post Se lanza StockInsuficienteException
      */
     @Test
     public void testReducirStockInsuficiente()
     {
-        assertThrows(StockInsuficienteException.class, () -> {libro.reducirStock(20);});
- 
+        assertThrows(StockInsuficienteException.class, () -> {
+            libro.reducirStock(15);
+        });
+    }
+
+    /**
+     * Verifica el cálculo del precio final sin descuento.
+     *
+     * @pre El libro no tiene descuento
+     * @post El precio final es igual al precio base
+     */
+    @Test
+    public void testGetPrecioFinalSinDescuento()
+    {
+        assertEquals(50.0, libro.getPrecioFinal());
+    }
+
+    /**
+     * Verifica el cálculo del precio final con descuento.
+     *
+     * @pre El libro tiene descuento activo
+     * @post El precio final corresponde al precio con descuento aplicado
+     */
+    @Test
+    public void testGetPrecioFinalConDescuento()
+    {
+        LibroFisico libroConDescuento = new LibroFisico("002", "Python", "Autor2", 100.0, "Programación", "ruta.jpg", "desc", "ed", "200", "ES", "2021", true, 10, 5);
+        assertEquals(90.0, libroConDescuento.getPrecioFinal());
     }
 }

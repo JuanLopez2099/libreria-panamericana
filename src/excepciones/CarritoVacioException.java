@@ -3,10 +3,13 @@ package excepciones;
 /**
  * Excepción que se lanza cuando se intenta realizar una compra
  * con el carrito de compras vacío.
- * <p>
+ *
  * Esta excepción indica que no es posible completar la operación
  * debido a la ausencia de productos en el carrito.
- * </p>
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
  */
 public class CarritoVacioException extends Exception 
 {

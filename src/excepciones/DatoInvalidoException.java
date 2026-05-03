@@ -3,10 +3,13 @@ package excepciones;
 /**
  * Excepción que se lanza cuando el usuario ingresa un dato
  * inválido en alguno de los campos de búsqueda del sistema.
- * <p>
+ *
  * Esta excepción indica que el valor ingresado no cumple con
  * los requisitos esperados para realizar la operación solicitada.
- * </p>
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
  */
 public class DatoInvalidoException extends Exception
 {

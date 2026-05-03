@@ -2,27 +2,30 @@ package mundo;
 
 /**
  * Representa un ítem dentro del carrito de compras.
- * <p>
- * Un ítem asocia un producto con una cantidad determinada,
- * permitiendo calcular su subtotal dentro del carrito.
- * </p>
+ *
+ * Asocia un producto con una cantidad específica, permitiendo gestionar
+ * operaciones relacionadas como modificación de cantidad y cálculo de subtotal.
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
  */
 public class ItemCarrito
 {
-    /** Producto asociado a este ítem */
+    /** Producto asociado a este ítem del carrito */
     private Producto producto;
     
-    /** Cantidad del producto en el carrito. Siempre debe ser mayor o igual a 1 */
+    /** Cantidad del producto en el carrito (debe ser mayor o igual a 1) */
     private int cantidad;
 
     /**
-     * Construye un nuevo ítem de carrito con el producto y la cantidad indicados.
-     * 
-     * @param producto Producto a asociar
-     * @param cantidad Cantidad inicial del producto
-     * 
+     * Construye un ítem de carrito con un producto y una cantidad inicial.
+     *
      * @pre producto != null && cantidad >= 1
      * @post Se crea un ítem con el producto y la cantidad especificados
+     *
+     * @param producto Producto que se asocia al ítem
+     * @param cantidad Cantidad inicial del producto
      */
     public ItemCarrito(Producto producto, int cantidad)
     {
@@ -32,12 +35,12 @@ public class ItemCarrito
     }
 
     /**
-     * Retorna el producto asociado a este ítem.
-     * 
-     * @return Producto del ítem
-     * 
+     * Obtiene el producto asociado a este ítem.
+     *
      * @pre true
-     * @post Se retorna el producto asociado
+     * @post Retorna el producto asociado al ítem
+     *
+     * @return Producto asociado al ítem
      */
     public Producto getProducto()
     {
@@ -45,12 +48,12 @@ public class ItemCarrito
     }
 
     /**
-     * Retorna la cantidad actual del producto en el carrito.
-     * 
-     * @return Cantidad actual
-     * 
+     * Obtiene la cantidad actual del producto en el carrito.
+     *
      * @pre true
-     * @post Se retorna la cantidad actual del producto
+     * @post Retorna la cantidad actual del producto
+     *
+     * @return Cantidad del producto en el ítem
      */
     public int getCantidad()
     {
@@ -58,12 +61,12 @@ public class ItemCarrito
     }
 
     /**
-     * Establece la cantidad del producto en el ítem.
-     * 
-     * @param cantidad Nueva cantidad
-     * 
+     * Establece una nueva cantidad para el producto en el ítem.
+     *
      * @pre cantidad >= 1
-     * @post La cantidad del ítem se actualiza con el valor dado
+     * @post La cantidad del ítem es actualizada con el valor proporcionado
+     *
+     * @param cantidad Nueva cantidad del producto
      */
     public void setCantidad(int cantidad)
     {
@@ -73,11 +76,11 @@ public class ItemCarrito
 
     /**
      * Establece el producto asociado a este ítem.
-     * 
-     * @param producto Nuevo producto
-     * 
+     *
      * @pre producto != null
-     * @post El producto del ítem se actualiza con el valor dado
+     * @post El producto del ítem es actualizado con el valor proporcionado
+     *
+     * @param producto Nuevo producto a asociar
      */
     public void setProducto(Producto producto)
     {
@@ -86,10 +89,10 @@ public class ItemCarrito
     }
 
     /**
-     * Incrementa en 1 la cantidad del producto en el carrito.
-     * 
+     * Incrementa en una unidad la cantidad del producto en el ítem.
+     *
      * @pre true
-     * @post La cantidad se incrementa en una unidad
+     * @post La cantidad del producto aumenta en una unidad
      */
     public void incrementarCantidad()
     {
@@ -98,36 +101,24 @@ public class ItemCarrito
     }
 
     /**
-     * Decrementa en 1 la cantidad del producto en el carrito.
-     * <p>
-     * La cantidad mínima permitida es 1, por lo que no se reduce
-     * si ya se encuentra en ese valor.
-     * </p>
-     * 
+     * Disminuye en una unidad la cantidad del producto en el ítem.
+     *
      * @pre true
-     * @post La cantidad se reduce en una unidad si es mayor que 1
+     * @post La cantidad del producto se reduce en una unidad
      */
     public void decrementarCantidad()
     {
-        if (this.cantidad > 1)
-        {
-            this.cantidad--;
-        }
-        
+        this.cantidad--;
         validarInvariantes();
     }
 
     /**
-     * Calcula el subtotal de este ítem.
-     * <p>
-     * El subtotal se obtiene multiplicando el precio final del producto
-     * (con o sin descuento) por la cantidad.
-     * </p>
-     * 
-     * @return Subtotal del ítem
-     * 
+     * Calcula el subtotal del ítem basado en el precio final del producto y la cantidad.
+     *
      * @pre producto != null
-     * @post Se retorna el valor correspondiente a precioFinal * cantidad
+     * @post Retorna el valor correspondiente a precioFinal * cantidad
+     *
+     * @return Subtotal del ítem
      */
     public double getSubtotal()
     {
@@ -135,9 +126,12 @@ public class ItemCarrito
     }
     
     /**
-     * Verifica que el producto sea válido.
-     * 
-     * @return true si el producto no es null
+     * Verifica que el producto asociado sea válido.
+     *
+     * @pre true
+     * @post Retorna true si el producto no es null
+     *
+     * @return true si el producto es válido, false en caso contrario
      */
     private boolean productoValido() 
     {
@@ -145,9 +139,12 @@ public class ItemCarrito
     }
 
     /**
-     * Verifica que la cantidad sea válida.
-     * 
-     * @return true si la cantidad es mayor o igual a 1
+     * Verifica que la cantidad del producto sea válida.
+     *
+     * @pre true
+     * @post Retorna true si la cantidad es mayor o igual a 1
+     *
+     * @return true si la cantidad es válida, false en caso contrario
      */
     private boolean cantidadValida() 
     {
@@ -155,8 +152,8 @@ public class ItemCarrito
     }
 
     /**
-     * Verifica las invariantes de la clase.
-     * 
+     * Valida las invariantes de la clase para garantizar consistencia interna.
+     *
      * @pre true
      * @post Se garantiza que el producto no sea null y la cantidad sea válida
      */

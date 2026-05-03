@@ -5,16 +5,30 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingUtilities;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import excepciones.StockInsuficienteException;
+import mundo.LibroFisico;
+import mundo.Producto;
+
+/**
+ * Panel que muestra la información básica del libro seleccionado.
+ *
+ * Permite visualizar los datos principales del producto actual
+ * y realizar acciones como agregar al carrito, ver información
+ * detallada o acceder al carrito de compras.
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
+ */
 public class PanelLibroActual extends JPanel implements ActionListener
 {
 	private JLabel lblcodigo;
@@ -30,12 +44,23 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	private JButton btncomprar;
 	private JButton btncarrito;
 	private JButton btninfo;
-	private JButton btneliminar;
+	private Producto productoActual;
+	private InterfazBiblioteca interfaz;
 	
 	
 	
-	public PanelLibroActual()
+	/**
+	 * Construye el panel del libro actual.
+	 *
+	 * @param interfaz Referencia a la interfaz principal
+	 *
+	 * @pre interfaz != null
+	 * @post Se inicializan los componentes gráficos del panel
+	 */
+	public PanelLibroActual(InterfazBiblioteca interfaz)
 	{
+		this.interfaz = interfaz;
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -67,8 +92,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		
 		
 		btncomprar = new JButton("Agregar Carrito ✅");
-		
-		btneliminar = new JButton("Eliminar ❌");
+		btncomprar.addActionListener(this);
 		
 		btninfo = new JButton("Info 🔎");
 		btninfo.addActionListener(this);
@@ -126,12 +150,10 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		
 		gbc.gridx = 0; 
 		gbc.gridy = 5;
-		gbc.gridwidth = 2; // ocupa ambas columnas
+		gbc.gridwidth = 2;
 		gbc.weightx = 1.0;
 		add(btncomprar, gbc);
 
-		gbc.gridy = 6;
-		add(btneliminar, gbc);
 
 		gbc.gridy = 7;
 		add(btninfo, gbc);
@@ -140,25 +162,65 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		add(btncarrito, gbc);
 	}
 
+	/**
+	 * Maneja los eventos generados por los botones del panel.
+	 *
+	 * @param e Evento de acción generado
+	 *
+	 * @pre e != null
+	 * @post Se ejecuta la acción correspondiente según el botón presionado
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(e.getSource() == btninfo)
 		{
-			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-			
-			InterfazInfo interfazInfo = new InterfazInfo(padre);
-			
-			interfazInfo.setVisible(true);
+			interfaz.abrirInfo(productoActual);
 		}
 		else if(e.getSource() == btncarrito)
 		{
-			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-			
-			InterfazCarrito interfazCarrito = new InterfazCarrito(padre);
-			
-			interfazCarrito.setVisible(true);
+			interfaz.abrirCarrito();
 		}
+		else if(e.getSource() == btncomprar)
+		{
+			try
+            {
+                interfaz.agregarAlCarrito(productoActual);
+                JOptionPane.showMessageDialog(this, productoActual.getTitulo() + " agregado al carrito", "Carrito", JOptionPane.INFORMATION_MESSAGE);
+            }
+            catch(StockInsuficienteException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
+            }
+		}
+		
+	}
+	
+	/**
+	 * Muestra la información de un producto en el panel.
+	 *
+	 * @param p Producto que se desea visualizar
+	 *
+	 * @pre p != null
+	 * @post Los campos del panel se actualizan con la información del producto
+	 */
+	public void mostrarInformacio(Producto p)
+	{
+		this.productoActual = p;
+		txtcodigo.setText(p.getCodigo());
+		txttitulo.setText(p.getTitulo());
+		txtautor.setText(p.getNombreAutor());
+		txtprecio.setText("$" + p.getPrecio());
+		
+		if(p instanceof LibroFisico)
+		{
+			txtstock.setText(String.valueOf(((LibroFisico) p).getStock()));
+		}
+		else
+		{
+			txtstock.setText("Digital");
+		}
+		
 		
 	}
 }
