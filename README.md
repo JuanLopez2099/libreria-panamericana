@@ -1,3 +1,4 @@
+
 # 📚 Biblioteca Panamericana
 
 Aplicación de escritorio desarrollada en Java con interfaz gráfica Swing, que simula el sistema de gestión de una biblioteca digital y física.
@@ -29,3 +30,7 @@ Aplicación de escritorio desarrollada en Java con interfaz gráfica Swing, que 
 ## Autores
 - Estefania Rodriguez Gutierrez
 - Juan Camilo Lopez
+
+# libreria-panamericana
+Proyecto de objetos y estructura de datos.
+
