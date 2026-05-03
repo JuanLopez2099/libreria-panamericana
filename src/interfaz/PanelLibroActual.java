@@ -5,15 +5,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingUtilities;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import excepciones.StockInsuficienteException;
+import mundo.LibroFisico;
+import mundo.Producto;
 
 public class PanelLibroActual extends JPanel implements ActionListener
 {
@@ -30,12 +33,15 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	private JButton btncomprar;
 	private JButton btncarrito;
 	private JButton btninfo;
-	private JButton btneliminar;
+	private Producto productoActual;
+	private InterfazBiblioteca interfaz;
 	
 	
 	
-	public PanelLibroActual()
+	public PanelLibroActual(InterfazBiblioteca interfaz)
 	{
+		this.interfaz = interfaz;
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -67,8 +73,7 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		
 		
 		btncomprar = new JButton("Agregar Carrito ✅");
-		
-		btneliminar = new JButton("Eliminar ❌");
+		btncomprar.addActionListener(this);
 		
 		btninfo = new JButton("Info 🔎");
 		btninfo.addActionListener(this);
@@ -130,8 +135,6 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		gbc.weightx = 1.0;
 		add(btncomprar, gbc);
 
-		gbc.gridy = 6;
-		add(btneliminar, gbc);
 
 		gbc.gridy = 7;
 		add(btninfo, gbc);
@@ -145,20 +148,44 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	{
 		if(e.getSource() == btninfo)
 		{
-			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-			
-			InterfazInfo interfazInfo = new InterfazInfo(padre);
-			
-			interfazInfo.setVisible(true);
+			interfaz.abrirInfo(productoActual);
 		}
 		else if(e.getSource() == btncarrito)
 		{
-			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-			
-			InterfazCarrito interfazCarrito = new InterfazCarrito(padre);
-			
-			interfazCarrito.setVisible(true);
+			interfaz.abrirCarrito();
 		}
+		else if(e.getSource() == btncomprar)
+		{
+			try
+            {
+                interfaz.agregarAlCarrito(productoActual);
+                JOptionPane.showMessageDialog(this, productoActual.getTitulo() + " agregado al carrito", "Carrito", JOptionPane.INFORMATION_MESSAGE);
+            }
+            catch(StockInsuficienteException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
+            }
+		}
+		
+	}
+	
+	public void mostrarInformacio(Producto p)
+	{
+		this.productoActual = p;
+		txtcodigo.setText(p.getCodigo());
+		txttitulo.setText(p.getTitulo());
+		txtautor.setText(p.getNombreAutor());
+		txtprecio.setText("$" + p.getPrecio());
+		
+		if(p instanceof LibroFisico)
+		{
+			txtstock.setText(String.valueOf(((LibroFisico) p).getStock()));
+		}
+		else
+		{
+			txtstock.setText("Digital");
+		}
+		
 		
 	}
 }

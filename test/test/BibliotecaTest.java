@@ -45,13 +45,13 @@ public class BibliotecaTest
     {
         biblioteca = new Biblioteca();
 
-        libro1 = new LibroFisico("001", "Java Básico", "Autor1", 50.0, "Programación", "ruta.jpg", "desc", "ed", "100", "ES", "2020", false, 0, 0, 10);
+        libro1 = new LibroFisico("001", "Java Básico", "Autor1", 50.0, "Programación", "ruta.jpg", "desc", "ed", "100", "ES", "2020", false, 0, 0);
                 
 
-        libro2 = new LibroFisico("002", "Python Avanzado", "Autor2", 30.0, "Programación", "ruta.jpg", "desc", "ed", "200", "ES", "2021", true, 10, 0, 0);
+        libro2 = new LibroFisico("002", "Python Avanzado", "Autor2", 30.0, "Programación", "ruta.jpg", "desc", "ed", "200", "ES", "2021", true, 10, 0);
                 
 
-        libro3 = new LibroDigitial("003", "Historia Universal", "Autor3", 40.0, "Historia", "ruta.jpg", "desc", "ed", "300", "ES", "2019", true, 20, 0, "PDF", 5.0);
+        libro3 = new LibroDigitial("003", "Historia Universal", "Autor3", 40.0, "Historia", "ruta.jpg", "desc", "ed", "300", "ES", "2019", true, 20, "PDF", 5.0);
                 
 
         biblioteca.agregarProducto(libro1);
@@ -83,7 +83,7 @@ public class BibliotecaTest
     {
         
 
-        Producto nuevo = new LibroFisico("010", "Nuevo Libro", "AutorX", 20.0, "Novela", "ruta.jpg", "desc", "ed", "100", "ES", "2022", false, 0, 0, 5);
+        Producto nuevo = new LibroFisico("010", "Nuevo Libro", "AutorX", 20.0, "Novela", "ruta.jpg", "desc", "ed", "100", "ES", "2022", false, 0, 0);
      
         biblioteca.agregarProducto(nuevo);
 

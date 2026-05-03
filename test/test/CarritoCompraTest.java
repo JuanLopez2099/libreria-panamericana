@@ -43,8 +43,8 @@ public class CarritoCompraTest
     {
         carrito = new CarritoCompra();
 
-        libro1 = new LibroFisico("001", "Libro 1", "Autor 1", 50.0, "Novela", "ruta1", "sinopsis", "editorial", "100", "Español", "2020", false, 0, 0, 10);
-        libro2 = new LibroFisico("002", "Libro 2", "Autor 2", 30.0, "Drama", "ruta2", "sinopsis", "editorial", "200", "Español", "2021", false, 0, 0, 5);
+        libro1 = new LibroFisico("001", "Libro 1", "Autor 1", 50.0, "Novela", "ruta1", "sinopsis", "editorial", "100", "Español", "2020", false, 0, 0);
+        libro2 = new LibroFisico("002", "Libro 2", "Autor 2", 30.0, "Drama", "ruta2", "sinopsis", "editorial", "200", "Español", "2021", false, 0, 0);
     }
 
     // -------------------------------------------------------------------------
@@ -72,7 +72,15 @@ public class CarritoCompraTest
     @Test
     public void testAgregarProducto()
     {
-        carrito.agregarProducto(libro1);
+    	try
+    	{
+    		carrito.agregarProducto(libro1);
+    	}
+    	catch(StockInsuficienteException e)
+    	{
+    		e.getMessage();
+    	}
+        
         assertFalse(carrito.estaVacio());
     }
 
@@ -100,7 +108,15 @@ public class CarritoCompraTest
     @Test
     public void testEliminarProducto()
     {
-        carrito.agregarProducto(libro1);
+    	try
+    	{
+    		carrito.agregarProducto(libro1);
+    	}
+    	catch(StockInsuficienteException e)
+    	{
+    		e.getMessage();
+    	}
+        
         carrito.eliminarProducto(libro1);
 
         assertTrue(carrito.estaVacio());

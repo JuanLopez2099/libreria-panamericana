@@ -4,15 +4,20 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class PanelConsultas extends JPanel
+import excepciones.DatoInvalidoException;
+import excepciones.LibroNoEncontradoException;
+
+
+public class PanelConsultas extends JPanel implements ActionListener
 {
 	private JButton buscarCodigo;
 	private JButton buscarTitulo;
@@ -23,10 +28,14 @@ public class PanelConsultas extends JPanel
 	private JButton ordenarPrecio;
 	private JButton ordenarTitulo;
 	private PanelFormulario panelFormulario;
+	private InterfazBiblioteca interfaz;
 	
 	
-	public PanelConsultas()
+	public PanelConsultas(InterfazBiblioteca interfaz)
 	{
+		this.interfaz = interfaz;
+		panelFormulario = new PanelFormulario();
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -35,15 +44,30 @@ public class PanelConsultas extends JPanel
 		setBorder(borde);
 		
 		buscarCodigo = new JButton("Buscar Por Codigo 🔎");
-		buscarTitulo = new JButton("Buscar Por Título 🔍");
-		filtrarCategoria = new JButton("Filtrar por Categoría 🗂️");
-		filtrarAutor = new JButton("Filtrar por Autor ✍️");
-		filtrarDisponibles = new JButton("Mostrar Disponibles 📦");
-		filtrarDescuento = new JButton("Mostrar con Descuento 💸");
-		ordenarPrecio = new JButton("Ordenar por Precio 💲");
-		ordenarTitulo = new JButton("Ordenar por Título 🔤");
+		buscarCodigo.addActionListener(this);
 		
-		panelFormulario = new PanelFormulario();
+		buscarTitulo = new JButton("Buscar Por Título 🔍");
+		buscarTitulo.addActionListener(this);
+		
+		filtrarCategoria = new JButton("Filtrar por Categoría 🗂️");
+		filtrarCategoria.addActionListener(this);
+		
+		filtrarAutor = new JButton("Filtrar por Autor ✍️");
+		filtrarAutor.addActionListener(this);
+		
+		filtrarDisponibles = new JButton("Mostrar Disponibles 📦");
+		filtrarDisponibles.addActionListener(this);
+		
+		filtrarDescuento = new JButton("Mostrar con Descuento 💸");
+		filtrarDescuento.addActionListener(this);
+		
+		ordenarPrecio = new JButton("Ordenar por Precio 💲");
+		ordenarPrecio.addActionListener(this);
+		
+		ordenarTitulo = new JButton("Ordenar por Título 🔤");
+		ordenarTitulo.addActionListener(this);
+		
+		
 		
 		
 		 gbc.gridx = 0;
@@ -85,6 +109,82 @@ public class PanelConsultas extends JPanel
 	     
 		
 		
+		
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource() == ordenarPrecio)
+		{
+			interfaz.ordenarPorPrecio();
+		}
+		else if(e.getSource() == ordenarTitulo)
+		{
+			interfaz.ordenarPorTitulo();
+		}
+		else if(e.getSource() == buscarCodigo)
+		{
+			try
+			{
+				interfaz.abrirInfo(interfaz.buscarPorCodigo(panelFormulario.getCodigo()));
+			}
+			catch(DatoInvalidoException ex)
+			{
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+			}
+			catch(LibroNoEncontradoException ex)
+			{
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Libro No Encontrado", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		else if(e.getSource() == buscarTitulo)
+		{
+			try
+            {
+                interfaz.abrirInfo(interfaz.buscarPorTitulo(panelFormulario.getTitulo()));
+            }
+            catch(DatoInvalidoException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+            }
+            catch(LibroNoEncontradoException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Libro No Encontrado", JOptionPane.ERROR_MESSAGE);
+            }
+		}
+		else if(e.getSource() == filtrarCategoria)
+		{
+			try
+            {
+                interfaz.filtrarPorCategoria(panelFormulario.getCategoria());
+            }
+            catch(DatoInvalidoException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+            }
+			
+		}
+		else if(e.getSource() == filtrarAutor)
+		{
+			try
+            {
+                interfaz.filtrarPorAutor(panelFormulario.getAutor());
+            }
+            catch(DatoInvalidoException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+            }
+		}
+		else if(e.getSource() == filtrarDescuento)
+		{
+			interfaz.filtrarPorDescuento();
+		}
+		else if(e.getSource() == filtrarDisponibles)
+		{
+			interfaz.filtrarDisponibles();
+		}
 		
 		
 	}

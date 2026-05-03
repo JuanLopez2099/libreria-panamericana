@@ -7,10 +7,6 @@ package mundo;
  * el nombre sea válido (no nulo y no vacío) y el saldo sea no negativo mediante
  * la validación de invariantes.
  * </p>
- * 
- * @author [Tu Nombre]
- * @version 1.1
- * @since 1.0
  */
 public class Usuario 
 {
@@ -111,6 +107,11 @@ public class Usuario
 	{
 		this.saldo -= monto;
 		validarInvariantes();
+	}
+	
+	public boolean tieneSaldoSuficiente(double monto)
+	{
+	    return saldo >= monto;
 	}
 
 	/**

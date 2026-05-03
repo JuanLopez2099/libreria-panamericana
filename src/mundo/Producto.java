@@ -53,8 +53,6 @@ public abstract class Producto
 	/** Porcentaje de descuento aplicable al producto (entre 0 y 100). */
 	private double porcentajeDescuento;
 
-	/** Número de veces que el producto ha sido vendido. */
-	private int numeroVentas;
 
 	// -------------------------------------------------------------------------
 	// Constructor
@@ -97,7 +95,7 @@ public abstract class Producto
 	 * @post getNumeroVentas() == numeroVentas
 	 * @post getPorcentajeDescuento() == porcentajeDescuento
 	 */
-	public Producto(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento, int numeroVentas) 
+	public Producto(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento) 
 	{
 		this.codigo = codigo;
 		this.titulo = titulo;
@@ -112,7 +110,7 @@ public abstract class Producto
 		this.fechaPublicacion = fechaPublicacion;
 		this.tieneDescuento = tieneDescuento;
 		this.porcentajeDescuento = porcentajeDescuento;
-		this.numeroVentas = numeroVentas;
+		
 		
 		validarInvariantes();
 	}
@@ -314,18 +312,6 @@ public abstract class Producto
 		return porcentajeDescuento;
 	}
 
-	/**
-	 * Retorna el número de veces que el producto ha sido vendido.
-	 *
-	 * @return El número de ventas.
-	 *
-	 * @pre true
-	 * @post result >= 0
-	 */
-	public int getNumeroVentas() 
-	{
-		return numeroVentas;
-	}
 
 	// -------------------------------------------------------------------------
 	// Setters
@@ -513,38 +499,10 @@ public abstract class Producto
 		validarInvariantes();
 	}
 
-	/**
-	 * Establece el número de ventas del producto.
-	 *
-	 * @param numeroVentas El nuevo número de ventas. Debe ser mayor o igual a 0.
-	 *
-	 * @pre numeroVentas >= 0
-	 * @post getNumeroVentas() == numeroVentas
-	 *
-	 * @throws AssertionError Si el número de ventas es negativo y las aserciones están habilitadas.
-	 */
-	public void setNumeroVentas(int numeroVentas)
-	{
-		this.numeroVentas = numeroVentas;
-		validarInvariantes();
-	}
 
 	// -------------------------------------------------------------------------
 	// Métodos
 	// -------------------------------------------------------------------------
-
-	/**
-	 * Incrementa el número de ventas del producto en la cantidad indicada.
-	 *
-	 * @param veces Cantidad de ventas a agregar. Se espera que sea un valor positivo.
-	 *
-	 * @pre veces > 0
-	 * @post getNumeroVentas() == old(getNumeroVentas()) + veces
-	 */
-	public void incrementarVecesVendido(int veces)
-	{
-		this.numeroVentas += veces;
-	}
 
 	/**
 	 * Retorna el tipo de producto.
@@ -588,7 +546,7 @@ public abstract class Producto
 				+ precio + ", categoria=" + categoria + ", rutaPortada=" + rutaPortada + ", sinopsis=" + sinopsis
 				+ ", editorial=" + editorial + ", numeroPaginas=" + numeroPaginas + ", idioma=" + idioma
 				+ ", fechaPublicacion=" + fechaPublicacion + ", tieneDescuento=" + tieneDescuento
-				+ ", porcentajeDescuento=" + porcentajeDescuento + ", numeroVentas=" + numeroVentas + "]";
+				+ ", porcentajeDescuento=" + porcentajeDescuento + "]";
 	}
 
 	// -------------------------------------------------------------------------
@@ -671,15 +629,7 @@ public abstract class Producto
 		return porcentajeDescuento >= 0 && porcentajeDescuento <= 100;
 	}
 
-	/**
-	 * Verifica que el número de ventas sea válido.
-	 *
-	 * @return {@code true} si el número de ventas es mayor o igual a 0.
-	 */
-	private boolean numeroVentasValido()
-	{
-		return numeroVentas >= 0;
-	}
+	
 
 	/**
 	 * Verifica todas las invariantes de la clase.
@@ -697,6 +647,5 @@ public abstract class Producto
 		assert rutaPortadaValida()        : "La ruta de la portada debe ser valida";
 		assert idiomaValido()             : "El idioma debe ser valido";
 		assert porcentajeDescuentoValido(): "El porcentaje de descuento debe ser valido";
-		assert numeroVentasValido()       : "El numero de ventas debe ser valido";
 	}
 }

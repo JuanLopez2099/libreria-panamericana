@@ -34,15 +34,13 @@ public class LibroFisico extends Producto
      * @param fechaPublicacion Fecha de publicación
      * @param tieneDescuento Indica si tiene descuento
      * @param porcentajeDescuento Porcentaje de descuento
-     * @param numeroVentas Número de veces vendido
      * @param stock Cantidad inicial en inventario
-     * 
      * @pre codigo != null && titulo != null && precio > 0 && stock >= 0
      * @post Se crea un libro físico con el stock especificado
      */
-    public LibroFisico(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento, int numeroVentas, int stock) 
+    public LibroFisico(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento,  int stock) 
     {
-        super(codigo, titulo, nombreAutor, precio, categoria, rutaPortada, sinopsis, editorial, numeroPaginas, idioma, fechaPublicacion, tieneDescuento, porcentajeDescuento, numeroVentas);
+        super(codigo, titulo, nombreAutor, precio, categoria, rutaPortada, sinopsis, editorial, numeroPaginas, idioma, fechaPublicacion, tieneDescuento, porcentajeDescuento);
         this.stock = stock;
         validarInvariantes();
     }
