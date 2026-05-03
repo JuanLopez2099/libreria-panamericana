@@ -4,14 +4,18 @@ import excepciones.StockInsuficienteException;
 
 /**
  * Representa un libro físico dentro del sistema.
- * <p>
- * Los libros físicos poseen un stock limitado, el cual se reduce
+ *
+ * Extiende la clase Producto y modela un producto que posee
+ * disponibilidad limitada mediante un stock. Este stock se reduce
  * únicamente cuando se realiza una compra.
- * </p>
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
  */
 public class LibroFisico extends Producto 
 {
-    /** Cantidad de unidades disponibles en inventario. */
+    /** Cantidad de unidades disponibles en inventario */
     private int stock;
 
     // -------------------------------------------------------------------------
@@ -19,24 +23,25 @@ public class LibroFisico extends Producto
     // -------------------------------------------------------------------------
 
     /**
-     * Construye un nuevo libro físico.
-     * 
+     * Construye un libro físico con la información especificada.
+     *
+     * @pre codigo != null && titulo != null && precio > 0 && stock >= 0
+     * @post Se crea una instancia de libro físico con el stock inicial definido
+     *
      * @param codigo Código único del producto
      * @param titulo Título del libro
-     * @param nombreAutor Nombre del autor
+     * @param nombreAutor Nombre del autor del libro
      * @param precio Precio base del libro
      * @param categoria Categoría del libro
-     * @param rutaPortada Ruta de la portada
-     * @param sinopsis Sinopsis del libro
+     * @param rutaPortada Ruta de la imagen de portada
+     * @param sinopsis Descripción o resumen del libro
      * @param editorial Editorial del libro
-     * @param numeroPaginas Número de páginas
-     * @param idioma Idioma del libro
-     * @param fechaPublicacion Fecha de publicación
-     * @param tieneDescuento Indica si tiene descuento
-     * @param porcentajeDescuento Porcentaje de descuento
-     * @param stock Cantidad inicial en inventario
-     * @pre codigo != null && titulo != null && precio > 0 && stock >= 0
-     * @post Se crea un libro físico con el stock especificado
+     * @param numeroPaginas Número de páginas del libro
+     * @param idioma Idioma en el que está escrito el libro
+     * @param fechaPublicacion Fecha de publicación del libro
+     * @param tieneDescuento Indica si el libro tiene descuento aplicado
+     * @param porcentajeDescuento Porcentaje de descuento aplicado
+     * @param stock Cantidad inicial disponible en inventario
      */
     public LibroFisico(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento,  int stock) 
     {
@@ -50,12 +55,12 @@ public class LibroFisico extends Producto
     // -------------------------------------------------------------------------
 
     /**
-     * Retorna el stock disponible del libro.
-     * 
-     * @return Cantidad de unidades en inventario
-     * 
+     * Obtiene el stock disponible del libro.
+     *
      * @pre true
-     * @post Se retorna el stock actual
+     * @post Retorna la cantidad actual de unidades en inventario
+     *
+     * @return Cantidad de unidades disponibles
      */
     public int getStock() 
     {
@@ -68,11 +73,11 @@ public class LibroFisico extends Producto
 
     /**
      * Establece el stock del libro.
-     * 
-     * @param stock Nuevo valor de stock
-     * 
+     *
      * @pre stock >= 0
-     * @post El stock se actualiza con el valor dado
+     * @post El stock es actualizado con el valor proporcionado
+     *
+     * @param stock Nueva cantidad de unidades en inventario
      */
     public void setStock(int stock) 
     {
@@ -85,18 +90,13 @@ public class LibroFisico extends Producto
     // -------------------------------------------------------------------------
 
     /**
-     * Reduce el stock en la cantidad indicada.
-     * <p>
-     * Si la cantidad solicitada es mayor que el stock disponible,
-     * se lanza una excepción.
-     * </p>
+     * Reduce el stock del libro en la cantidad indicada.
      *
-     * @param cantidad Cantidad a reducir
-     * 
-     * @throws StockInsuficienteException Si la cantidad supera el stock disponible
-     * 
      * @pre cantidad >= 0
-     * @post El stock se reduce en la cantidad indicada si es posible
+     * @post El stock se reduce en la cantidad indicada si hay disponibilidad suficiente
+     *
+     * @param cantidad Cantidad de unidades a descontar del stock
+     * @throws StockInsuficienteException Si la cantidad solicitada supera el stock disponible
      */
     public void reducirStock(int cantidad) throws StockInsuficienteException 
     {
@@ -117,12 +117,12 @@ public class LibroFisico extends Producto
     // -------------------------------------------------------------------------
 
     /**
-     * Retorna el tipo de producto.
-     * 
-     * @return "Físico"
-     * 
+     * Obtiene el tipo de producto.
+     *
      * @pre true
-     * @post Se retorna el tipo "Físico"
+     * @post Retorna el tipo de producto como "Físico"
+     *
+     * @return Cadena que representa el tipo de producto
      */
     @Override
     public String getTipo() 
@@ -131,12 +131,12 @@ public class LibroFisico extends Producto
     }
 
     /**
-     * Indica si el libro está disponible para la venta.
-     * 
-     * @return true si el stock es mayor que 0, false en caso contrario
-     * 
+     * Indica si el libro se encuentra disponible para la venta.
+     *
      * @pre true
-     * @post Se retorna true si hay al menos una unidad disponible
+     * @post Retorna true si existe al menos una unidad disponible en stock
+     *
+     * @return true si el stock es mayor a 0, false en caso contrario
      */
     @Override
     public boolean estaDisponible() 
@@ -149,9 +149,12 @@ public class LibroFisico extends Producto
     // -------------------------------------------------------------------------
 
     /**
-     * Verifica que el stock sea válido.
-     * 
-     * @return true si el stock es mayor o igual a 0
+     * Verifica que el stock tenga un valor válido.
+     *
+     * @pre true
+     * @post Retorna true si el stock es mayor o igual a 0
+     *
+     * @return true si el stock es válido, false en caso contrario
      */
     private boolean stockValido()
     {
@@ -159,8 +162,8 @@ public class LibroFisico extends Producto
     }
 
     /**
-     * Verifica las invariantes de la clase.
-     * 
+     * Valida las invariantes de la clase para garantizar consistencia interna.
+     *
      * @pre true
      * @post Se garantiza que el stock no sea negativo
      */
@@ -174,12 +177,12 @@ public class LibroFisico extends Producto
     // -------------------------------------------------------------------------
 
     /**
-     * Retorna una representación en texto del libro físico.
-     * 
-     * @return Cadena con la información del libro físico
-     * 
+     * Genera una representación en texto del libro físico.
+     *
      * @pre true
-     * @post Se retorna una cadena con los datos del objeto
+     * @post Retorna una cadena con la información del libro físico
+     *
+     * @return Representación textual del objeto
      */
     @Override
     public String toString() 
