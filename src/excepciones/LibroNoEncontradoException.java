@@ -3,11 +3,14 @@ package excepciones;
 /**
  * Excepción que se lanza cuando no se encuentra un libro
  * dentro de la colección del sistema.
- * <p>
+ *
  * Esta excepción indica que una operación de búsqueda no pudo
  * completarse exitosamente debido a que el libro solicitado
  * no existe en la biblioteca.
- * </p>
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
  */
 public class LibroNoEncontradoException extends Exception 
 {
