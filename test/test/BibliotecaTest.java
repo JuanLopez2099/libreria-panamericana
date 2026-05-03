@@ -45,10 +45,10 @@ public class BibliotecaTest
     {
         biblioteca = new Biblioteca();
 
-        libro1 = new LibroFisico("001", "Java Básico", "Autor1", 50.0, "Programación", "ruta.jpg", "desc", "ed", "100", "ES", "2020", false, 0, 0);
+        libro1 = new LibroFisico("001", "Java Básico", "Autor1", 50.0, "Programación", "ruta.jpg", "desc", "ed", "100", "ES", "2020", false, 0, 5);
                 
 
-        libro2 = new LibroFisico("002", "Python Avanzado", "Autor2", 30.0, "Programación", "ruta.jpg", "desc", "ed", "200", "ES", "2021", true, 10, 0);
+        libro2 = new LibroFisico("002", "Python Avanzado", "Autor2", 30.0, "Programación", "ruta.jpg", "desc", "ed", "200", "ES", "2021", true, 10, 5);
                 
 
         libro3 = new LibroDigitial("003", "Historia Universal", "Autor3", 40.0, "Historia", "ruta.jpg", "desc", "ed", "300", "ES", "2019", true, 20, "PDF", 5.0);
