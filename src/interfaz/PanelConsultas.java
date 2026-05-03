@@ -9,18 +9,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import excepciones.DatoInvalidoException;
 import excepciones.LibroNoEncontradoException;
-import mundo.Biblioteca;
-import mundo.Producto;
+
 
 public class PanelConsultas extends JPanel implements ActionListener
 {
@@ -32,17 +27,14 @@ public class PanelConsultas extends JPanel implements ActionListener
 	private JButton filtrarDescuento;
 	private JButton ordenarPrecio;
 	private JButton ordenarTitulo;
-	private Biblioteca biblioteca;
 	private PanelFormulario panelFormulario;
-	private PanelListaLibros panelListaLibros;
+	private InterfazBiblioteca interfaz;
 	
 	
-	
-	public PanelConsultas(PanelListaLibros panelListaLibros, PanelFormulario panelFormulario, Biblioteca biblioteca)
+	public PanelConsultas(InterfazBiblioteca interfaz)
 	{
-		this.panelListaLibros = panelListaLibros;
-		this.panelFormulario = panelFormulario;
-		this.biblioteca = biblioteca;
+		this.interfaz = interfaz;
+		panelFormulario = new PanelFormulario();
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -121,112 +113,77 @@ public class PanelConsultas extends JPanel implements ActionListener
 		
 	}
 
-	public void buscarPorCodigo()
-	{
-		try
-		{
-			try
-			{
-				String codigo = panelFormulario.getCodigo();
-				Producto p = biblioteca.buscarPorCodigo(codigo);
-				JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-		        InterfazInfo interfazInfo = new InterfazInfo(padre, p);
-		        interfazInfo.setVisible(true);
-			}
-			catch(DatoInvalidoException e)
-			{
-				JOptionPane.showMessageDialog(this, e.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
-			}
-			
-		}
-		catch(LibroNoEncontradoException e)
-		{
-			JOptionPane.showMessageDialog(this, e.getMessage(), "Libro No Encontrado", JOptionPane.ERROR_MESSAGE);
-		}
-		
-	}
-	
-	public void buscarPorTitulo()
-	{
-		biblioteca.ordenarPorTitulo();
-		
-		try
-		{
-			try
-			{
-				String titulo = panelFormulario.getTitulo();
-				Producto p = biblioteca.busquedaBinariaPorTitulo(titulo);
-				JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-		        InterfazInfo interfazInfo = new InterfazInfo(padre, p);
-		        interfazInfo.setVisible(true);
-			}
-			catch(DatoInvalidoException e)
-			{
-				JOptionPane.showMessageDialog(this, e.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
-			}
-			
-			
-		}
-		catch(LibroNoEncontradoException e)
-		{
-			JOptionPane.showMessageDialog(this, e.getMessage(), "Libro No Encontrado", JOptionPane.ERROR_MESSAGE);
-		}
-		
-		
-		
-	}
-	
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(e.getSource() == ordenarPrecio)
 		{
-			panelListaLibros.ordenarPorPrecio();
+			interfaz.ordenarPorPrecio();
 		}
 		else if(e.getSource() == ordenarTitulo)
 		{
-			panelListaLibros.ordenarPorTitulo();
+			interfaz.ordenarPorTitulo();
 		}
 		else if(e.getSource() == buscarCodigo)
 		{
-			buscarPorCodigo();
-		}
-		else if(e.getSource() == buscarTitulo)
-		{
-			buscarPorTitulo();
-		}
-		else if(e.getSource() == filtrarCategoria)
-		{
 			try
 			{
-				panelListaLibros.filtrarPorCategoria(panelFormulario.getCategoria());
+				interfaz.abrirInfo(interfaz.buscarPorCodigo(panelFormulario.getCodigo()));
 			}
 			catch(DatoInvalidoException ex)
 			{
 				JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
 			}
+			catch(LibroNoEncontradoException ex)
+			{
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Libro No Encontrado", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		else if(e.getSource() == buscarTitulo)
+		{
+			try
+            {
+                interfaz.abrirInfo(interfaz.buscarPorTitulo(panelFormulario.getTitulo()));
+            }
+            catch(DatoInvalidoException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+            }
+            catch(LibroNoEncontradoException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Libro No Encontrado", JOptionPane.ERROR_MESSAGE);
+            }
+		}
+		else if(e.getSource() == filtrarCategoria)
+		{
+			try
+            {
+                interfaz.filtrarPorCategoria(panelFormulario.getCategoria());
+            }
+            catch(DatoInvalidoException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+            }
 			
 		}
 		else if(e.getSource() == filtrarAutor)
 		{
 			try
-			{
-				panelListaLibros.filtrarPorAutor(panelFormulario.getAutor());
-			}
-			catch(DatoInvalidoException ex)
-			{
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
-			}
+            {
+                interfaz.filtrarPorAutor(panelFormulario.getAutor());
+            }
+            catch(DatoInvalidoException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
+            }
 		}
 		else if(e.getSource() == filtrarDescuento)
 		{
-			panelListaLibros.filtrarPorDescuento();
+			interfaz.filtrarPorDescuento();
 		}
 		else if(e.getSource() == filtrarDisponibles)
 		{
-			panelListaLibros.filtrarDisponibles();
+			interfaz.filtrarDisponibles();
 		}
 		
 		

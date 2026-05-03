@@ -185,7 +185,6 @@ public class CarritoCompra
                 libroFisico.reducirStock(item.getCantidad());
             }
 
-            p.incrementarVecesVendido(item.getCantidad());
         }
 
         items.clear();
@@ -197,18 +196,11 @@ public class CarritoCompra
         return items;
     }
     
-    /**
-     * Indica si el carrito está vacío.
-     * 
-     * @return true si no hay ítems, false en caso contrario
-     * 
-     * @pre true
-     * @post Se retorna true si el carrito no contiene productos
-     */
-    public boolean estaVacio() 
+    public boolean estaVacio()
     {
-        return items.isEmpty();
+    	return items.isEmpty();
     }
+    
 
     // -------------------------------------------------------------------------
     // Invariantes

@@ -1,13 +1,17 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
+import excepciones.LibroNoEncontradoException;
+import excepciones.StockInsuficienteException;
 import mundo.Biblioteca;
 import mundo.CarritoCompra;
+import mundo.Producto;
 import mundo.Usuario;
 
 
@@ -17,7 +21,6 @@ public class InterfazBiblioteca extends JFrame
 	private PanelListaLibros panelListaLibros;
 	private PanelConsultas panelConsultas;
 	private PanelUsuario panelUsuario;
-	private PanelFormulario panelFormulario;
 	private Biblioteca biblioteca;
 	private CarritoCompra carrito;
 	private Usuario usuario;
@@ -45,17 +48,129 @@ public class InterfazBiblioteca extends JFrame
 		panelUsuario = new PanelUsuario(usuario);
 		add(panelUsuario, BorderLayout.NORTH);
 		
-		panelListaLibros = new PanelListaLibros(biblioteca, carrito, usuario, panelUsuario);
+		panelListaLibros = new PanelListaLibros(this);
 		add(panelListaLibros, BorderLayout.CENTER);
 		
-		panelFormulario = new PanelFormulario();
-		panelConsultas = new PanelConsultas(panelListaLibros, panelFormulario, biblioteca);
+		panelConsultas = new PanelConsultas(this);
 		add(panelConsultas, BorderLayout.SOUTH);
 		
 
-		
+		mostrarLibros();
 
 	}
+	
+	public void mostrarLibros()
+	{
+	    panelListaLibros.mostrarLista(biblioteca.getProductos());
+	}
+	
+	public void abrirInfo(Producto p)
+	{
+		InterfazInfo interfazInfo = new InterfazInfo(this, p);
+		interfazInfo.setVisible(true);
+	}
+	
+	public void abrirCarrito()
+    {
+        InterfazCarrito interfazCarrito = new InterfazCarrito(this);
+        interfazCarrito.setVisible(true);
+    }
+
+    public void actualizarSaldo()
+    {
+        panelUsuario.actualizarSaldo();
+    }
+
+    public void agregarAlCarrito(Producto p) throws StockInsuficienteException
+    {
+        carrito.agregarProducto(p);
+    }
+    
+    public Producto buscarPorCodigo(String codigo) throws LibroNoEncontradoException
+    {
+        return biblioteca.buscarPorCodigo(codigo);
+    }
+	
+    public Producto buscarPorTitulo(String titulo) throws LibroNoEncontradoException
+    {
+        biblioteca.ordenarPorTitulo();
+        return biblioteca.busquedaBinariaPorTitulo(titulo);
+    }
+    
+    public void ordenarPorPrecio()
+    {
+        biblioteca.ordenarPorPrecio();
+        mostrarLibros();
+    }
+
+    public void ordenarPorTitulo()
+    {
+        biblioteca.ordenarPorTitulo();
+        mostrarLibros();
+    }
+    
+    public void filtrarPorCategoria(String categoria)
+    {
+    	ArrayList<Producto> lista = biblioteca.filtrarPorCategoria(categoria);
+    	if(lista.isEmpty())
+        {
+    		JOptionPane.showMessageDialog(this, "Sin resultados", "Categoria no encontrada", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            panelListaLibros.mostrarLista(lista);
+        }
+    	
+    }
+
+    public void filtrarPorAutor(String autor)
+    {
+    	ArrayList<Producto> lista = biblioteca.filtrarPorAutor(autor);
+        if(lista.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Sin resultados", "Autor no encontrado", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            panelListaLibros.mostrarLista(lista);
+        }
+    }
+
+    public void filtrarDisponibles()
+    {
+    	ArrayList<Producto> lista = biblioteca.filtrarDisponibles();
+        if(lista.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Sin resultados", "No hay disponibles", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            panelListaLibros.mostrarLista(lista);
+        }
+    }
+
+    public void filtrarPorDescuento()
+    {
+    	ArrayList<Producto> lista = biblioteca.filtrarConDescuento();
+        if(lista.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Sin resultados", "No hay libros con descuento", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            panelListaLibros.mostrarLista(lista);
+        }
+    }
+	
+    public CarritoCompra getCarrito()
+    { 
+    	return carrito; 
+    }
+    
+    public Usuario getUsuario()
+    { 
+    	return usuario; 
+    }
 	
 	public static void main(String[] args) 
 	{

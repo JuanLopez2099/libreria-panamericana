@@ -15,25 +15,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-import mundo.Biblioteca;
-import mundo.CarritoCompra;
 import mundo.Producto;
-import mundo.Usuario;
+
 
 
 public class PanelListaLibros extends JPanel
 {	
 	private JTextArea listaLibros;
 	private PanelLibroActual libroActual;
-	private Biblioteca biblioteca;
 	private ArrayList<Producto> productosListados;
 	
 	
-	public PanelListaLibros(Biblioteca biblioteca, CarritoCompra carrito, Usuario usuario, PanelUsuario panelUsuario)
+	public PanelListaLibros(InterfazBiblioteca interfaz)
 	{
-		this.biblioteca = biblioteca;
-		
-		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -44,7 +38,7 @@ public class PanelListaLibros extends JPanel
 		borde.setTitleColor(Color.BLACK);
 		scroll.setBorder(borde);
 		
-		libroActual = new PanelLibroActual(carrito, usuario, panelUsuario);
+		libroActual = new PanelLibroActual(interfaz);
 		listaLibros.setEditable(false);
 		
         gbc.gridy = 0;
@@ -59,7 +53,7 @@ public class PanelListaLibros extends JPanel
         gbc.gridx = 1;
         gbc.weightx = 0.6;
         add(libroActual, gbc);
-        mostrarLibros();
+        
         
         listaLibros.addMouseListener(new MouseAdapter() 
         {
@@ -85,118 +79,15 @@ public class PanelListaLibros extends JPanel
       
 	}
 	
-	public void mostrarLibros()
-	{
-		productosListados = biblioteca.getProductos();
-		listaLibros.setText("");
-		
-		for(Producto p : productosListados)
-		{
-			listaLibros.append(p.getTitulo() + "\n");
-		}
-	}
-	
-	public void ordenarPorPrecio()
-	{
-		listaLibros.setText("");
-		biblioteca.ordenarPorPrecio();
-		productosListados = biblioteca.getProductos();
-		
-		
-		for(Producto p : productosListados)
-		{
-			listaLibros.append(p.getTitulo() + "\n");
-		}
-	}
-	
-	public void ordenarPorTitulo()
-	{
-		listaLibros.setText("");
-		biblioteca.ordenarPorTitulo();
-		productosListados = biblioteca.getProductos();
-		
-		for(Producto p : productosListados)
-		{
-			listaLibros.append(p.getTitulo() + "\n");
-		}
-	}
-	
-	public void filtrarPorCategoria(String categoria)
-	{
-		
-		ArrayList<Producto> lista  = biblioteca.filtrarPorCategoria(categoria);
+	public void mostrarLista(ArrayList<Producto> lista)
+    {
+        productosListados = lista;
+        listaLibros.setText("");
+        for(Producto p : lista)
+        {
+            listaLibros.append(p.getTitulo() + "\n");
+        }
+    }
 
-		if(lista.isEmpty())
-		{
-			JOptionPane.showMessageDialog(this, "Sin resultados", "Categoria no encontrada", JOptionPane.ERROR_MESSAGE);
-			mostrarLibros();
-		}
-		else
-		{	
-			listaLibros.setText("");
-			productosListados = lista;
-			for(Producto p: lista)
-			{
-				listaLibros.append(p.getTitulo() + "\n");
-			}
-		}
-			
-		
-	}
-	
-	public void filtrarPorAutor(String autor)
-	{
-		
-		ArrayList<Producto> lista  = biblioteca.filtrarPorAutor(autor);
-
-		if(lista.isEmpty())
-		{
-			JOptionPane.showMessageDialog(this, "Sin resultados", "Autor no encontrado", JOptionPane.ERROR_MESSAGE);
-			mostrarLibros();
-		}
-		else
-		{	
-			listaLibros.setText("");
-			productosListados = lista;
-			for(Producto p: lista)
-			{
-				listaLibros.append(p.getTitulo() + "\n");
-			}
-		}
-			
-		
-	}
-	
-	public void filtrarDisponibles()
-	{
-		ArrayList<Producto> lista  = biblioteca.filtrarDisponibles();
-		
-		listaLibros.setText("");
-		productosListados = lista;
-		for(Producto p: lista)
-		{
-			listaLibros.append(p.getTitulo() + "\n");
-		}
-	}
-	
-	public void filtrarPorDescuento()
-	{
-		
-		ArrayList<Producto> lista  = biblioteca.filtrarConDescuento();
-		
-			
-		listaLibros.setText("");
-		productosListados = lista;
-		for(Producto p: lista)
-		{
-			listaLibros.append(p.getTitulo() + "\n");
-		}
-		
-			
-		
-	}
-	
-	
-	
 
 }

@@ -8,19 +8,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import excepciones.StockInsuficienteException;
-import mundo.CarritoCompra;
 import mundo.LibroFisico;
 import mundo.Producto;
-import mundo.Usuario;
 
 public class PanelLibroActual extends JPanel implements ActionListener
 {
@@ -38,17 +34,13 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	private JButton btncarrito;
 	private JButton btninfo;
 	private Producto productoActual;
-	private CarritoCompra carrito;
-	private Usuario usuario;
-	private PanelUsuario panelUsuario;
+	private InterfazBiblioteca interfaz;
 	
 	
 	
-	public PanelLibroActual(CarritoCompra carrito, Usuario usuario, PanelUsuario panelUsuario)
+	public PanelLibroActual(InterfazBiblioteca interfaz)
 	{
-		this.carrito = carrito;
-		this.usuario = usuario;
-		this.panelUsuario = panelUsuario;
+		this.interfaz = interfaz;
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -82,7 +74,6 @@ public class PanelLibroActual extends JPanel implements ActionListener
 		
 		btncomprar = new JButton("Agregar Carrito ✅");
 		btncomprar.addActionListener(this);
-		
 		
 		btninfo = new JButton("Info 🔎");
 		btninfo.addActionListener(this);
@@ -157,33 +148,23 @@ public class PanelLibroActual extends JPanel implements ActionListener
 	{
 		if(e.getSource() == btninfo)
 		{
-			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-			
-			InterfazInfo interfazInfo = new InterfazInfo(padre, productoActual);
-			
-			interfazInfo.setVisible(true);
+			interfaz.abrirInfo(productoActual);
 		}
 		else if(e.getSource() == btncarrito)
 		{
-			JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
-			
-			InterfazCarrito interfazCarrito = new InterfazCarrito(padre, carrito, usuario, panelUsuario);
-			
-			interfazCarrito.setVisible(true);
+			interfaz.abrirCarrito();
 		}
 		else if(e.getSource() == btncomprar)
 		{
 			try
-			{
-				carrito.agregarProducto(productoActual);
-				JOptionPane.showMessageDialog(this, productoActual.getTitulo() + " agregado al carrito", "Carrito", JOptionPane.INFORMATION_MESSAGE);
-			}
-			catch(StockInsuficienteException ex)
-			{
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
-			}
-			
-			
+            {
+                interfaz.agregarAlCarrito(productoActual);
+                JOptionPane.showMessageDialog(this, productoActual.getTitulo() + " agregado al carrito", "Carrito", JOptionPane.INFORMATION_MESSAGE);
+            }
+            catch(StockInsuficienteException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
+            }
 		}
 		
 	}

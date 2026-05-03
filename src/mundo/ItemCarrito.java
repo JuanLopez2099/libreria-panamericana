@@ -109,11 +109,9 @@ public class ItemCarrito
      */
     public void decrementarCantidad()
     {
-        if (this.cantidad > 1)
-        {
-            this.cantidad--;
-        }
-        
+
+    	this.cantidad--;
+
         validarInvariantes();
     }
 

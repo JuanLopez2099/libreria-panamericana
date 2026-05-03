@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -16,9 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import excepciones.CarritoVacioException;
 import excepciones.StockInsuficienteException;
-import mundo.CarritoCompra;
 import mundo.ItemCarrito;
-import mundo.Usuario;
 
 public class InterfazCarrito extends JDialog implements ActionListener
 {
@@ -30,25 +27,21 @@ public class InterfazCarrito extends JDialog implements ActionListener
     private JButton btncomprar;
     private JButton btnañadir;
     private JButton btnquitar;
-    private CarritoCompra carrito;
     private ItemCarrito itemSeleccionado;
-    private Usuario usuario;
-    private PanelUsuario panelUsuario;
+    private InterfazBiblioteca interfaz;
 
-    public InterfazCarrito(JFrame padre, CarritoCompra carrito, Usuario usuario, PanelUsuario panelUsuario) 
+    public InterfazCarrito(InterfazBiblioteca interfaz) 
     {
-    	super(padre, "Carrito de Compra", true);
+    	super(interfaz, "Carrito de Compra", true);
     	
-    	this.usuario = usuario;
-    	this.carrito = carrito;
-    	this.panelUsuario = panelUsuario;
+    	this.interfaz = interfaz;
         
         setSize(700, 450);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(padre);
+        setLocationRelativeTo(interfaz);
 
         panelListaCarrito = new PanelListaCarrito();
 
@@ -116,10 +109,10 @@ public class InterfazCarrito extends JDialog implements ActionListener
         
         panelListaCarrito.getTabla().getSelectionModel().addListSelectionListener(e ->
         {
-            int fila = panelListaCarrito.getTabla().getSelectedRow();
-            if(fila >= 0 && fila < carrito.getItems().size())
+        	int fila = panelListaCarrito.getTabla().getSelectedRow();
+            if(fila >= 0 && fila < interfaz.getCarrito().getItems().size())
             {
-                itemSeleccionado = carrito.getItems().get(fila);
+                itemSeleccionado = interfaz.getCarrito().getItems().get(fila);
                 txttitulo.setText(itemSeleccionado.getProducto().getTitulo());
             }
         });
@@ -145,7 +138,7 @@ public class InterfazCarrito extends JDialog implements ActionListener
     	    {
     	        if(itemSeleccionado.getCantidad() == 1)
     	        {
-    	            carrito.eliminarProducto(itemSeleccionado.getProducto());
+    	        	interfaz.getCarrito().eliminarProducto(itemSeleccionado.getProducto());
     	            itemSeleccionado = null;
     	            txttitulo.setText("");
     	        }
@@ -159,42 +152,43 @@ public class InterfazCarrito extends JDialog implements ActionListener
     	else if(e.getSource() == btncomprar)
     	{
     		try
-    		{
-    			double total = carrito.calcularTotal();
-    			
-    			if(!usuario.tieneSaldoSuficiente(total))
-    			{
-    				JOptionPane.showMessageDialog(this, "Saldo insuficiente", "Sin Saldo", JOptionPane.ERROR_MESSAGE);
-    				return;
-    			}
-    			
-    			carrito.comprar();
-    			usuario.descontarSaldo(total);
-    			panelUsuario.actualizarSaldo();
-    			mostrarCarrito();
-    			txttitulo.setText("");
-    	        itemSeleccionado = null;
-    	        
-    	        JOptionPane.showMessageDialog(this, "¡Compra realizada con éxito!", "Compra", JOptionPane.INFORMATION_MESSAGE);
-    	        dispose();
-    		}
-    		catch(CarritoVacioException ex)
-    		{
-    			JOptionPane.showMessageDialog(this, ex.getMessage(), "Carrito Vacío", JOptionPane.ERROR_MESSAGE);
-    		}
-    		catch(StockInsuficienteException ex)
-    		{
-    			 JOptionPane.showMessageDialog(this, ex.getMessage(), "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
-    		}
+            {
+                double total = interfaz.getCarrito().calcularTotal();
+
+                if(!interfaz.getUsuario().tieneSaldoSuficiente(total))
+                {
+                    JOptionPane.showMessageDialog(this, "Saldo insuficiente", "Sin Saldo", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                interfaz.getCarrito().comprar();
+                interfaz.getUsuario().descontarSaldo(total);
+                interfaz.actualizarSaldo();
+                mostrarCarrito();
+                txttitulo.setText("");
+                itemSeleccionado = null;
+
+                JOptionPane.showMessageDialog(this, "¡Compra realizada con éxito!", "Compra", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            }
+            catch(CarritoVacioException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Carrito Vacío", JOptionPane.ERROR_MESSAGE);
+            }
+            catch(StockInsuficienteException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
+            }
     	}
 		
 	}
+    
     private void mostrarCarrito()
     {
-        DefaultTableModel modelo = (DefaultTableModel) panelListaCarrito.getModelo();
-        modelo.setRowCount(0); 
-        
-        for(ItemCarrito item : carrito.getItems())
+    	DefaultTableModel modelo = panelListaCarrito.getModelo();
+        modelo.setRowCount(0);
+
+        for(ItemCarrito item : interfaz.getCarrito().getItems())
         {
             modelo.addRow(new Object[]{
                 item.getProducto().getTitulo(),
@@ -203,8 +197,8 @@ public class InterfazCarrito extends JDialog implements ActionListener
                 "$" + item.getSubtotal()
             });
         }
-        
-        txttotal.setText("$" + carrito.calcularTotal());
+
+        txttotal.setText("$" + interfaz.getCarrito().calcularTotal());
     }
 
 	
