@@ -17,6 +17,16 @@ import excepciones.CarritoVacioException;
 import excepciones.StockInsuficienteException;
 import mundo.ItemCarrito;
 
+/**
+ * Ventana que representa la interfaz del carrito de compras.
+ *
+ * Permite visualizar los productos agregados, modificar cantidades,
+ * eliminar productos y realizar el proceso de compra.
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
+ */
 public class InterfazCarrito extends JDialog implements ActionListener
 {
     private PanelListaCarrito panelListaCarrito;
@@ -30,11 +40,19 @@ public class InterfazCarrito extends JDialog implements ActionListener
     private ItemCarrito itemSeleccionado;
     private InterfazBiblioteca interfaz;
 
+    /**
+     * Construye la ventana del carrito de compras.
+     *
+     * @param interfaz Referencia a la interfaz principal
+     *
+     * @pre interfaz != null
+     * @post Se inicializan los componentes gráficos y se muestra el contenido del carrito
+     */
     public InterfazCarrito(InterfazBiblioteca interfaz) 
     {
-    	super(interfaz, "Carrito de Compra", true);
-    	
-    	this.interfaz = interfaz;
+        super(interfaz, "Carrito de Compra", true);
+        
+        this.interfaz = interfaz;
         
         setSize(700, 450);
         setLayout(new GridBagLayout());
@@ -109,49 +127,56 @@ public class InterfazCarrito extends JDialog implements ActionListener
         
         panelListaCarrito.getTabla().getSelectionModel().addListSelectionListener(e ->
         {
-        	int fila = panelListaCarrito.getTabla().getSelectedRow();
+            int fila = panelListaCarrito.getTabla().getSelectedRow();
             if(fila >= 0 && fila < interfaz.getCarrito().getItems().size())
             {
                 itemSeleccionado = interfaz.getCarrito().getItems().get(fila);
                 txttitulo.setText(itemSeleccionado.getProducto().getTitulo());
             }
         });
-        
 
         mostrarCarrito();
     }
     
+    /**
+     * Maneja los eventos generados por los botones de la interfaz.
+     *
+     * @param e Evento de acción generado por un componente
+     *
+     * @pre e != null
+     * @post Se ejecuta la acción correspondiente según el botón presionado
+     */
     @Override
-	public void actionPerformed(ActionEvent e) 
-	{
-    	if(e.getSource() == btnañadir)
-    	{
-    		if(itemSeleccionado != null)
-    	    {
-    	        itemSeleccionado.incrementarCantidad();
-    	        mostrarCarrito();
-    	    }
-    	}
-    	else if(e.getSource() == btnquitar)
-    	{
-    		if(itemSeleccionado != null)
-    	    {
-    	        if(itemSeleccionado.getCantidad() == 1)
-    	        {
-    	        	interfaz.getCarrito().eliminarProducto(itemSeleccionado.getProducto());
-    	            itemSeleccionado = null;
-    	            txttitulo.setText("");
-    	        }
-    	        else
-    	        {
-    	            itemSeleccionado.decrementarCantidad();
-    	        }
-    	        mostrarCarrito();
-    	    }
-    	}
-    	else if(e.getSource() == btncomprar)
-    	{
-    		try
+    public void actionPerformed(ActionEvent e) 
+    {
+        if(e.getSource() == btnañadir)
+        {
+            if(itemSeleccionado != null)
+            {
+                itemSeleccionado.incrementarCantidad();
+                mostrarCarrito();
+            }
+        }
+        else if(e.getSource() == btnquitar)
+        {
+            if(itemSeleccionado != null)
+            {
+                if(itemSeleccionado.getCantidad() == 1)
+                {
+                    interfaz.getCarrito().eliminarProducto(itemSeleccionado.getProducto());
+                    itemSeleccionado = null;
+                    txttitulo.setText("");
+                }
+                else
+                {
+                    itemSeleccionado.decrementarCantidad();
+                }
+                mostrarCarrito();
+            }
+        }
+        else if(e.getSource() == btncomprar)
+        {
+            try
             {
                 double total = interfaz.getCarrito().calcularTotal();
 
@@ -179,13 +204,18 @@ public class InterfazCarrito extends JDialog implements ActionListener
             {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
             }
-    	}
-		
-	}
+        }
+    }
     
+    /**
+     * Actualiza la visualización del carrito en la tabla.
+     *
+     * @pre interfaz.getCarrito() != null
+     * @post La tabla muestra los productos actuales y el total actualizado
+     */
     private void mostrarCarrito()
     {
-    	DefaultTableModel modelo = panelListaCarrito.getModelo();
+        DefaultTableModel modelo = panelListaCarrito.getModelo();
         modelo.setRowCount(0);
 
         for(ItemCarrito item : interfaz.getCarrito().getItems())
@@ -200,6 +230,4 @@ public class InterfazCarrito extends JDialog implements ActionListener
 
         txttotal.setText("$" + interfaz.getCarrito().calcularTotal());
     }
-
-	
 }

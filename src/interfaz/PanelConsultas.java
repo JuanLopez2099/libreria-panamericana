@@ -16,7 +16,16 @@ import javax.swing.border.TitledBorder;
 import excepciones.DatoInvalidoException;
 import excepciones.LibroNoEncontradoException;
 
-
+/**
+ * Panel que contiene las opciones de consulta del sistema.
+ *
+ * Permite realizar búsquedas, filtros y ordenamientos sobre los productos
+ * disponibles en la biblioteca mediante botones de acción.
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
+ */
 public class PanelConsultas extends JPanel implements ActionListener
 {
 	private JButton buscarCodigo;
@@ -30,7 +39,14 @@ public class PanelConsultas extends JPanel implements ActionListener
 	private PanelFormulario panelFormulario;
 	private InterfazBiblioteca interfaz;
 	
-	
+	/**
+	 * Construye el panel de consultas.
+	 *
+	 * @param interfaz Referencia a la interfaz principal
+	 *
+	 * @pre interfaz != null
+	 * @post Se inicializan los componentes y se organizan en el panel
+	 */
 	public PanelConsultas(InterfazBiblioteca interfaz)
 	{
 		this.interfaz = interfaz;
@@ -67,52 +83,52 @@ public class PanelConsultas extends JPanel implements ActionListener
 		ordenarTitulo = new JButton("Ordenar por Título 🔤");
 		ordenarTitulo.addActionListener(this);
 		
-		
-		
-		
-		 gbc.gridx = 0;
-	     gbc.weightx = 1.0;
-	     gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+	    gbc.weightx = 1.0;
+	    gbc.fill = GridBagConstraints.HORIZONTAL;
 	     
-	     gbc.gridy = 0;
-	     add(buscarCodigo, gbc);
+	    gbc.gridy = 0;
+	    add(buscarCodigo, gbc);
 
-	     gbc.gridy = 1;
-	     add(buscarTitulo, gbc);
+	    gbc.gridy = 1;
+	    add(buscarTitulo, gbc);
 
-	     gbc.gridy = 2;
-	     add(filtrarCategoria, gbc);
+	    gbc.gridy = 2;
+	    add(filtrarCategoria, gbc);
 
-	     gbc.gridy = 3;
-	     add(filtrarAutor, gbc);
+	    gbc.gridy = 3;
+	    add(filtrarAutor, gbc);
 
-	     gbc.gridy = 4;
-	     add(filtrarDisponibles, gbc);  	
+	    gbc.gridy = 4;
+	    add(filtrarDisponibles, gbc);  	
 
-	     gbc.gridy = 5;
-	     add(filtrarDescuento, gbc);
+	    gbc.gridy = 5;
+	    add(filtrarDescuento, gbc);
 
-	     gbc.gridy = 6;
-	     add(ordenarPrecio, gbc);
+	    gbc.gridy = 6;
+	    add(ordenarPrecio, gbc);
 
-	     gbc.gridy = 7;
-	     add(ordenarTitulo, gbc);
+	    gbc.gridy = 7;
+	    add(ordenarTitulo, gbc);
 	     
-	     gbc.gridx = 1;
-	     gbc.gridy = 0;
-	     gbc.gridheight = 8; 
-	     gbc.weightx = 0.7;
-	     gbc.weighty = 1.0;
-	     gbc.fill = GridBagConstraints.BOTH;
-	     gbc.insets = new Insets(5, 20, 5, 5);
-	     add(panelFormulario, gbc);
-	     
-		
-		
-		
-		
+	    gbc.gridx = 1;
+	    gbc.gridy = 0;
+	    gbc.gridheight = 8; 
+	    gbc.weightx = 0.7;
+	    gbc.weighty = 1.0;
+	    gbc.fill = GridBagConstraints.BOTH;
+	    gbc.insets = new Insets(5, 20, 5, 5);
+	    add(panelFormulario, gbc);
 	}
 
+	/**
+	 * Maneja los eventos generados por los botones del panel.
+	 *
+	 * @param e Evento de acción generado por un componente
+	 *
+	 * @pre e != null
+	 * @post Se ejecuta la operación correspondiente según el botón presionado
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -164,7 +180,6 @@ public class PanelConsultas extends JPanel implements ActionListener
             {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Campo vacio", JOptionPane.ERROR_MESSAGE);
             }
-			
 		}
 		else if(e.getSource() == filtrarAutor)
 		{
@@ -185,8 +200,5 @@ public class PanelConsultas extends JPanel implements ActionListener
 		{
 			interfaz.filtrarDisponibles();
 		}
-		
-		
 	}
-	
 }

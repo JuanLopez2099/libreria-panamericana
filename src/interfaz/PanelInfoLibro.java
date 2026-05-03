@@ -18,6 +18,16 @@ import mundo.LibroDigitial;
 import mundo.LibroFisico;
 import mundo.Producto;
 
+/**
+ * Panel que muestra la información detallada de un libro.
+ *
+ * Permite visualizar los datos generales y específicos de un producto,
+ * incluyendo atributos propios de libros físicos y digitales.
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
+ */
 public class PanelInfoLibro extends JPanel
 {
 	private JLabel imagen;
@@ -48,6 +58,12 @@ public class PanelInfoLibro extends JPanel
 	private JLabel lblidioma;
 	private JTextField txtidioma;
 	
+	/**
+	 * Construye el panel de información del libro.
+	 *
+	 * @pre true
+	 * @post Se inicializan y configuran todos los componentes gráficos del panel
+	 */
 	public PanelInfoLibro()
 	{
 		setLayout(new GridBagLayout());
@@ -235,6 +251,14 @@ public class PanelInfoLibro extends JPanel
 		
 	}
 	
+	/**
+	 * Muestra la información de un producto en el panel.
+	 *
+	 * @param p Producto del cual se desea mostrar la información
+	 *
+	 * @pre p != null
+	 * @post Los campos del panel se actualizan con la información del producto
+	 */
 	public void mostrarInformacio(Producto p)
 	{
 		ImageIcon portada = new ImageIcon(p.getRutaPortada());
@@ -275,8 +299,4 @@ public class PanelInfoLibro extends JPanel
 		
 		
 	}
-	
-	
-	
-
 }
