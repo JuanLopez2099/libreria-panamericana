@@ -14,21 +14,17 @@ Aplicación de escritorio desarrollada en Java con interfaz gráfica Swing, que 
 - Realizar la compra descontando el saldo del usuario y el stock disponible
 
 ## Tecnologías utilizadas
-
 - Java 25
 - Swing (interfaz gráfica)
 - JUnit 5 (pruebas unitarias)
 
 ## Estructura del proyecto
 
-BibliotecaPanamericana/
-├── src/
-│   ├── interfaz/       → Clases de la interfaz gráfica
-│   ├── mundo/          → Lógica del negocio
-│   └── excepciones/    → Excepciones personalizadas
-├── test/               → Pruebas unitarias
-├── img/                → Imágenes del proyecto (portadas, banner, icono)
-└── README.md
+- `src/interfaz/` — Clases de la interfaz gráfica
+- `src/mundo/` — Lógica del negocio
+- `src/excepciones/` — Excepciones personalizadas
+- `test/` — Pruebas unitarias
+- `img/` — Imágenes del proyecto (portadas, banner, icono)
 
 ## Autores
 - Estefania Rodriguez Gutierrez
