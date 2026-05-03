@@ -6,11 +6,14 @@ import excepciones.CarritoVacioException;
 import excepciones.StockInsuficienteException;
 
 /**
- * Clase que representa el carrito de compras del sistema.
- * <p>
- * Permite agregar, eliminar y gestionar productos seleccionados por el usuario,
- * así como calcular el total de la compra y ejecutar el proceso de compra.
- * </p>
+ * Representa el carrito de compras del sistema.
+ *
+ * Permite gestionar los productos seleccionados por el usuario, incluyendo
+ * operaciones de agregado, eliminación, cálculo del total y ejecución de la compra.
+ *
+ * @author Estefania Rodriguez
+ * @author Juan Camilo Lopez
+ * @version 1.0
  */
 public class CarritoCompra 
 {
@@ -23,9 +26,9 @@ public class CarritoCompra
 
     /**
      * Construye un carrito de compras vacío.
-     * 
+     *
      * @pre true
-     * @post items != null && items está vacía
+     * @post Se inicializa la lista de ítems y queda vacía
      */
     public CarritoCompra() 
     {
@@ -38,14 +41,13 @@ public class CarritoCompra
     // -------------------------------------------------------------------------
 
     /**
-     * Busca un ítem dentro del carrito que corresponda al producto dado.
-     * La comparación se realiza utilizando el código único del producto.
-     * 
-     * @param producto Producto que se desea buscar
-     * @return El ítem correspondiente si existe, null en caso contrario
-     * 
+     * Busca un ítem dentro del carrito asociado a un producto específico.
+     *
      * @pre producto != null
-     * @post Se retorna el ítem asociado al producto si existe
+     * @post Retorna el ítem correspondiente al producto si existe, null en caso contrario
+     *
+     * @param producto Producto que se desea buscar en el carrito
+     * @return Ítem asociado al producto o null si no se encuentra
      */
     private ItemCarrito buscarItem(Producto producto) 
     {
@@ -60,16 +62,17 @@ public class CarritoCompra
     }
     
     /**
-     * Agrega un producto al carrito con cantidad 1.
-     * 
-     * @param producto Producto a agregar
-     * 
+     * Agrega un producto al carrito con una cantidad de 1 unidad.
+     *
      * @pre producto != null
-     * @post El producto queda agregado al carrito con cantidad 1
+     * @post El producto se agrega al carrito o se incrementa su cantidad en 1 si ya existe
+     *
+     * @param producto Producto que se desea agregar
+     * @throws StockInsuficienteException Si el producto físico no tiene stock suficiente
      */
-    public void agregarProducto(Producto producto)throws StockInsuficienteException
+    public void agregarProducto(Producto producto) throws StockInsuficienteException
     {
-    	if(producto instanceof LibroFisico)
+        if(producto instanceof LibroFisico)
         {
             LibroFisico libroFisico = (LibroFisico) producto;
             ItemCarrito itemExistente = buscarItem(producto);
@@ -91,13 +94,13 @@ public class CarritoCompra
 
     /**
      * Agrega un producto al carrito con una cantidad específica.
-     * 
-     * @param producto Producto a agregar
-     * @param cantidad Cantidad a agregar
-     * 
+     *
      * @pre producto != null && cantidad >= 1
-     * @post Si el producto ya existe, se incrementa su cantidad; 
-     *       de lo contrario, se agrega un nuevo ítem al carrito
+     * @post Si el producto ya existe en el carrito, se incrementa su cantidad;
+     *       de lo contrario, se agrega un nuevo ítem con la cantidad indicada
+     *
+     * @param producto Producto que se desea agregar
+     * @param cantidad Cantidad de unidades a agregar
      */
     public void agregarProducto(Producto producto, int cantidad) 
     {
@@ -119,11 +122,11 @@ public class CarritoCompra
 
     /**
      * Elimina completamente un producto del carrito.
-     * 
-     * @param producto Producto a eliminar
-     * 
+     *
      * @pre producto != null
-     * @post El producto deja de estar en el carrito si existía
+     * @post El producto es eliminado del carrito si estaba presente
+     *
+     * @param producto Producto que se desea eliminar
      */
     public void eliminarProducto(Producto producto) 
     {
@@ -138,12 +141,12 @@ public class CarritoCompra
     }
 
     /**
-     * Calcula el valor total del carrito.
-     * 
-     * @return Total a pagar por los productos del carrito
-     * 
+     * Calcula el valor total de los productos en el carrito.
+     *
      * @pre true
-     * @post Se retorna la suma de los subtotales de todos los ítems
+     * @post Retorna la suma de los subtotales de todos los ítems del carrito
+     *
+     * @return Valor total a pagar por los productos
      */
     public double calcularTotal() 
     {
@@ -158,14 +161,14 @@ public class CarritoCompra
     }
 
     /**
-     * Realiza la compra de los productos del carrito.
-     * 
-     * @throws CarritoVacioException Si el carrito está vacío
-     * @throws StockInsuficienteException Si no hay suficiente stock de algún producto físico
-     * 
+     * Ejecuta el proceso de compra de los productos en el carrito.
+     *
      * @pre true
-     * @post Si la compra es exitosa, se actualiza el stock (si aplica),
-     *       se incrementan las ventas y el carrito queda vacío
+     * @post Si la compra es exitosa, se actualiza el stock de los productos físicos
+     *       y el carrito queda vacío
+     *
+     * @throws CarritoVacioException Si el carrito no contiene productos
+     * @throws StockInsuficienteException Si algún producto físico no tiene stock suficiente
      */
     public void comprar() throws CarritoVacioException, StockInsuficienteException 
     {
@@ -173,7 +176,6 @@ public class CarritoCompra
         {
             throw new CarritoVacioException("El carrito está vacío");
         }
-
 
         for (ItemCarrito item : items) 
         {
@@ -184,21 +186,36 @@ public class CarritoCompra
                 LibroFisico libroFisico = (LibroFisico) p;
                 libroFisico.reducirStock(item.getCantidad());
             }
-
         }
 
         items.clear();
         validarInvariantes();
     }
 
+    /**
+     * Obtiene la lista de ítems del carrito.
+     *
+     * @pre items != null
+     * @post Retorna la referencia a la lista interna de ítems
+     *
+     * @return Lista de ítems del carrito
+     */
     public ArrayList<ItemCarrito> getItems()
     {
         return items;
     }
     
+    /**
+     * Verifica si el carrito se encuentra vacío.
+     *
+     * @pre true
+     * @post Retorna true si no hay ítems en el carrito, false en caso contrario
+     *
+     * @return true si el carrito está vacío, false en caso contrario
+     */
     public boolean estaVacio()
     {
-    	return items.isEmpty();
+        return items.isEmpty();
     }
     
 
@@ -207,7 +224,12 @@ public class CarritoCompra
     // -------------------------------------------------------------------------
 
     /**
-     * Verifica que la lista de ítems sea válida.
+     * Verifica que la lista de ítems esté correctamente inicializada.
+     *
+     * @pre true
+     * @post Retorna true si la lista de ítems no es null
+     *
+     * @return true si la lista es válida, false en caso contrario
      */
     private boolean itemsValidos() 
     {
@@ -215,7 +237,10 @@ public class CarritoCompra
     }
 
     /**
-     * Verifica las invariantes de la clase.
+     * Valida las invariantes de la clase para garantizar consistencia interna.
+     *
+     * @pre true
+     * @post Se verifica que la lista de ítems exista
      */
     private void validarInvariantes() 
     {
