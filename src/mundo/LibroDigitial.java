@@ -36,7 +36,6 @@ public class LibroDigitial extends Producto
      * @param fechaPublicacion Fecha de publicación
      * @param tieneDescuento Indica si tiene descuento
      * @param porcentajeDescuento Porcentaje de descuento
-     * @param numeroVentas Número de veces vendido
      * @param formatoArchivo Formato del archivo digital
      * @param tamanoMB Tamaño del archivo en MB
      * 
@@ -44,7 +43,7 @@ public class LibroDigitial extends Producto
      *      formatoArchivo != null && tamanoMB > 0
      * @post Se crea un libro digital con los atributos especificados
      */
-    public LibroDigitial(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento, int numeroVentas, String formatoArchivo, double tamanoMB)                    
+    public LibroDigitial(String codigo, String titulo, String nombreAutor, double precio, String categoria, String rutaPortada, String sinopsis, String editorial, String numeroPaginas, String idioma, String fechaPublicacion, boolean tieneDescuento, double porcentajeDescuento, String formatoArchivo, double tamanoMB)                    
     {
         super(codigo, titulo, nombreAutor, precio, categoria, rutaPortada, sinopsis, editorial, numeroPaginas, idioma, fechaPublicacion, tieneDescuento, porcentajeDescuento);
 
