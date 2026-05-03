@@ -263,12 +263,16 @@ public class PanelInfoLibro extends JPanel
 	{
 		String rutaLimpia = p.getRutaPortada().replace("img/", "");
 		java.net.URL urlImg = getClass().getResource("/" + rutaLimpia);
-	    if (urlImg != null) {
+		
+	    if (urlImg != null) 
+	    {
 	        ImageIcon portada = new ImageIcon(urlImg);
 	        Image imagenEscalada = portada.getImage().getScaledInstance(imagen.getPreferredSize().width, 200, Image.SCALE_SMOOTH);
 	        imagen.setIcon(new ImageIcon(imagenEscalada));
-	    } else {
-	        // Si no encuentra la imagen, podrías poner un icono por defecto o dejarlo vacío
+	    } 
+	    else 
+	    {
+	        
 	        imagen.setIcon(null); 
 	        System.err.println("No se encontró la imagen: " + p.getRutaPortada());
 	    }
