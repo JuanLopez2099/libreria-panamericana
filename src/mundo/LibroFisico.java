@@ -102,14 +102,11 @@ public class LibroFisico extends Producto
     {
         if (cantidad > stock) 
         {
-            throw new StockInsuficienteException(
-                "Stock insuficiente. Disponible: " + stock + ", solicitado: " + cantidad
-            );
+            throw new StockInsuficienteException("Stock insuficiente.");          
         }
 
         stock -= cantidad;
 
-        assert stock >= 0 : "El stock no puede ser negativo";
     }
 
     // -------------------------------------------------------------------------
