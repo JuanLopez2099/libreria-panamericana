@@ -83,7 +83,7 @@ public class PanelListaLibros extends JPanel
             	}
             	catch(Exception ex)
             	{
-            		// Se ignora cualquier error de selección
+            		
             	}
         	}
 		});
